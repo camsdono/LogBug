@@ -28,8 +28,12 @@
                     </ul>
                 </div>
             </div>
+            <span class="float-start" style="margin-left: 9vw; margin-top: 1vh;">
+                <button style="width: 5vw; height: 5vh;"  onclick="location.href='./project-display.php?id=<?=$_GET['id']?>&orgid=<?=$_GET['orgid']?>'" class="btn1">Back</button>
+            </span>
             <div class="body1">
                 <div class="col-12">
+                    
                     <form action="../process.php" method="post">
                         <input type="text" placeholder="Bug Name" name="bugname" class="txt1" required><br>
                         <input type="text" placeholder="Bug Description" name="bugdesc" class="txt1" required><br>
@@ -39,7 +43,13 @@
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
                         </select><br><br>
-                        <input type="text" value="<?=$_GET['id']?>" class="txt1" name="id" style="display: none;" required>
+                        <input type="text" value="<?=$_GET['id']?>" class="txt1" name="projectid" style="display: none;" required>
+                        <input type="text" value="<?=$_GET['name']?>" class="txt1" name="projectname" style="display: none;" required>
+                        <input type="text" value="<?=$_GET['orgid']?>" class="txt1" name="orgid" style="display: none;" required>
+                        <input type="text" value="<?=$_GET['orgname']?>" class="txt1" name="orgname" style="display: none;" required>
+                        <input type="text" value="<?=$_SESSION['username']?>" class="txt1" name="createdUser" style="display: none;" required>
+                        <input type="text" value="<?=date("Y-m-d")?>" class="txt1" name="dateCreated" style="display: none;" required><br>
+                      
                         <input type="submit" value="Add Bug" class="btn2" name="btn-addbug-project"><br>
                     </form>
                 </div>

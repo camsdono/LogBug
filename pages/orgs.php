@@ -43,36 +43,34 @@ if (!isset($_SESSION['username'])){
                         <?php
                             if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                                 $user = $_SESSION['username'];
-                                $sql = "SELECT * FROM org_members WHERE confirmJoined='1'";
+                                $sql = "SELECT * FROM org_members WHERE confirmJoined='1' AND username='$_SESSION[username]'";
                                 $result = mysqli_query($con, $sql);
 
-                                $sql2 = "SELECT * FROM orgs WHERE org_owner='$user'";
-                                $result2 = mysqli_query($con, $sql2);
                                 if ($result->num_rows > 0) {
-                                        $row1 = $result->fetch_assoc();
-                                        $orgID = $row1['orgID'];
-                                        $sql1 = "SELECT * FROM orgs WHERE org_owner='$user'";
-                                        $result1 = mysqli_query($con, $sql1);
-                                        while($row = $result1->fetch_assoc()) {
+                                        
+                                        while($row = $result->fetch_assoc()) {
+                                            $sql1 = "SELECT * FROM orgs WHERE id='$row[orgID]'";
+                                            $result1 = mysqli_query($con, $sql1);
+                                            $row1 = $result1->fetch_assoc();
 
                         ?>
-                        <div class="card" id="card" onClick="location.href='./sub-pages/org_display.php?id=<?=$row["id"] ?>'" name="card">
+                        <div class="card" id="card" onClick="location.href='./sub-pages/org_display.php?id=<?=$row["orgID"] ?>'" name="card">
                             <h4 style="padding-top: 5px;">
                                 
-                                <?=$row["org_name"] ?>
+                                <?=$row["orgName"] ?>
                             </h4>
                             <p>
                                 Owner:
-                                <?=$row["org_owner"] ?>
+                                <?=$row1["org_owner"] ?>
                             </p>
                             <p>
                                 Description:<br>
-                                <?=$row["org_description"] ?>
+                                <?=$row1["org_description"] ?>
                             </p>
                         </div>
                         <?php
                                         
-                                    }
+                                }
                                 } else {
                                     echo "You are not in any orgs how about you join one?";
                                 }

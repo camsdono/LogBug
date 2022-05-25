@@ -171,4 +171,32 @@ if(isset($_POST['btn-adduser-org'])) {
     }
 }
 
+if(isset($_POST['btn-addbug-project'])) {
+    require_once('./config.php');
+    session_start();
+
+    $bugName = mysqli_real_escape_string($con, $_POST['bugname']);
+    $bugDesc = mysqli_real_escape_string($con, $_POST['bugdesc']);
+    $priority = mysqli_real_escape_string($con, $_POST['priority']);
+    $projectid = mysqli_real_escape_string($con, $_POST['projectid']);
+    $projectname = mysqli_real_escape_string($con, $_POST['projectname']);
+    $orgid = mysqli_real_escape_string($con, $_POST['orgid']);
+    $orgname = mysqli_real_escape_string($con, $_POST['orgname']);
+    $createduser = mysqli_real_escape_string($con, $_POST['createdUser']);
+    $dateCreated = mysqli_real_escape_string($con, $_POST['dateCreated']);
+
+    $sql = "INSERT INTO bugs (bugName, bugDescription, projectID, projectName, orgID, orgName, createdUser, dateCreated, priority) 
+    values('$bugName', '$bugDesc', '$projectid', '$projectname', '$orgid', '$orgname', '$createduser', '$dateCreated', '$priority')";
+    $result = mysqli_query($con, $sql);
+    if($result) {
+        echo "Bug Has Been Created";
+        header("Location: ./sub-pages/project-display.php?id=$projectid&orgid=$orgid"); 
+    } else {
+        echo "An error has occured please try again later";
+        header("Location: ./sub-pages/project-display.php?id=$projectid&orgid=$orgid"); 
+    }
+}
+
+
+
 ?>

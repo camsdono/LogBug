@@ -144,9 +144,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                 <span class="float-start" style="margin-left: 9vw; margin-top: 1vh;">
                     <button style="width: 5vw; height: 5vh;"  onclick="location.href='./org_display.php?id=<?=$orgid?>'" class="btn1">Back</button>
                 </span>
+                <?php
+                    $sql2 = "SELECT * FROM org_members WHERE username='$user' AND orgID='$orgid' AND orgRole='owner' OR orgRole='editor'; ";
+                    $result2 = mysqli_query($con, $sql2);
+                    if ($result2->num_rows > 0) {
+                        
+                ?>
                 <span class="float-end" style="margin-left: 9vw; margin-top: 1vh;">
                     <button onclick="location.href='./add-bugs.php?id=<?=$projectid?>&name=<?=$projectName?>&orgid=<?=$orgid?>&orgname=<?=$orgname?>'" class="btn1">Add Bug</button>
                 </span>
+                <?php
+                    }
+                ?>
                 <div class="container" style="display: block-inline; margin-left: 10vw;">
                     <div class="row">
                         <div class="col-md-6">
