@@ -185,8 +185,8 @@ if(isset($_POST['btn-addbug-project'])) {
     $createduser = mysqli_real_escape_string($con, $_POST['createdUser']);
     $dateCreated = mysqli_real_escape_string($con, $_POST['dateCreated']);
 
-    $sql = "INSERT INTO bugs (bugName, bugDescription, projectID, projectName, orgID, orgName, createdUser, dateCreated, priority) 
-    values('$bugName', '$bugDesc', '$projectid', '$projectname', '$orgid', '$orgname', '$createduser', '$dateCreated', '$priority')";
+    $sql = "INSERT INTO bugs (bugName, bugDescription, projectID, projectName, orgID, orgName, createdUser, dateCreated, needsDone, priority) 
+    values('$bugName', '$bugDesc', '$projectid', '$projectname', '$orgid', '$orgname', '$createduser', '$dateCreated', '1', '$priority')";
     $result = mysqli_query($con, $sql);
     if($result) {
         echo "Bug Has Been Created";

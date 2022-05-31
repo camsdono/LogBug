@@ -47,11 +47,10 @@ if (!isset($_SESSION['username'])){
                                 $result = mysqli_query($con, $sql);
 
                                 if ($result->num_rows > 0) {
-                                        
-                                        while($row = $result->fetch_assoc()) {
-                                            $sql1 = "SELECT * FROM orgs WHERE id='$row[orgID]'";
-                                            $result1 = mysqli_query($con, $sql1);
-                                            $row1 = $result1->fetch_assoc();
+                                    while($row = $result->fetch_assoc()) {
+                                        $sql1 = "SELECT * FROM orgs WHERE id='$row[orgID]'";
+                                        $result1 = mysqli_query($con, $sql1);
+                                        $row1 = $result1->fetch_assoc();
 
                         ?>
                         <div class="card" id="card" onClick="location.href='./sub-pages/org_display.php?id=<?=$row["orgID"] ?>'" name="card">
@@ -92,5 +91,4 @@ if (!isset($_SESSION['username'])){
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     </body>
-
 </html>

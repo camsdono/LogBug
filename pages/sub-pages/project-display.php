@@ -7,8 +7,7 @@ if (!isset($_SESSION['username'])){
 }
 
 
-if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
-                
+if (isset($_SESSION['id']) && isset($_SESSION['username'])) {        
     $user = $_SESSION['username'];
     $projectid = $_GET['id'];
     $orgid = $_GET['orgid'];
@@ -22,6 +21,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $isDone = "SELECT * FROM bugs WHERE isDone='1' AND projectID='$projectid'; ";
     $isDoneResult = mysqli_query($con, $isDone);
 
+    $needsDone = "SELECT * FROM bugs WHERE needsDone='1' AND projectID='$projectid'; ";
+    $needsDoneResult = mysqli_query($con, $needsDone);
     
 
     $inProgress = "SELECT * FROM bugs WHERE inProgress='1' AND projectID='$projectid'; ";
@@ -36,7 +37,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $lowPriority = "SELECT * FROM bugs WHERE priority='low' AND projectID='$projectid';";
     $lowPriorityResult = mysqli_query($con, $lowPriority);
 
-    
+
 
     $totalBugCount = mysqli_num_rows($result);
 
@@ -44,6 +45,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $highPriorityCount = mysqli_num_rows($highPriorityResult);
     $mediumPriorityCount = mysqli_num_rows($mediumPriorityResult);
     $lowPriorityCount = mysqli_num_rows($lowPriorityResult);
+    $needsDoneCount = mysqli_num_rows($needsDoneResult);
 
 
     $isDoneCount = mysqli_num_rows($isDoneResult);
@@ -55,9 +57,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         }
     }
 }
-
-
-
 
 
 ?>
@@ -77,6 +76,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
             var data = google.visualization.arrayToDataTable([
                 ['Bugs', 'Status Count'],
                 <?php
+                echo "['"."Needs Done"."',".$needsDoneCount."],";
                 echo "['"."Bugs In Progress"."',".$inProgressCount."],";
                 echo "['"."Finished Bugs"."',".$isDoneCount."],";
                 ?>
@@ -101,7 +101,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                 legend: {  position: 'bottom', textStyle: {color: 'white' , fontSize: 14} },
                 titleTextStyle: { color: 'white'  },
                 pieSliceText: 'value-and-percentage',
-                colors: ['#C70039', '#27C683'],
+                colors: ['#C70039', '#FF5733', '#27C683'],
                 pieSliceText: 'value'
             };
 
@@ -150,19 +150,44 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                     if ($result2->num_rows > 0) {
                         
                 ?>
-                <span class="float-end" style="margin-left: 9vw; margin-top: 1vh;">
+                <span class="float-end" style="margin-right: 1vw; margin-top: 1vh;">
                     <button onclick="location.href='./add-bugs.php?id=<?=$projectid?>&name=<?=$projectName?>&orgid=<?=$orgid?>&orgname=<?=$orgname?>'" class="btn1">Add Bug</button>
-                </span>
+                </span><br><br><br>
                 <?php
                     }
                 ?>
+                
+               
+                    <?php
+                    $bugSql = "SELECT * FROM bugs WHERE projectID='$projectid'";
+                    $bugResults = mysqli_query($con, $bugSql);
+                    if ($bugResults->num_rows > 0) {
+                        ?>
+                            <h5 style="margin-left: 12vw;">Bugs:</h5>
+                        <?php
+                        while($row1 = $bugResults->fetch_assoc()) {
+                    ?>
+                     <div class="container" style="display: block-inline; margin-left: 10vw;">
+                        <div class="card1">
+                            <p>Bug Name: <?php echo $row1['bugName'] ?></p>
+                            <p>Bug Description: <?php echo $row1['bugDescription'] ?></p>
+                            <span class="float-end" style="background-color: transparent;">
+                                <button onclick="location.href='./edit-bugs.php?id=<?=$row1['id']?>'" class="btn3">Edit Bug</button>
+                            </span>
+                        </div>
+                     </div>
+                    
+                    <?php
+                            }
+                        }
+                    ?>
                 <div class="container" style="display: block-inline; margin-left: 10vw;">
                     <div class="row">
                         <div class="col-md-6">
-                            <div  id="piechart" style=" color: 'white'; background-color: transparent; vertical-align:middle;  width: 32vw; height: 30vh;"></div>
+                            <div  id="piechart" style=" color: 'white'; background-color: transparent; vertical-align:middle;  width: 40vw; height: 33vh;"></div>
                         </div>
                         <div class="col-md-6">
-                            <div  id="piechart1" style=" color: 'white'; background-color: transparent; vertical-align:middle;  width: 32vw; height: 30vh;"></div>
+                            <div  id="piechart1" style=" color: 'white'; background-color: transparent; vertical-align:middle;  width: 40vw; height: 33vh;"></div>
                         </div>
                     </div>
                 </div>
