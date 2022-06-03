@@ -53,7 +53,7 @@ if (!isset($_SESSION['username'])){
                                         $row1 = $result1->fetch_assoc();
 
                         ?>
-                        <div class="card" id="card" onClick="location.href='./sub-pages/org_display.php?id=<?=$row["orgID"] ?>'" name="card">
+                        <div class="card" id="card" onClick="location.href='./sub-pages/org-display.php?id=<?=$row["orgID"] ?>'" name="card">
                             <h4 style="padding-top: 5px;">
                                 
                                 <?=$row["orgName"] ?>

@@ -142,7 +142,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
             
             ?>
                 <span class="float-start" style="margin-left: 9vw; margin-top: 1vh;">
-                    <button style="width: 5vw; height: 5vh;"  onclick="location.href='./org_display.php?id=<?=$orgid?>'" class="btn1">Back</button>
+                    <button style="width: 5vw; height: 5vh;"  onclick="location.href='./org-display.php?id=<?=$orgid?>'" class="btn1">Back</button>
                 </span>
                 <?php
                     $sql2 = "SELECT * FROM org_members WHERE username='$user' AND orgID='$orgid' AND orgRole='owner' OR orgRole='editor'; ";
@@ -152,7 +152,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                 ?>
                 <span class="float-end" style="margin-right: 1vw; margin-top: 1vh;">
                     <button onclick="location.href='./add-bugs.php?id=<?=$projectid?>&name=<?=$projectName?>&orgid=<?=$orgid?>&orgname=<?=$orgname?>'" class="btn1">Add Bug</button>
-                </span><br><br><br>
+                </span><br><br><br><br>
                 <?php
                     }
                 ?>
@@ -172,13 +172,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                             <p>Bug Name: <?php echo $row1['bugName'] ?></p>
                             <p>Bug Description: <?php echo $row1['bugDescription'] ?></p>
                             <span class="float-end" style="background-color: transparent;">
-                                <button onclick="location.href='./edit-bugs.php?id=<?=$row1['id']?>'" class="btn3">Edit Bug</button>
+                                <button onclick="location.href='./edit-bugs.php?id=<?=$row1['id']?>&orgid=<?=$row1['orgID']?>&bugname=<?=$row1['bugName']?>&projectid=<?=$projectid?>'" class="btn3">Edit Bug</button>
                             </span>
                         </div>
                      </div>
                     
                     <?php
                             }
+                        } else {
+                            ?>
+                                <h4 style="margin-left: 12vw;" >This project has no bugs you should create one...</h4>
+                            <?php
                         }
                     ?>
                 <div class="container" style="display: block-inline; margin-left: 10vw;">

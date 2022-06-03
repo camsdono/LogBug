@@ -145,8 +145,7 @@ if(isset($_POST['btn-adduser-org'])) {
 
     if ($result1->num_rows > 0) {
         while($row = $result1->fetch_assoc()) {
-            
-
+        
             while($row1 = $result2->fetch_assoc()) {
                 $username = $row['username'];
                 $confirmcode = random_int(000000, 999999);
@@ -197,6 +196,72 @@ if(isset($_POST['btn-addbug-project'])) {
     }
 }
 
+if(isset($_POST['btn-edit-bug'])) {
+    require_once('./config.php');
+    session_start();
 
+    $bugname = mysqli_real_escape_string($con, $_POST['bugname']);
+    $bugDesc = mysqli_real_escape_string($con, $_POST['bugdesc']);
+    $bugID = mysqli_real_escape_string($con, $_POST['bugid']);
+    $orgid = mysqli_real_escape_string($con, $_POST['orgid']);
+    $projectid = mysqli_real_escape_string($con, $_POST['projectid']);
+
+    $sql = "SELECT * FROM bugs WHERE id=$bugID";
+    $result = mysqli_query($con, $sql);
+
+    if($result) {
+       
+        $updateBug = "UPDATE bugs SET bugName='$bugname', bugDescription='$bugDesc' WHERE id=$bugID";
+        $result1 = mysqli_query($con, $updateBug);
+        
+        if($result1) {
+            if ($result->num_rows > 0) {
+                while($row = $result -> fetch_assoc()) {
+                    $projectid = $row['projectID'];
+                }
+            }
+            echo "Bug Has Been Created";
+            header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&projectid=$projectid"); 
+        } else {
+            echo "An error has occured please try again later";
+            header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&projectid=$projectid"); 
+        }
+       
+    } else {
+        echo "An error has occured please try again later";
+        header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&projectid=$projectid"); 
+    }
+}
+
+if(isset($_POST['btn-assign-bug'])) {
+    require_once('./config.php');
+    session_start();
+
+    $bugname = mysqli_real_escape_string($con, $_POST['bugname']);
+    $orgid = mysqli_real_escape_string($con, $_POST['orgid']);
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $duedate = mysqli_real_escape_string($con, $_POST['duedate']);
+    $bugID = mysqli_real_escape_string($con, $_POST['bugid']);
+    $date = date("Y-m-d");
+
+    $sql = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($con, $sql);
+
+    if($result) {
+        
+        $sql2 = "SELECT * FROM bugs_assigned WHERE assingedUser='$username'";
+        $result2 = mysqli_query($con, $sql2);
+        if(!$result2) {
+            $sql1 = "INSERT INTO bugs_assigned (bugName, orgID, assingedUser, dateAssigned, dueDate) values('$bugname', '$orgid', '$username', '$date', '$duedate')";
+            $result1 = mysqli_query($con, $sql1);
+        } else {
+            header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&useradded=true"); 
+            echo "<span style='color:white;text-align:center;'>User you tried adding alredy is added</span>";
+        }
+    } else {
+        header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname"); 
+        echo "<span style='color:white;text-align:center;'>An error has occured please try again later</span>";
+    }
+}
 
 ?>
