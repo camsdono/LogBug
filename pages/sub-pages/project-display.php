@@ -151,8 +151,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                         
                 ?>
                 <span class="float-end" style="margin-right: 1vw; margin-top: 1vh;">
-                    <button onclick="location.href='./add-bugs.php?id=<?=$projectid?>&name=<?=$projectName?>&orgid=<?=$orgid?>&orgname=<?=$orgname?>'" class="btn1">Add Bug</button>
-                </span><br><br><br><br>
+                    <button onclick="location.href='./add-bugs.php?id=<?=$projectid?>&name=<?=$projectName?>&orgid=<?=$orgid?>&orgname=<?=$orgname?>'" class="btn1">Add Bug</button><br>
+                </span>
                 <?php
                     }
                 ?>
@@ -163,7 +163,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                     $bugResults = mysqli_query($con, $bugSql);
                     if ($bugResults->num_rows > 0) {
                         ?>
-                            <h5 style="margin-left: 12vw;">Bugs:</h5>
+                            <h5 style="margin-left: 12vw; margin-top: 12vh;">Bugs:</h5>
                         <?php
                         while($row1 = $bugResults->fetch_assoc()) {
                     ?>
@@ -171,9 +171,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
                         <div class="card1">
                             <p>Bug Name: <?php echo $row1['bugName'] ?></p>
                             <p>Bug Description: <?php echo $row1['bugDescription'] ?></p>
+                            <?php
+                                $sql2 = "SELECT * FROM org_members WHERE username='$user' AND orgID='$orgid' AND orgRole='owner' OR orgRole='editor'; ";
+                                $result2 = mysqli_query($con, $sql2);
+                                if ($result2->num_rows > 0){
+                            ?>
                             <span class="float-end" style="background-color: transparent;">
                                 <button onclick="location.href='./edit-bugs.php?id=<?=$row1['id']?>&orgid=<?=$row1['orgID']?>&bugname=<?=$row1['bugName']?>&projectid=<?=$projectid?>'" class="btn3">Edit Bug</button>
                             </span>
+                            <?php
+                                }
+                            ?>
                         </div>
                      </div>
                     

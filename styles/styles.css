@@ -56,6 +56,10 @@ li a {
     background-color: #4d4d4d;
 }
 
+.big-display, .small-display {
+    background-color: #4d4d4d;
+}
+
 /* Change the link color on hover */
 li a:hover {
     background-color: #1a1a1a;
@@ -283,13 +287,13 @@ select {
 /* Track */
 ::-webkit-scrollbar-track {
     border-radius: 1vw;
-  background: rgb(74, 74, 74, 0.545);
+    background: rgb(74, 74, 74, 0.545);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     border-radius: 1vw;
-  background: rgba(136, 136, 136, 0.545);
+    background: rgba(136, 136, 136, 0.545);
 }
 
 /* Handle on hover */

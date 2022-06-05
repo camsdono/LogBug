@@ -239,6 +239,7 @@ if(isset($_POST['btn-assign-bug'])) {
 
     $bugname = mysqli_real_escape_string($con, $_POST['bugname']);
     $orgid = mysqli_real_escape_string($con, $_POST['orgid']);
+    $projectid = mysqli_real_escape_string($con, $_POST['projectid']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $duedate = mysqli_real_escape_string($con, $_POST['duedate']);
     $bugID = mysqli_real_escape_string($con, $_POST['bugid']);
@@ -248,18 +249,23 @@ if(isset($_POST['btn-assign-bug'])) {
     $result = mysqli_query($con, $sql);
 
     if($result) {
-        
-        $sql2 = "SELECT * FROM bugs_assigned WHERE assingedUser='$username'";
+        $sql2 = "SELECT * FROM bugs_assigned WHERE assingedUser='$username' AND bugID='$bugID'";
         $result2 = mysqli_query($con, $sql2);
-        if(!$result2) {
-            $sql1 = "INSERT INTO bugs_assigned (bugName, orgID, assingedUser, dateAssigned, dueDate) values('$bugname', '$orgid', '$username', '$date', '$duedate')";
+        if ($result2->num_rows <= 0) {
+            $sql1 = "INSERT INTO bugs_assigned (bugName, orgID, bugID, assingedUser, dateAssigned, dueDate) values('$bugname', '$orgid', '$bugID', '$username', '$date', '$duedate')";
             $result1 = mysqli_query($con, $sql1);
+            if($result1) {
+                header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&useradded=added&projectid=$projectid"); 
+            } else {
+                header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&projectid=$projectid"); 
+                echo "<span style='color:white;text-align:center;'>An error has occured please try again later</span>";
+            }
         } else {
-            header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&useradded=true"); 
+            header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&useradded=true&projectid=$projectid"); 
             echo "<span style='color:white;text-align:center;'>User you tried adding alredy is added</span>";
         }
     } else {
-        header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname"); 
+        header("Location: ./sub-pages/edit-bugs.php?id=$bugID&orgid=$orgid&bugname=$bugname&projectid=$projectid"); 
         echo "<span style='color:white;text-align:center;'>An error has occured please try again later</span>";
     }
 }

@@ -64,7 +64,7 @@ $orgid = $_GET['orgid'];
                                         <div class="innerContent">
 
                                             <div class="info">
-                                                <p>The user you tried assining is already assigned to this bug</p><br>
+                                                <p>The user you tried assigning is already assigned to this bug</p><br>
 
                                             </div>
 
@@ -76,15 +76,10 @@ $orgid = $_GET['orgid'];
                                             </div>
 
                                         </div>
-                                        <div class="innerFooter">
-
-                                        </div>
                                     </div>
-
                                 </td>
                             </tr>
                         </table>
-
                     </div>
                 </div>
 
@@ -117,6 +112,7 @@ $orgid = $_GET['orgid'];
                     <input type="text" value=<?=$bugname ?> class="txt1" name="bugname" required style="display: none;">
                     <input type="text" value=<?=$orgid ?> class="txt1" name="orgid" required style="display: none;">
                     <input type="text" style="display: none;" value="<?=$_GET['id']?>" class="txt1" name="bugid" required>
+                    <input type="text" style="display: none;" value="<?=$_GET['projectid']?>" class="txt1" name="projectid" required>
                     Due date: <input type="date" placeholder="Date Due" class="txt1" name="duedate" required><br><br>
                     <input type="submit" value="Assign User" class="btn" name="btn-assign-bug"><br>
                 </form>
