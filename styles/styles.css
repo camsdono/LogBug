@@ -14,18 +14,36 @@ h1 {
     color: #E100FF;
 }
 
-.bugs-created {
-    position: absolute;
-    left: 5px;
-    width: 10%;
-    max-height: 22%;
+.info {
+    margin-left: 5px;
+    text-align: center;
+    width: 12vw;
+    height: 12vh;
+    min-height: 12vh;
+    max-height: 12vh;
+    display: inline-block;
     background-color: #202731;
     border-radius: 10px;
-    padding: 10px;
-    text-align: center;
 }
 
-.bugs-created h5 {
+.info-row {
+    height: 100%;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.info-row::-webkit-scrollbar {
+    display: none;
+}
+
+.info p {
+    margin: 0;
+}
+
+.info h5 {
     font-size: 1rem;
 }
 
@@ -156,7 +174,7 @@ input::-webkit-input-placeholder {
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
     input {
         border: none;
         border-radius: 5px;
@@ -191,8 +209,11 @@ input::-webkit-input-placeholder {
         width: 24vw;
     }
 
-    .bugs-created {
-        width: 30%;
+    .info {
+        width: 30vw;
+        min-width: 30vw;
+        height: 20vh;
+        max-height: 30vh;
     }
 }
 

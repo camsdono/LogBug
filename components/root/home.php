@@ -18,10 +18,26 @@
     <body>
         <section class="blue">
             <div class="curve"></div>
-            <div class="bugs-created">
-                <h5>Bugs Created:</h5>
-                <p>50</p>
+            <div class="info-row">
+                <h4 style="margin-left: 5px;">Stats:</h4>
+                <div class="info">
+                    <h5>Bugs Created:</h5>
+                    <p>50</p>
+                </div>
+                <div class="info">
+                    <h5>Projects In:</h5>
+                    <p>5</p>
+                </div>
+                <div class="info">
+                    <h5>Fixed Bugs:</h5>
+                    <p>12</p>
+                </div>
+                <div class="info">
+                    <h5>Orgs In:</h5>
+                    <p>12</p>
+                </div>
             </div>
+            
         </section>
         
         <footer>
