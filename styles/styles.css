@@ -2,6 +2,34 @@
     -webkit-appearance: none;
 }
 
+
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+}
+  
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.topnav a:hover {
+    background-color: rgb(119, 119, 119);
+    color: black;
+}
+
+.topnav .icon {
+    display: none;
+}
+
 h1 {
     font-size: 4rem;
 }
@@ -18,9 +46,8 @@ h1 {
     margin-left: 5px;
     text-align: center;
     width: 12vw;
-    height: 12vh;
-    min-height: 12vh;
-    max-height: 12vh;
+    height: 100%;
+    padding-bottom: 15px;
     display: inline-block;
     background-color: #202731;
     border-radius: 10px;
@@ -62,7 +89,6 @@ section {
     flex-direction: column;
     align-items: center;
     min-height: 400px;
-    padding-top: 50px;
 }
 
 input {
@@ -212,8 +238,28 @@ input::-webkit-input-placeholder {
     .info {
         width: 30vw;
         min-width: 30vw;
-        height: 20vh;
-        max-height: 30vh;
+        height: 35%;
+        max-height: 35%;
+    }
+
+    .topnav a:not(:first-child) {display: none;}
+    
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+
+    .topnav.responsive {position: relative;}
+
+    .topnav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
     }
 }
 
@@ -225,4 +271,5 @@ footer {
     right: 0px;
     margin-bottom: 0px;
     overflow-x: hidden;
+    overflow-y: hidden;
 }

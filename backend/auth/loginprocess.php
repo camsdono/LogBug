@@ -3,6 +3,7 @@
 require('../config.php');
 
 if (isset($_POST["login-btn"])) {
+    session_start();
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -10,7 +11,13 @@ if (isset($_POST["login-btn"])) {
 
     $sql = "SELECT * FROM users WHERE username='$username' AND password='$encryptedpass'";
     $result = $conn->query($sql);
-    header("Location: ../../components/root/home.php");
+    if(mysqli_num_rows($result) > 0) {
+        $_SESSION["username"] = $username;
+        header("Location: ../../components/root/home.php");
+    } else {
+        echo "Incorrect Login Details";
+    }
+    
 }
 
 if (isset($_POST["register-btn"])) {
