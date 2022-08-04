@@ -12,7 +12,11 @@ if (isset($_POST["login-btn"])) {
     $sql = "SELECT * FROM users WHERE username='$username' AND password='$encryptedpass'";
     $result = $conn->query($sql);
     if(mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $_SESSION["id"] = $row['id'];
+        }
         $_SESSION["username"] = $username;
+        
         header("Location: ../../components/root/home.php");
     } else {
         echo "Incorrect Login Details";

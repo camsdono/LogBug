@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bug Tracker</title>
+        <title>LogBug</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,7 @@
     </head>
     <body>
         <section class="blue">
-            <h1>Bug Tracker!</h1>
+            <h1>Log Bug!</h1>
             <p class="title-sub">A website to keep track of all your bugs and to manage your teams. Click <a href="./components/auth/login.php">Here</a> To Get Started</p>
             
             <div class="curve"></div>
