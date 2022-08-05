@@ -10,15 +10,21 @@ if(!$_SESSION['username'] == null) {
     header("Location: ../auth/login.php");
 }
 
-$getOrgInfo = "SELECT * FROM org_members WHERE orgMember='$username'";
-$result = $conn->query($getOrgInfo);
+$orgid = $_GET['id'];
 
+$getOrgInfo = "SELECT * FROM orgs WHERE id='$orgid'";
+$result = $conn->query($getOrgInfo);
 ?>
 
 <!DOCTYPE html>
+
 <html>
+    <?php
+        if(mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_array($result)) {
+    ?>
     <head>
-        <title id="title">Organizations</title>
+        <title id="title"><?=$row['orgName']?></title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,8 +39,8 @@ $result = $conn->query($getOrgInfo);
         <section class="blue">
             <div class="curve"></div>
             <div class="topnav" id="myTopnav">
-                <a href="./home.php">Home</a>
-                <a href="./organization.php">Organizations</a>
+                <a href="../root/home.php">Home</a>
+                <a href="../root/organization.php">Organizations</a>
                 <a href="#">Tickets</a>
 
                 <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
@@ -42,44 +48,18 @@ $result = $conn->query($getOrgInfo);
                 </a>
             </div>
 
-            <h2>Organizations</h2>
-            <div class="org-row">
-                <a class="create-org" href="../creation/createorg.php">Create Org</a>
-            </div>
-            <?php
-            if(mysqli_num_rows($result) > 0) {
-                ?>
-                <div class="card-row">
-                    <?php
-                while ($row = mysqli_fetch_array($result)) {
-                    $orgID = $row["orgID"];
-                    $getOrg = "SELECT * FROM orgs WHERE id='$orgID'";
-                    $getOrgRes = $conn->query($getOrg);
-                       
-                    while ($row1 = $getOrgRes->fetch_row()) {
-                       ?>
-                           <div class="card" onclick="location.href='../displays/orgdisplay.php?id=<?=$orgID ?>'">
-                                <h3><?=$row['orgName']?></h3>
-                           </div>
-                       <?php
-                    }
-                }
-                ?>
-                </div>
-                <?php
-            } else {
-                ?>
-                <h4>You Are Currently Not In Any Orgs Either Join Or <a class="link" href="../creation/createorg.php">Create</a> One!</h4>
-                <?php
-            }
-
-            ?>
-
+            <h2><?=$row['orgName']?></h2>
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>
     </body>
+    <?php
+            }
+        } else {
+            header("Location: ../root/organization.php");
+        }
+    ?>
 </html>
 <script>  
     function OpenCloseNav() {
