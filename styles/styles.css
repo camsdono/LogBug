@@ -47,6 +47,12 @@ h1 {
     color: #E100FF;
 }
 
+.org-description {
+    position: absolute;
+    right: 1vw;
+    top: 20vh;
+}
+
 .create-org {
     display: inline-block;
     margin-left: 5px;
@@ -95,7 +101,7 @@ h1 {
     background-color: #202731;
     border-radius: 10px;
     margin-bottom: 5px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     overflow-y: hidden;
     white-space: none;
     user-select: none;
@@ -278,6 +284,7 @@ input::-webkit-input-placeholder {
 }
 
 
+
 @media screen and (max-width: 700px) {
     input {
         border: none;
@@ -292,6 +299,12 @@ input::-webkit-input-placeholder {
 
     h1 {
         font-size: 3.3rem;
+    }
+
+    .org-description {
+        position: absolute;
+        left: 1vw;
+        top: 62vh;
     }
 
     .title-sub {
@@ -326,7 +339,7 @@ input::-webkit-input-placeholder {
     }
 
     .create-org {
-        width: 25vw;
+        width: 35vw;
     }
 
     .topnav a:not(:first-child) {display: none;}

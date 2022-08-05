@@ -14,6 +14,9 @@ $orgid = $_GET['id'];
 
 $getOrgInfo = "SELECT * FROM orgs WHERE id='$orgid'";
 $result = $conn->query($getOrgInfo);
+
+$getProjects = "SELECT * FROM projects WHERE orgID='$orgid'";
+$getProjectsRes = $conn->query($getProjects);
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +52,11 @@ $result = $conn->query($getOrgInfo);
             </div>
 
             <h2><?=$row['orgName']?></h2>
+
+            <div class="org-description">
+                <h4>Description:</h4>
+                <p><?=$row['orgDesc']?></p>
+            </div>
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
