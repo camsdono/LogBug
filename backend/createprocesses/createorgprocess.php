@@ -20,9 +20,10 @@ if (isset($_POST["create-org-btn"])) {
     
     $orgID = mysqli_insert_id($conn);
     $memberID = $_SESSION["id"];
+    $orgRole = "owner";
 
-    $addmemberorg = $conn->prepare("INSERT INTO org_members (orgName, orgID, orgMember, memberID) VALUES (?, ?, ?, ?)");
-    $addmemberorg->bind_param("sisi", $orgName, $orgID, $orgOwner, $memberID);
+    $addmemberorg = $conn->prepare("INSERT INTO org_members (orgName, orgID, orgMember, memberID, orgRole) VALUES (?, ?, ?, ?, ?)");
+    $addmemberorg->bind_param("sisis", $orgName, $orgID, $orgOwner, $memberID, $orgRole);
 
     $addmemberorg->execute();
     

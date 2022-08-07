@@ -18,6 +18,13 @@ Created By: Camsdono Studios
 
 - Create Comments On Bugs
 - Team Chat
-- Public API
-- Discord Bot Announcment Support
-- Twitter Announcment Support 
+- Public API / Pro Edition Of LogBug Only
+- Discord Bot Announcment Support / Enterprise And Pro Edition Only
+- Twitter Announcment Support / Enterprise And Pro Only
+
+## V0.03 - Management Setup
+
+- Project Deadlines 
+- Project Prototype Stages 
+- Member Calander 
+- To Do List (Kaban Board) / Enterprise And Pro Edition Only / One Free Board Maximum 3 Tabs Basic Edition

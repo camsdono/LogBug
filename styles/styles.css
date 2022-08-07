@@ -51,6 +51,7 @@ h1 {
     position: absolute;
     right: 1vw;
     top: 20vh;
+    color:rgb(219, 219, 219);
 }
 
 .create-org {
@@ -302,9 +303,12 @@ input::-webkit-input-placeholder {
     }
 
     .org-description {
-        position: absolute;
-        left: 1vw;
-        top: 62vh;
+        position: relative;
+        top: -2vh;
+        right: 0;
+        width: 75%;
+        text-align: center;
+        color:rgb(219, 219, 219);
     }
 
     .title-sub {

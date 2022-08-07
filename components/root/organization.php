@@ -43,12 +43,12 @@ $result = $conn->query($getOrgInfo);
             </div>
 
             <h2>Organizations</h2>
-            <div class="org-row">
-                <a class="create-org" href="../creation/createorg.php">Create Org</a>
-            </div>
             <?php
             if(mysqli_num_rows($result) > 0) {
                 ?>
+                <div class="org-row">
+                    <a class="create-org" href="../creation/createorg.php">Create Org</a>
+                </div>
                 <div class="card-row">
                     <?php
                 while ($row = mysqli_fetch_array($result)) {

@@ -54,7 +54,6 @@ $getProjectsRes = $conn->query($getProjects);
             <h2><?=$row['orgName']?></h2>
 
             <div class="org-description">
-                <h4>Description:</h4>
                 <p><?=$row['orgDesc']?></p>
             </div>
         </section>
