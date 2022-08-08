@@ -17,6 +17,14 @@ $result = $conn->query($getOrgInfo);
 
 $getProjects = "SELECT * FROM projects WHERE orgID='$orgid'";
 $getProjectsRes = $conn->query($getProjects);
+
+$getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username' AND orgID='$orgid'";
+$getOrgUserRes = $conn->query($getOrgUser);
+
+if(mysqli_num_rows($getOrgUserRes) == null) {
+    header("Location: ../root/organization.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +64,37 @@ $getProjectsRes = $conn->query($getProjects);
             <div class="org-description">
                 <p><?=$row['orgDesc']?></p>
             </div>
+
+            <?php
+                if(mysqli_num_rows($getProjectsRes) > 0) {
+                    ?>
+                    <div class="org-row">
+                        <a class="create-org" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create Project</a>
+                    </div>
+                    <div class="card-row">
+                        <?php
+                        while ($row1 = mysqli_fetch_array($getProjectsRes)) {
+                            ?>
+                                <div class="card" onclick="location.href='../displays/orgdisplay.php?id=<?=$orgID ?>'">
+                                    <h3><?=$row1['projectName']?></h3>
+                                </div>
+                            <?php
+                        }
+                        ?>
+                        </div>
+                        <?php
+                } else {
+                    while ($row = mysqli_fetch_array($getOrgUserRes)) {
+                        if($row['orgRole'] == "owner" || $row['orgRole'] == "editor") {
+
+                    ?>
+                        <h4>This Org Does Not Have Any Projets <a class="link" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create</a> One!</h4>
+                    <?php
+                        }
+                    }
+                }
+            ?>
+            
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>

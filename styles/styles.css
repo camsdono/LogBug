@@ -47,10 +47,17 @@ h1 {
     color: #E100FF;
 }
 
+.link:hover {
+    text-decoration: underline;
+    color: #c318da;
+}
+
 .org-description {
-    position: absolute;
-    right: 1vw;
-    top: 20vh;
+    position: relative;
+    top: -2vh;
+    right: 0;
+    width: 75%;
+    text-align: center;
     color:rgb(219, 219, 219);
 }
 
@@ -302,15 +309,6 @@ input::-webkit-input-placeholder {
         font-size: 3.3rem;
     }
 
-    .org-description {
-        position: relative;
-        top: -2vh;
-        right: 0;
-        width: 75%;
-        text-align: center;
-        color:rgb(219, 219, 219);
-    }
-
     .title-sub {
         font-size: 1.07rem;
         margin-left: 18px;
@@ -331,10 +329,11 @@ input::-webkit-input-placeholder {
     }
 
     .info {
+        user-select: none;
         width: 30vw;
         min-width: 30vw;
-        height: 35%;
-        max-height: 35%;
+        height: 10vh;
+        max-height: 10vh;
     }
 
     .card {

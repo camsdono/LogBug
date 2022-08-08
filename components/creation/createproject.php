@@ -1,4 +1,5 @@
 <?php
+
 require('../../backend/config.php');
 
 session_start();
@@ -8,13 +9,16 @@ if(!$_SESSION['username'] == null) {
 } else {
     header("Location: ../auth/login.php");
 }
+
+$orgid = $_GET['orgid'];
+
 ?>
 
 <!DOCTYPE html>
 <html>
 
     <head>
-        <title id="title">Create Organization</title>
+        <title id="title">Create Project</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,17 +42,20 @@ if(!$_SESSION['username'] == null) {
                 </a>
             </div>
 
-            <h2>Create Organization</h2>
+            <h2>Create Project</h2>
 
-            <form method="POST" action="../../backend/createprocesses/createorgprocess.php">
+            <form method="POST" action="../../backend/createprocesses/createprojectprocess.php">
                 <div class="input-row">
-                    <input type="text" placeholder="Org Name" name="orgName" require>
+                    <input type="text" placeholder="Project Name" name="projectName" require>
                 </div>
                 <div class="input-row">
-                    <input type="text" placeholder="Org Description" name="orgDesc" require>
+                    <input type="text" placeholder="Project Description" name="projectDesc" require>
+                </div>
+                <div class="input-row" style="display: none">
+                    <input type="text" value="<?=$orgid?>" name="orgID" require>
                 </div>
                 <div class="input-row">
-                    <input type="submit" value="Create Organization" name="create-org-btn">
+                    <input type="submit" value="Create Project" name="create-project-btn">
                 </div>
             </form>
         </section>

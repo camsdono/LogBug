@@ -1,5 +1,7 @@
 <?php
 
+require('../../backend/config.php');
+
 session_start();
 
 if(!$_SESSION['username'] == null) {
@@ -7,6 +9,9 @@ if(!$_SESSION['username'] == null) {
 } else {
     header("Location: ../auth/login.php");
 }
+
+$getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username'";
+$getOrgUserRes = $conn->query($getOrgUser);
 
 ?>
 <!DOCTYPE html>
@@ -42,15 +47,11 @@ if(!$_SESSION['username'] == null) {
                 <h4 style="margin-left: 5px;">Stats:</h4>
                 <div class="info">
                     <h5>Bugs Created:</h5>
-                    <p></p>
-                </div>
-                <div class="info">
-                    <h5>Projects In:</h5>
-                    <p></p>
+                    <p><?=mysqli_num_rows($getOrgUserRes)?></p>
                 </div>
                 <div class="info">
                     <h5>Orgs In:</h5>
-                    <p></p>
+                    <p><?=mysqli_num_rows($getOrgUserRes)?></p>
                 </div>
             </div>
         </section>
