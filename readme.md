@@ -18,6 +18,7 @@ Created By: Camsdono Studios
 
 - Create Comments On Bugs
 - Team Chat
+- Customer Support AI
 - Public API / Pro Edition Of LogBug Only
 - Discord Bot Announcment Support / Enterprise And Pro Edition Only
 - Twitter Announcment Support / Enterprise And Pro Edition Only
