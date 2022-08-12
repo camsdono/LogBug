@@ -13,6 +13,10 @@
     $projectid = $_GET['id'];
     $getProjectInfo = "SELECT * FROM projects WHERE id='$projectid'";
     $result = $conn->query($getProjectInfo);
+
+    $getBugs = "SELECT * FROM bugs WHERE projectID='$projectid'";
+    $getBugsRes = $conn->query($getBugs);
+    
 ?>
 
 <!DOCTYPE html>

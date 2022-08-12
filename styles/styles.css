@@ -24,6 +24,7 @@
 .topnav a:hover {
     background-color: rgb(119, 119, 119);
     color: black;
+    border-radius: 20px;
 }
 
 .topnav .icon {
@@ -363,6 +364,11 @@ input::-webkit-input-placeholder {
         float: none;
         display: block;
         text-align: left;
+    }
+    .topnav a:hover {
+        background-color: rgb(119, 119, 119);
+        color: black;
+        border-radius: 0;
     }
 }
 
