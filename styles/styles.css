@@ -24,7 +24,6 @@
 .topnav a:hover {
     background-color: rgb(119, 119, 119);
     color: black;
-    border-radius: 20px;
 }
 
 .topnav .icon {
@@ -333,8 +332,8 @@ input::-webkit-input-placeholder {
         user-select: none;
         width: 30vw;
         min-width: 30vw;
-        height: 10vh;
-        max-height: 10vh;
+        height: 12vh;
+        min-height: 12vh;
     }
 
     .card {
@@ -368,7 +367,6 @@ input::-webkit-input-placeholder {
     .topnav a:hover {
         background-color: rgb(119, 119, 119);
         color: black;
-        border-radius: 0;
     }
 }
 
