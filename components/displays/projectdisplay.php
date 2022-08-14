@@ -56,6 +56,23 @@
             </div>
 
             <h2><?=$row['projectName']?></h2>
+            <div class="org-description">
+                <p><?=$row['projectDesc']?></p>
+            </div>
+
+            <?php
+
+            if(mysqli_num_rows($getBugsRes) > 0) {
+                ?>
+                
+                <?php
+            } else {
+                ?>
+                    <h4>There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createorg.php">Add</a> One!</h4>
+                <?php
+            }
+
+            ?>
         </section>
     </body>
     <?php

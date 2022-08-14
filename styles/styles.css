@@ -101,8 +101,8 @@ h1 {
 .card {
     margin-left: 5px;
     text-align: center;
-    width: 25vw;
-    min-width: 25vw;
+    width: 18vw;
+    min-width: 18vw;
     height: 5vh;
     padding-bottom: 15px;
     display: inline-block;
@@ -367,6 +367,10 @@ input::-webkit-input-placeholder {
     .topnav a:hover {
         background-color: rgb(119, 119, 119);
         color: black;
+    }
+
+    body {
+        overflow-y: scroll;
     }
 }
 

@@ -29,3 +29,12 @@ Created By: Camsdono Studios
 - Project Prototype Stages 
 - Member Calander 
 - To Do List (Kaban Board) / Enterprise And Pro Edition Only / One Free Board Maximum 3 Tabs Basic Edition
+- Search Bugs/Members
+
+## V0.04 - User Update
+
+- User profiles
+- Progress overview (public)
+- Profile Pictures 
+- 2FA
+- User Settings

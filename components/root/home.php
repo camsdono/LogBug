@@ -13,6 +13,9 @@ if(!$_SESSION['username'] == null) {
 $getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username'";
 $getOrgUserRes = $conn->query($getOrgUser);
 
+$getBugs = "SELECT * FROM bugs WHERE createdUser='$username'";
+$getBugsRes = $conn->query($getBugs);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,7 +55,7 @@ $getOrgUserRes = $conn->query($getOrgUser);
                 <h4 style="margin-left: 5px;">Stats:</h4>
                 <div class="info">
                     <h5>Bugs Created:</h5>
-                    <p><?=mysqli_num_rows($getOrgUserRes)?></p>
+                    <p><?=mysqli_num_rows($getBugsRes)?></p>
                 </div>
                 <div class="info">
                     <h5>Orgs In:</h5>
