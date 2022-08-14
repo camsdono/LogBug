@@ -2,6 +2,36 @@
     -webkit-appearance: none;
 }
 
+.breadcrumbs {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 15px;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+.breadcrumbs-item {
+    display: inline-block;
+    text-align: left;
+}
+
+.breadcrumbs-item:not(:last-of-type)::after {
+    content: '/';
+    margin: 0 5px;
+    color: #e0e0e0
+}
+
+.breadcrumbs-link {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+.breadcrumbs-link:hover {
+    text-decoration: underline;
+}
 
 .topnav {
     background-color: #333;
@@ -65,8 +95,8 @@ h1 {
     display: inline-block;
     margin-left: 5px;
     background-color: #202731;
-    min-width: 14vw;
-    width: 14vw;
+    min-width: 18vw;
+    width: 18vw;
     font-size: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -318,6 +348,17 @@ input::-webkit-input-placeholder {
         font-size: 0.9rem;
     }
 
+    .org-description {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+        margin-left: 15px;
+        padding: 10px;
+        font-family: sans-serif;
+    }
+
     .button-holder{
         width: 50%;
         margin-bottom: 5px;
@@ -367,10 +408,6 @@ input::-webkit-input-placeholder {
     .topnav a:hover {
         background-color: rgb(119, 119, 119);
         color: black;
-    }
-
-    body {
-        overflow-y: scroll;
     }
 }
 

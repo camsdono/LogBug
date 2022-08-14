@@ -63,8 +63,17 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
+            
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs-item">
+                    <a href="#" class="breadcrumbs-link">Your Organizations</a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a href="#" class="breadcrumbs-link"><?=$row['orgName']?></a>
+                </li>
+            </ul>
 
-            <h2><?=$row['orgName']?></h2>
+           
 
             <div class="org-description">
                 <p><?=$row['orgDesc']?></p>
