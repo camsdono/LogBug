@@ -55,7 +55,15 @@
                 </a>
             </div>
 
-            <h2><?=$row['projectName']?></h2>
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs-item">
+                    <a href="../root/organization.php?id=<?=$row['orgID']?>" class="breadcrumbs-link">Your Organizations</a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a href="./orgdisplay.php?id=<?=$row['orgID'] ?>" class="breadcrumbs-link"><?=$row['orgName']?></a>
+                </li>
+            </ul>
+
             <div class="org-description">
                 <p><?=$row['projectDesc']?></p>
             </div>
@@ -68,7 +76,7 @@
                 <?php
             } else {
                 ?>
-                    <h4>There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createorg.php">Add</a> One!</h4>
+                    <h4 class="info-no-data">There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createbug.php">Add</a> One!</h4>
                 <?php
             }
 

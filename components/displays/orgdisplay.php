@@ -24,7 +24,7 @@ $getOrgUserRes = $conn->query($getOrgUser);
 if(mysqli_num_rows($getOrgUserRes) == null) {
     header("Location: ../root/organization.php");
 }
-
+ 
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +66,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
             
             <ul class="breadcrumbs">
                 <li class="breadcrumbs-item">
-                    <a href="#" class="breadcrumbs-link">Your Organizations</a>
+                    <a href="../root/organization.php?id=<?=$orgid?>" class="breadcrumbs-link">Your Organizations</a>
                 </li>
                 <li class="breadcrumbs-item">
                     <a href="#" class="breadcrumbs-link"><?=$row['orgName']?></a>

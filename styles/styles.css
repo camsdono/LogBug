@@ -1,5 +1,28 @@
 * {
-    -webkit-appearance: none;
+    -webkit-appearance: none;                           
+}
+
+.back-button {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 20px;
+    padding: 5px;
+    font-family: sans-serif;
+    
+}
+
+.back-button-item {
+    background-color: rgb(4, 170, 4);
+    padding: 12px 12px;
+    border-radius: 12px;
+}
+
+.back-button-item:hover {
+    cursor: pointer;
+    background-color: green;
 }
 
 .breadcrumbs {
@@ -12,6 +35,7 @@
     padding: 10px;
     font-family: sans-serif;
 }
+
 
 .breadcrumbs-item {
     display: inline-block;
@@ -408,6 +432,10 @@ input::-webkit-input-placeholder {
     .topnav a:hover {
         background-color: rgb(119, 119, 119);
         color: black;
+    }
+
+    .info-no-data {
+        margin-left: 10px;
     }
 }
 
