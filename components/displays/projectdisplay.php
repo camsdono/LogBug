@@ -24,6 +24,7 @@
     <?php
         if(mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
+                $orgid = $row['orgID'];
     ?>
     <head>
         <title id="title"><?=$row['projectName']?></title>
@@ -76,12 +77,14 @@
                 <?php
             } else {
                 ?>
-                    <h4 class="info-no-data">There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createbug.php">Add</a> One!</h4>
+                    <h4 class="info-no-data">There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createbug.php?id=<?=$projectid?>">Add</a> One!</h4>
                 <?php
             }
-
             ?>
         </section>
+        <footer>
+            <p class="footer-txt">@Camsdono Studios</p>
+        </footer>
     </body>
     <?php
             }

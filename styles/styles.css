@@ -3,12 +3,12 @@
 }
 
 .back-button {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    width: 100%;
-    margin-left: 20px;
+    margin-right: 82%;
+    margin-top: 35px;
     padding: 5px;
     font-family: sans-serif;
     
@@ -254,6 +254,20 @@ input::-webkit-input-placeholder {
     font-size: 0.9rem;
 }
 
+select {
+    border: none;
+    border-radius: 5px;
+    width: 30vw;
+    height: 4vh;
+    outline: none;
+    font-size: 0.9rem;
+    z-index: 2;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-indent: 5px;
+}
+
 .input-row {
     margin-bottom: 5px;
     z-index: 2;
@@ -355,6 +369,15 @@ input::-webkit-input-placeholder {
         height: 5vh;
         outline: none;
     }
+
+    select {
+        border: none;
+        border-radius: 5px;
+        width: 50vw;
+        height: 5vh;
+        outline: none;
+    }
+
     .curve {
         height: 140px;
     }

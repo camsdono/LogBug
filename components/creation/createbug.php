@@ -1,11 +1,22 @@
 <?php
 
+require('../../backend/config.php');
+
+session_start();
+
+if(!$_SESSION['username'] == null) {
+    $username = $_SESSION['username'];
+} else {
+    header("Location: ../auth/login.php");
+}
+
+$projectid = $_GET['id'];
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title id="title"><?=$row['projectName']?></title>
+        <title id="title">Create Bug</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,9 +45,48 @@
                 </a>
             </div>
 
-            <div class="back-button">
+            <h2>Add Bug</h2>
+
+            <div class="back-button" onclick="window.location = '../displays/projectdisplay.php?id=<?=$projectid?>'">
                 <h4 class="back-button-item">Back</h4>
             </div>
+
+            <form method="POST" action="../../backend/createprocesses/createorgprocess.php">
+                <div class="input-row">
+                    <input type="text" placeholder="Bug Name" name="bugName" require>
+                </div>
+                <div class="input-row">
+                    <input type="text" placeholder="Bug Description" name="bugDesc" require>
+                </div>
+                <label for="priority">priority:</label>
+                <div class="input-row">
+                    <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div><br>
+                <label>Due Date:</label>
+                <div class="input-row">
+                    <input type="date" name="dueDate" require>
+                </div>
+                <div class="input-row">
+                    <input type="submit" value="Add Bug" name="create-bug-btn">
+                </div>
+            </form>
         </section>
+        <footer>
+            <p class="footer-txt">@Camsdono Studios</p>
+        </footer>
     </body>
 </html>
+<script>  
+    function OpenCloseNav() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
