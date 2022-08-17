@@ -7,6 +7,7 @@ if (isset($_POST["create-org-btn"])) {
 
     $orgOwner = $_SESSION['username'];
     $joinCode = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
+
     $stmt = $conn->prepare("INSERT INTO orgs (orgName, orgDesc, joinCode, orgOwner) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $orgName, $orgDesc, $joinCode, $orgOwner);
 
@@ -38,6 +39,7 @@ if (isset($_POST["create-org-btn"])) {
     }
 
     $stmt->close();
+    $addmemberorg->close();
     
 }
 

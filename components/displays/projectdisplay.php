@@ -11,6 +11,10 @@
     }
 
     $projectid = $_GET['id'];
+
+    if($projectid == null) {
+        echo "Project ID empty";
+    }
     $getProjectInfo = "SELECT * FROM projects WHERE id='$projectid'";
     $result = $conn->query($getProjectInfo);
 

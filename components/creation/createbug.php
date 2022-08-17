@@ -12,6 +12,15 @@ if(!$_SESSION['username'] == null) {
 
 $projectid = $_GET['id'];
 
+$getProject = "SELECT * FROM projects WHERE id='$projectid'";
+$getProjectRes = $conn->query($getProject);
+
+if(mysqli_num_rows($getProjectRes) > 0) {
+    while ($row = mysqli_fetch_array($getProjectRes)) {
+        $projectName = $row['projectName'];
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +60,7 @@ $projectid = $_GET['id'];
                 <h4 class="back-button-item">Back</h4>
             </div>
 
-            <form method="POST" action="../../backend/createprocesses/createorgprocess.php">
+            <form method="POST" action="../../backend/createprocesses/createbugprocess.php">
                 <div class="input-row">
                     <input type="text" placeholder="Bug Name" name="bugName" require>
                 </div>
@@ -60,7 +69,7 @@ $projectid = $_GET['id'];
                 </div>
                 <label for="priority">priority:</label>
                 <div class="input-row">
-                    <select name="priority" id="priority">
+                    <select name="priority" id="priority" require>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
@@ -70,9 +79,17 @@ $projectid = $_GET['id'];
                 <div class="input-row">
                     <input type="date" name="dueDate" require>
                 </div>
+                <div class="input-row" style="display: none;">
+                    <input type="text" value="<?=$projectid?>" name="projectID" >
+                </div>
+                <div class="input-row" style="display: none;">
+                    <input type="text"  value="<?=$projectName?>" name="projectName" >
+                </div>
                 <div class="input-row">
                     <input type="submit" value="Add Bug" name="create-bug-btn">
                 </div>
+
+                
             </form>
         </section>
         <footer>
