@@ -362,9 +362,11 @@ select {
 .bug-holder {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 95%;
     background: #0f0f10;
     border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .bug-holder:hover {

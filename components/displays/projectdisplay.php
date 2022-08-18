@@ -76,6 +76,11 @@
             <?php
 
             if(mysqli_num_rows($getBugsRes) > 0) {
+                ?>
+                <div class="org-row">
+                    <a class="create-org" href="../creation/createbug.php?id=<?=$projectid?>">Add Bug</a>
+                </div>
+            <?php
                 while ($row1 = mysqli_fetch_array($getBugsRes)) {
                 ?>
                     <div class="bug-holder">
