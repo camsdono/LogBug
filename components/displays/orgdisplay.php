@@ -59,6 +59,12 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
                 <a href="../root/organization.php">Organizations</a>
                 <a href="#">Tickets</a>
 
+                <div class="profile-holder">
+                    <div class="pfp">
+                        <i class="fa fa-user-alt"></i>
+                    </div>
+                </div>
+
                 <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                     <i class="fa fa-bars"></i>
                 </a>

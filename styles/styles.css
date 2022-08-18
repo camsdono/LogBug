@@ -359,7 +359,14 @@ select {
     -webkit-appearance: none;
 }
 
+.profile-holder {
+    width: 15%;
+    height: 100%;
+}
 
+.pfp {
+    border-radius: 50%;
+}
 
 @media screen and (max-width: 700px) {
     input {
