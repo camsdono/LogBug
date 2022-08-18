@@ -359,13 +359,24 @@ select {
     -webkit-appearance: none;
 }
 
-.profile-holder {
-    width: 15%;
-    height: 100%;
+.bug-holder {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    background: #0f0f10;
+    border-radius: 10px;
 }
 
-.pfp {
-    border-radius: 50%;
+.bug-holder:hover {
+    transition: ease-in-out 0.2s;
+    background-color: #2c333b;
+    cursor: pointer;
+}
+
+.bug-item {
+    user-select: none;
+    text-align: left;
+    margin-left: 10px;
 }
 
 @media screen and (max-width: 700px) {

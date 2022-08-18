@@ -1,16 +1,5 @@
 <?php
 
-require('../../backend/config.php');
-
-session_start();
-
-if(!$_SESSION['username'] == null) {
-    $username = $_SESSION['username'];
-    header("Location: ../root/home.php");
-} else {
-    header("Location: ../auth/login.php");
-}
-
 ?>
 
 <!DOCTYPE html>

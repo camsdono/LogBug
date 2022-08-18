@@ -76,9 +76,15 @@
             <?php
 
             if(mysqli_num_rows($getBugsRes) > 0) {
+                while ($row1 = mysqli_fetch_array($getBugsRes)) {
                 ?>
-                
+                    <div class="bug-holder">
+                        <div class="bug-item">
+                            <h4><?=$row1['bugName']?></h4>
+                        </div>
+                    </div>
                 <?php
+                }
             } else {
                 ?>
                     <h4 class="info-no-data">There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createbug.php?id=<?=$projectid?>">Add</a> One!</h4>
