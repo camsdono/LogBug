@@ -1,5 +1,15 @@
 <?php
 
+require('../../backend/config.php');
+
+session_start();
+
+if(!$_SESSION['username'] == null) {
+    $username = $_SESSION['username'];
+    header("Location: ../components/root/home.php");
+} else {
+    header("Location: ../components/auth/login.php");
+}
 
 ?>
 <!DOCTYPE html>
