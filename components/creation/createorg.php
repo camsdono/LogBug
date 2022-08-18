@@ -62,13 +62,4 @@ if(!$_SESSION['username'] == null) {
         </footer>
     </body>
 </html>
-<script>  
-    function OpenCloseNav() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-</script>
+<script src="../../js/openCloseNavBar.js"></script>

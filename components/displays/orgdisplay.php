@@ -122,13 +122,4 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
         }
     ?>
 </html>
-<script>  
-    function OpenCloseNav() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-</script>
+<script src="../../js/openCloseNavBar.js"></script>
