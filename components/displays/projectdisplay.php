@@ -80,6 +80,7 @@
                 <div class="org-row">
                     <a class="create-org" href="../creation/createbug.php?id=<?=$projectid?>">Add Bug</a>
                 </div>
+                <div class="bug-container">
             <?php
                 while ($row1 = mysqli_fetch_array($getBugsRes)) {
                 ?>
@@ -90,6 +91,9 @@
                     </div>
                 <?php
                 }
+                ?>
+                </div>
+                <?php
             } else {
                 ?>
                     <h4 class="info-no-data">There Are No Bugs Currently In The Project Would You Like To <a class="link" href="../creation/createbug.php?id=<?=$projectid?>">Add</a> One!</h4>
