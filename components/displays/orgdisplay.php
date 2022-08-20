@@ -90,7 +90,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
                         while ($row1 = mysqli_fetch_array($getProjectsRes)) {
                             $projectid = $row1['id'];
                             ?>
-                                <div class="card" onclick="location.href='../displays/projectdisplay.php?id=<?=$projectid ?>'">
+                                <div class="card" onclick="location.href='../displays/projectdisplay.php?id=<?=$projectid?>&page=<?=1?>'">
                                     <h3><?=$row1['projectName']?></h3>
                                 </div>
                             <?php

@@ -13,13 +13,15 @@
     $projectid = $_GET['id'];
 
     if($projectid == null) {
-        echo "Project ID empty";
+        echo "No Project ID Found";
     }
     $getProjectInfo = "SELECT * FROM projects WHERE id='$projectid'";
     $result = $conn->query($getProjectInfo);
 
     $getBugs = "SELECT * FROM bugs WHERE projectID='$projectid'";
     $getBugsRes = $conn->query($getBugs);
+
+    $count = 0;
     
 ?>
 
@@ -83,13 +85,21 @@
                 <div class="bug-container">
             <?php
                 while ($row1 = mysqli_fetch_array($getBugsRes)) {
-                ?>
-                    <div class="bug-holder">
-                        <div class="bug-item">
-                            <h4><?=$row1['bugName']?></h4>
+                    # only show 5 bugs at a time
+                    if($count < 6) {
+                        $count++;
+                        ?>
+                        <div class="bug-holder">
+
+                       
+                        <div class="bug-row">
+                            <div class="bug-title">
+                                <h4 href="../bug/bugdisplay.php?id=<?=$row1['id']?>"><?=$row1['bugName']?></h4>
+                            </div>
                         </div>
-                    </div>
-                <?php
+                        </div>
+                        <?php
+                    } 
                 }
                 ?>
                 </div>
