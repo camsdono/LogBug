@@ -56,7 +56,7 @@ if(mysqli_num_rows($getProjectRes) > 0) {
 
             <h2>Add Bug</h2>
 
-            <div class="back-button" onclick="window.location = '../displays/projectdisplay.php?id=<?=$projectid?>'">
+            <div class="back-button" onclick="window.location = '../displays/projectdisplay.php?id=<?=$projectid?>&page=1'">
                 <h4 class="back-button-item">Back</h4>
             </div>
 

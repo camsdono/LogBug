@@ -21,7 +21,7 @@ if (isset($_POST["create-bug-btn"])) {
     $res = mysqli_stmt_get_result($stmt);
 
     if(!$res) {
-        header("Location: ../../components/displays/projectdisplay.php?id=$projectID");
+        header("Location: ../../components/displays/projectdisplay.php?id=$projectID&page=1");
     } else {
         echo "An error has occured adding bug to project try again later.";
     }

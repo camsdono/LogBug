@@ -387,8 +387,21 @@ select {
     overflow-y: hidden;
 }
 
+.pagination {
+    text-align: center;
+}
 
+.pagination a{
+    color: rgb(218, 218, 218);
+    font-size: 17px;
+    text-decoration: none;
+    margin: 5px;
+}
 
+.pagination a:hover {
+    color: rgb(189, 189, 189);
+    cursor: pointer;
+}
 
 @media screen and (max-width: 700px) {
     input {
