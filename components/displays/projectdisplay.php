@@ -25,6 +25,11 @@
     $getBugs = "SELECT * FROM bugs WHERE projectID='$projectid' LIMIT $offset, $limit";
     $getBugsRes = $conn->query($getBugs);
 
+    #total bugs
+    $getTotalBugs = "SELECT * FROM bugs WHERE projectID='$projectid'";
+    $getTotalBugsRes = $conn->query($getTotalBugs);
+    $totalBugs = $getTotalBugsRes->num_rows;
+    $totalPages = ceil($totalBugs / 6);
 
     $count = 0;
     
@@ -105,6 +110,22 @@
                         <?php
                     } 
                 }
+
+
+                if($totalPages > 1) {
+                    ?>
+                    <div class="pagination">
+                        <?php
+                        for($i = 1; $i <= $totalPages; $i++) {
+                            ?>
+                            <a href="?id=<?=$projectid?>&page=<?=$i?>"><?=$i?></a>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <?php
+                }
+
                 ?>
                 </div>
                 <?php
