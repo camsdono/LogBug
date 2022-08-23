@@ -9,8 +9,9 @@
     } else {
         header("Location: ../auth/login.php");
     }
-
+    
     $projectid = $_GET['id'];
+    $page = $_GET['page'];
 
     if($projectid == null) {
         echo "No Project ID Found";
@@ -18,8 +19,12 @@
     $getProjectInfo = "SELECT * FROM projects WHERE id='$projectid'";
     $result = $conn->query($getProjectInfo);
 
-    $getBugs = "SELECT * FROM bugs WHERE projectID='$projectid'";
+    $limit = 6 * $page;
+    $offset = $limit - 6;
+
+    $getBugs = "SELECT * FROM bugs WHERE projectID='$projectid' LIMIT $offset, $limit";
     $getBugsRes = $conn->query($getBugs);
+
 
     $count = 0;
     
@@ -78,6 +83,7 @@
             <?php
 
             if(mysqli_num_rows($getBugsRes) > 0) {
+                
                 ?>
                 <div class="org-row">
                     <a class="create-org" href="../creation/createbug.php?id=<?=$projectid?>">Add Bug</a>
@@ -90,8 +96,6 @@
                         $count++;
                         ?>
                         <div class="bug-holder">
-
-                       
                         <div class="bug-row">
                             <div class="bug-title">
                                 <h4 href="../bug/bugdisplay.php?id=<?=$row1['id']?>"><?=$row1['bugName']?></h4>
