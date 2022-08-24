@@ -31,6 +31,10 @@
     $totalBugs = $getTotalBugsRes->num_rows;
     $totalPages = ceil($totalBugs / 6);
 
+    if($page > $totalPages) {
+        header("Location: projectdisplay.php?id=$projectid&page=1");
+    }
+
     $count = 0;
     
 ?>
