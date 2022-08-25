@@ -4,6 +4,11 @@ require('../../backend/config.php');
 
 session_start();
 
+$bugID = $_GET['bugID'];
+
+$getBug = "SELECT * FROM bugs WHERE id=$bugID";
+$getBugRes = $conn->query($getBug);
+
 if(!$_SESSION['username'] == null) {
     $username = $_SESSION['username'];
 } else {
@@ -54,4 +59,3 @@ if(!$_SESSION['username'] == null) {
         </section>
     </body>
 </html>
-
