@@ -19,7 +19,7 @@ if(!$_SESSION['username'] == null) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title id="title"></title>
+        <title id="title">BugDisplay</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,15 +47,48 @@ if(!$_SESSION['username'] == null) {
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
+            
+            <?php
+            
+            if(mysqli_num_rows($getBugRes) > 0) {
+                while ($row = mysqli_fetch_array($getBugRes)) {
+                ?>
+            
+                <ul class="breadcrumbs">
+                    <li class="breadcrumbs-item">
+                        <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a>
+                    </li>
+                    <li class="breadcrumbs-item">
+                        <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a>
+                    </li>
+                </ul>
+            
+                <div class="org-description">
+                    <p><?=$row['bugDesc']?></p>
+                </div>
+            
+                <div class="due-date">
+                    <?php
+                        if($row['dueDate'] != null) {
+                    ?>
 
-            <ul class="breadcrumbs">
-                <li class="breadcrumbs-item">
-                    <a href="../root/organization.php?id=<?=$row['orgID']?>" class="breadcrumbs-link">Your Organizations</a>
-                </li>
-                <li class="breadcrumbs-item">
-                    <a href="./orgdisplay.php?id=<?=$row['orgID'] ?>" class="breadcrumbs-link"><?=$row['orgName']?></a>
-                </li>
-            </ul>
+                    <p>Due Date: <?=$row['dueDate']?></p>
+
+                    <?php
+                        }
+                    ?>
+                </div>
+            
+                <?php
+            }
+            }
+            ?>
+
+            
         </section>
+        <footer>
+            <p class="footer-txt">@Camsdono Studios</p>
+        </footer>
     </body>
 </html>
+<script src="../../js/openCloseNavBar.js"></script>

@@ -100,14 +100,15 @@
                 <div class="bug-container">
             <?php
                 while ($row1 = mysqli_fetch_array($getBugsRes)) {
+                    $bugID = $row1['id'];
                     # only show 5 bugs at a time
                     if($count < 6) {
                         $count++;
                         ?>
-                        <div class="bug-holder">
+                        <div class="bug-holder" onclick="window.location.href='./bugdisplay.php?bugID=<?=$bugID?>'">
                         <div class="bug-row">
                             <div class="bug-title">
-                                <h4 href="../bug/bugdisplay.php?id=<?=$row1['id']?>"><?=$row1['bugName']?></h4>
+                                <h4><?=$row1['bugName']?></h4>
                             </div>
                         </div>
                         </div>
