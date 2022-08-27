@@ -1,5 +1,5 @@
 <?php
-
+ 
 require('../../backend/config.php');
 
 session_start();
@@ -11,6 +11,9 @@ if(!$_SESSION['username'] == null) {
 }
 
 $bugid = $_GET['id'];
+
+$getBugRes = $conn->query($getBug); 
+$getBug = "SELECT * FROM bugs WHERE id=$bugid";
 
 ?>
 <!DOCTYPE html>
