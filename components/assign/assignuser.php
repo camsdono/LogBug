@@ -12,8 +12,21 @@ if(!$_SESSION['username'] == null) {
 
 $bugid = $_GET['id'];
 
-$getBugRes = $conn->query($getBug); 
+
 $getBug = "SELECT * FROM bugs WHERE id=$bugid";
+$getBugRes = $conn->query($getBug); 
+
+$bug = $getBugRes->fetch_assoc();
+$projectID = $bug['projectID'];
+
+$getProject = "SELECT * FROM projects WHERE id=$projectID";
+$getProjectRes = $conn->query($getProject);
+$project = $getProjectRes->fetch_assoc();
+
+$orgID = $project['orgID'];
+
+$orgMembers = "SELECT * FROM org_members WHERE orgID=$orgID";
+$orgMembersRes = $conn->query($orgMembers);
 
 ?>
 <!DOCTYPE html>
@@ -55,7 +68,25 @@ $getBug = "SELECT * FROM bugs WHERE id=$bugid";
             </div>
 
             <form method="POST" action="../../backend/createprocesses/createbugprocess.php">
-                
+                <div class="input-row">
+                    <select name="users[]" multiple style="height: 10vh; font-size: 16px;">
+                    <?php
+                    while ($row1 = mysqli_fetch_array($orgMembersRes)) {
+                        $username = $row1['orgMember'];
+                    ?>
+                        <option value="<?php echo $username;?>"><?php echo $username;?></option>
+
+                    <?php
+                    }
+                    ?>
+                    </select>
+                </div>
+                <div class="input-row">
+                    <input type="hidden" name="bugid" value="<?=$bugid?>" disabled>
+                </div>
+                <div class="input-row">
+                    <input type="submit" value="Assign">
+                </div>
             </form>
         </section>
         <footer>

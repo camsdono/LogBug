@@ -74,6 +74,8 @@ if(!$_SESSION['username'] == null) {
 
                     <p>Due Date: <?=$row['dueDate']?></p>
 
+                    <a href="../assign/assignuser.php?id=<?=$row['id']?>">Assign User</a>
+
                     <?php
                         }
                     ?>
