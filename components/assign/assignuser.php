@@ -10,14 +10,15 @@ if(!$_SESSION['username'] == null) {
     header("Location: ../auth/login.php");
 }
 
-$bugid = $_GET['id'];
+$bugID = $_GET['id'];
 
 
-$getBug = "SELECT * FROM bugs WHERE id=$bugid";
+$getBug = "SELECT * FROM bugs WHERE id=$bugID";
 $getBugRes = $conn->query($getBug); 
 
 $bug = $getBugRes->fetch_assoc();
 $projectID = $bug['projectID'];
+$bugName = $bug['bugName'];
 
 $getProject = "SELECT * FROM projects WHERE id=$projectID";
 $getProjectRes = $conn->query($getProject);
@@ -67,25 +68,34 @@ $orgMembersRes = $conn->query($orgMembers);
                 <h4 class="back-button-item">Back</h4>
             </div>
 
-            <form method="POST" action="../../backend/createprocesses/createbugprocess.php">
+            <form method="POST" action="../../backend/assignprocess/assignbugprocess.php">
                 <div class="input-row">
-                    <select name="users[]" multiple style="height: 10vh; font-size: 16px;">
+                    <input type="hidden" name="bugID" value="<?=$bugID?>" require>
+                </div>
+
+                <div class="input-row">
+                    <input type="hidden" name="bugName" value="<?=$bugName?>" require>
+                </div>
+
+                <div class="input-row">
+                    <select name="members[]" multiple style="height: 10vh; font-size: 16px;">
                     <?php
                     while ($row1 = mysqli_fetch_array($orgMembersRes)) {
                         $username = $row1['orgMember'];
                     ?>
                         <option value="<?php echo $username;?>"><?php echo $username;?></option>
-
                     <?php
                     }
+                    
                     ?>
                     </select>
+                   
                 </div>
+                
+                
+                
                 <div class="input-row">
-                    <input type="hidden" name="bugid" value="<?=$bugid?>" disabled>
-                </div>
-                <div class="input-row">
-                    <input type="submit" value="Assign">
+                    <input type="submit" value="Assign" name="assign-btn">
                 </div>
             </form>
         </section>
