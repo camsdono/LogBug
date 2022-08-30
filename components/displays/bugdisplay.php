@@ -80,7 +80,22 @@ if(!$_SESSION['username'] == null) {
                         }
                     ?>
                 </div>
-            
+                
+                <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
+                <div class="members">
+                    <?php
+                        $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID";
+                        $getMembersRes = $conn->query($getMembers);
+                        
+                        if(mysqli_num_rows($getMembersRes) > 0) {
+                            while ($row = mysqli_fetch_array($getMembersRes)) {
+                    ?>
+                                <p><?=$row['username']?></p>
+                    <?php
+                            }
+                        }
+                    ?>
+                </div>
                 <?php
             }
             }

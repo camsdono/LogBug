@@ -403,6 +403,22 @@ select {
     cursor: pointer;
 }
 
+.members {
+    position: relative;
+    display: block;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 15px;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+.members p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 700px) {
     input {
         border: none;
@@ -438,6 +454,17 @@ select {
     }
 
     .org-description {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+        margin-left: 15px;
+        padding: 10px;
+        font-family: sans-serif;
+    }
+
+    .members {
         position: relative;
         display: flex;
         flex-direction: row;

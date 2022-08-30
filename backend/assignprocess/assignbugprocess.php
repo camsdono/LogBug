@@ -12,9 +12,6 @@ if (isset($_POST["assign-btn"])) {
    
 
     foreach ($users as $user) {
-
-       
-
         $selectUser = "SELECT * FROM users WHERE username='$user'";
         $selectUserRes = $conn->query($selectUser);
         
