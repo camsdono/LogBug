@@ -32,6 +32,7 @@ if (isset($_POST["assign-btn"])) {
         } else {
             echo "An error has occured adding bug to project try again later.";
         }
+        
         $stmt->close();
     }
    

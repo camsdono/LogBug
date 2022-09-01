@@ -78,6 +78,10 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
             <div class="org-description">
                 <p><?=$row['orgDesc']?></p>
             </div>
+            
+            <div class="options">
+                <a href="../edit/orgsettings.php"><i class="fa fa-gear fa-lg option-icon"></i></a>
+            </div>
 
             <?php
                 if(mysqli_num_rows($getProjectsRes) > 0) {

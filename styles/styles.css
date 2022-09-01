@@ -108,11 +108,13 @@ h1 {
 
 .org-description {
     position: relative;
-    top: -2vh;
-    right: 0;
-    width: 75%;
-    text-align: center;
-    color:rgb(219, 219, 219);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 15px;
+    padding: 10px;
+    font-family: sans-serif;
 }
 
 .create-org {
@@ -403,7 +405,7 @@ select {
     cursor: pointer;
 }
 
-.members {
+.members, .due-date {
     position: relative;
     display: block;
     flex-direction: row;
@@ -417,6 +419,22 @@ select {
 .members p {
     margin: 0;
     margin-bottom: 10px;
+}
+
+.options {
+    margin-left: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.option-icon {
+    color: whitesmoke;
+}
+
+.option-icon:hover {
+    color: dimgrey;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
 }
 
 @media screen and (max-width: 700px) {
@@ -453,27 +471,6 @@ select {
         font-size: 0.9rem;
     }
 
-    .org-description {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        width: 100%;
-        margin-left: 15px;
-        padding: 10px;
-        font-family: sans-serif;
-    }
-
-    .members {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        width: 100%;
-        margin-left: 15px;
-        padding: 10px;
-        font-family: sans-serif;
-    }
 
     .button-holder{
         width: 50%;
