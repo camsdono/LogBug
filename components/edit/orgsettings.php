@@ -18,6 +18,7 @@ $orgInfoRow = mysqli_fetch_array($orgInfoRes);
 
 $orgName = $orgInfoRow['orgName'];
 $orgDesc = $orgInfoRow['orgDesc'];
+$orgId = $orgInfoRow['id'];
 
 ?>
 <!DOCTYPE html>
@@ -66,31 +67,32 @@ $orgDesc = $orgInfoRow['orgDesc'];
             <h3 style="width: 100%; margin-left: 15px;">General:</h3>
 
             <div class="settings">
-                <form method="POST" action="../../backend/">
+                <form method="POST" action="../../backend/editprocess/orgsettings/orgnameeditprocess.php">
                     <div class="input-row">
                         <p>Organization Name: </p>
                     </div>
                     <div class="input-row">
-                        <input type="text" placeholder="<?=$orgName?>" />
+                        <input type="text" name="orgname" placeholder="<?=$orgName?>" />
+                    </div>
+                    <div class="input-row">
+                        <input type="hidden" name="orgid" value="<?=$orgId?>" />
                     </div>
                     <div class="input-row">
                         <input type="submit" value="Rename"  name="org-edit-name-btn"/>
                     </div>
                 </form>
 
-                <form method="POST" action="../../backend/">
+                <form method="POST" action="../../backend/editprocess/orgsettings/orgdesceditprocess.php">
                     <div class="input-row">
                         <p>Organization Description: </p>
                     </div>
                     <div class="input-row">
-                        <input type="text" placeholder="<?=$orgDesc?>" />
+                        <input name="orgdesc" type="text" placeholder="<?=$orgDesc?>" />
                     </div>
                     <div class="input-row">
                         <input type="submit" value="Update" name="org-edit-desc-btn" />
                     </div>
                 </form>
-                
-
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
