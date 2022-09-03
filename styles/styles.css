@@ -437,6 +437,13 @@ select {
     transition: ease-in-out 0.2s;
 }
 
+
+
+.settings-item input {
+    display: inline-block;
+}
+
+
 @media screen and (max-width: 700px) {
     input {
         border: none;

@@ -1,5 +1,23 @@
 <?php
 
+require('../../backend/config.php');
+
+session_start();
+
+if(!$_SESSION['username'] == null) {
+    $username = $_SESSION['username'];
+} else {
+    header("Location: ../auth/login.php");
+}
+
+$orgID = $_GET['id'];
+
+$orgInfo = "SELECT * FROM orgs WHERE id='$orgID'";
+$orgInfoRes = $conn->query($orgInfo);
+$orgInfoRow = mysqli_fetch_array($orgInfoRes);
+
+$orgName = $orgInfoRow['orgName'];
+$orgDesc = $orgInfoRow['orgDesc'];
 
 ?>
 <!DOCTYPE html>
@@ -33,6 +51,46 @@
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
+
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs-item">
+                    <a href="../root/organization.php?id=<?=$orgID?>" class="breadcrumbs-link"><?=$orgName?></a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a href="#" class="breadcrumbs-link">Org Settings</a>
+                </li>
+            </ul>
+
+            <h2>Org Settings</h2>
+
+            <h3 style="width: 100%; margin-left: 15px;">General:</h3>
+
+            <div class="settings">
+                <form method="POST" action="../../backend/">
+                    <div class="input-row">
+                        <p>Organization Name: </p>
+                    </div>
+                    <div class="input-row">
+                        <input type="text" placeholder="<?=$orgName?>" />
+                    </div>
+                    <div class="input-row">
+                        <input type="submit" value="Rename"  name="org-edit-name-btn"/>
+                    </div>
+                </form>
+
+                <form method="POST" action="../../backend/">
+                    <div class="input-row">
+                        <p>Organization Description: </p>
+                    </div>
+                    <div class="input-row">
+                        <input type="text" placeholder="<?=$orgDesc?>" />
+                    </div>
+                    <div class="input-row">
+                        <input type="submit" value="Update" name="org-edit-desc-btn" />
+                    </div>
+                </form>
+                
+
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>

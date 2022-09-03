@@ -80,7 +80,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
             </div>
             
             <div class="options">
-                <a href="../edit/orgsettings.php"><i class="fa fa-gear fa-lg option-icon"></i></a>
+                <a href="../edit/orgsettings.php?id=<?=$orgid ?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
             </div>
 
             <?php
