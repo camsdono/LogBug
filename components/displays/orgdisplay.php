@@ -24,7 +24,6 @@ $getOrgUserRes = $conn->query($getOrgUser);
 if(mysqli_num_rows($getOrgUserRes) == null) {
     header("Location: ../root/organization.php");
 }
- 
 ?>
 
 <!DOCTYPE html>
@@ -51,70 +50,73 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
         <link rel="stylesheet" href="../../styles/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <section class="blue">
-            <div class="curve"></div>
-            <div class="topnav" id="myTopnav">
-                <a href="../root/home.php">Home</a>
-                <a href="../root/organization.php">Organizations</a>
-                <a href="#">Tickets</a>
+    <body class="blue body">
+        <div class="topnav" id="myTopnav">
+            <a href="../root/home.php">Home</a>
+            <a href="../root/organization.php">Organizations</a>
+            <a href="#">Tickets</a>
 
-                <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
+            <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        
+        <ul class="breadcrumbs">
+            <li class="breadcrumbs-item">
+                <a href="../root/organization.php?id=<?=$orgid?>" class="breadcrumbs-link">Your Organizations</a>
+            </li>
+            <li class="breadcrumbs-item">
+                <a href="#" class="breadcrumbs-link"><?=$row['orgName']?></a>
+            </li>
+        </ul>
+
+        
+
+        <div class="org-description">
+            <p><?=$row['orgDesc']?></p>
+        </div>
+
+        <div class="option-bar">
+            <div class="option-bar-item">
+                <a href="../assign/adduserorg.php?id=<?=$orgid?>"><i class="fa fas fa-users fa-lg option-icon"></i></a>
             </div>
-            
-            <ul class="breadcrumbs">
-                <li class="breadcrumbs-item">
-                    <a href="../root/organization.php?id=<?=$orgid?>" class="breadcrumbs-link">Your Organizations</a>
-                </li>
-                <li class="breadcrumbs-item">
-                    <a href="#" class="breadcrumbs-link"><?=$row['orgName']?></a>
-                </li>
-            </ul>
-
-           
-
-            <div class="org-description">
-                <p><?=$row['orgDesc']?></p>
+            <div class="option-bar-item">
+                <a href="../edit/orgsettings.php?id=<?=$orgid?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
             </div>
-            
-            <div class="options">
-                <a href="../edit/orgsettings.php?id=<?=$orgid ?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
-            </div>
+        </div>
+        <i class=""></i>
 
-            <?php
-                if(mysqli_num_rows($getProjectsRes) > 0) {
-                    ?>
-                    <div class="org-row">
-                        <a class="create-org" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create Project</a>
-                    </div>
-                    <div class="card-row">
-                        <?php
-                        while ($row1 = mysqli_fetch_array($getProjectsRes)) {
-                            $projectid = $row1['id'];
-                            ?>
-                                <div class="card" onclick="location.href='../displays/projectdisplay.php?id=<?=$projectid?>&page=<?=1?>'">
-                                    <h3><?=$row1['projectName']?></h3>
-                                </div>
-                            <?php
-                        }
-                        ?>
-                        </div>
-                        <?php
-                } else {
-                    while ($row = mysqli_fetch_array($getOrgUserRes)) {
-                        if($row['orgRole'] == "owner" || $row['orgRole'] == "editor") {
 
-                    ?>
-                        <h4>This Org Does Not Have Any Projets <a class="link" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create</a> One!</h4>
+        <?php
+            if(mysqli_num_rows($getProjectsRes) > 0) {
+                ?>
+                <div class="org-row">
+                    <a class="create-org" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create Project</a>
+                </div>
+                <div class="card-row">
                     <?php
-                        }
+                    while ($row1 = mysqli_fetch_array($getProjectsRes)) {
+                        $projectid = $row1['id'];
+                        ?>
+                            <div class="card" onclick="location.href='../displays/projectdisplay.php?id=<?=$projectid?>&page=<?=1?>'">
+                                <h3><?=$row1['projectName']?></h3>
+                            </div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                    <?php
+            } else {
+                while ($row = mysqli_fetch_array($getOrgUserRes)) {
+                    if($row['orgRole'] == "owner" || $row['orgRole'] == "editor") {
+
+                ?>
+                    <h4>This Org Does Not Have Any Projets <a class="link" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create</a> One!</h4>
+                <?php
                     }
                 }
-            ?>
-            
-        </section>
+            }
+        ?>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>

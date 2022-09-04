@@ -428,14 +428,30 @@ select {
     margin-bottom: 10px;
 }
 
-.options {
-    margin-left: 15px;
-    margin-bottom: 10px;
-    width: 100%;
-}
 
 .option-icon {
+    display: inline-block;
     color: whitesmoke;
+}
+
+.option-bar-item {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+
+.option-bar {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 15px;
+    
+    font-family: sans-serif;
 }
 
 .option-icon:hover {
@@ -443,7 +459,6 @@ select {
     cursor: pointer;
     transition: ease-in-out 0.2s;
 }
-
 
 
 .settings-item input {

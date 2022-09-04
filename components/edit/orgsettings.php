@@ -96,7 +96,7 @@ $orgId = $orgInfoRow['id'];
                         <input type="submit" value="Update" name="org-edit-desc-btn" />
                     </div>
                 </form>
-       
+            </div>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>
