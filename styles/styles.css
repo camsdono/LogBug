@@ -239,6 +239,13 @@ section {
     min-height: 400px;
 }
 
+.body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 input {
     border: none;
     border-radius: 5px;
