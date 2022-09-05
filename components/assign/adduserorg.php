@@ -66,7 +66,7 @@ $orgId = $orgInfoRow['id'];
         <h3 style="width: 100%; margin-left: 15px;">Assign Users:</h3>
 
         <div class="settings">
-            <form method="POST" action="../../backend/editprocess/orgsettings/orgnameeditprocess.php">
+            <form method="POST" action="../../backend/assignprocess/adduserorgprocess.php">
                 <div class="input-row">
                     <input type="text" name="username" placeholder="Username" />
                 </div>
