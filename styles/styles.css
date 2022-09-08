@@ -167,7 +167,6 @@ h1 {
     margin-bottom: 5px;
     font-size: 0.9rem;
     overflow-y: hidden;
-    white-space: none;
     user-select: none;
 }
 
@@ -441,16 +440,14 @@ select {
     cursor: pointer;
 }
 
-
-
 .option-bar {
+    display: inline-block;
     margin: 10px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
     margin-left: 15px;
-    
     font-family: sans-serif;
 }
 

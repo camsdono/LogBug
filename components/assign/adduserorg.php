@@ -54,10 +54,10 @@ $orgId = $orgInfoRow['id'];
         
         <ul class="breadcrumbs">
             <li class="breadcrumbs-item">
-                <a href="../root/organization.php?id=<?=$orgid?>" class="breadcrumbs-link">Your Organizations</a>
+                <a href="../root/organization.php?id=<?=$orgId?>" class="breadcrumbs-link">Your Organizations</a>
             </li>
             <li class="breadcrumbs-item">
-                <a href="#" class="breadcrumbs-link"><?=$orgName?></a>
+                <a href="../displays/orgdisplay.php?id=<?=$orgId?>" class="breadcrumbs-link"><?=$orgName?></a>
             </li>
         </ul>
 

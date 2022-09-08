@@ -10,7 +10,7 @@ if(!$_SESSION['username'] == null) {
     header("Location: ../auth/login.php");
 }
 
-$getOrgInfo = "SELECT * FROM org_members WHERE orgMember='$username'";
+$getOrgInfo = "SELECT * FROM org_members WHERE orgMember='$username' AND confirmJoined=1";
 $result = $conn->query($getOrgInfo);
 
 ?>

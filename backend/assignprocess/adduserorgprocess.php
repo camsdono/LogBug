@@ -19,20 +19,27 @@ if (isset($_POST["org-assign-user-btn"])) {
         $getUserRow = mysqli_fetch_array($getUserResult);
 
         $getUserID = $getUserRow['id'];
+
+        $getUserData = "SELECT * FROM org_members WHERE memberID=$getUserID";
+        $getUserDataResult = mysqli_query($conn, $getUserData);
+
+        if(mysqli_num_rows($getUserDataResult) < 1) {
+            $stmt = $conn->prepare("INSERT INTO org_members (orgName, orgID, orgMember, memberID, orgRole, assignCode) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sisiss", $orgname, $orgid, $username, $getUserID, $userRole, $assignCode);
     
-        $stmt = $conn->prepare("INSERT INTO org_members (orgName, orgID, orgMember, memberID, orgRole, assignCode) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sisiss", $orgname, $orgid, $username, $getUserID, $userRole, $assignCode);
+            $stmt->execute();
+            $res = mysqli_stmt_get_result($stmt);
     
-        $stmt->execute();
-        $res = mysqli_stmt_get_result($stmt);
-    
-        if(!$res) {
-            header("Location: ../../components/assign/adduserorg.php?id=$orgid");
-        } else {
-            echo "An error has occured adding bug to project try again later.";
-        }
+            if(!$res) {
+                header("Location: ../../components/assign/adduserorg.php?id=$orgid");
+            } else {
+                echo "An error has occured adding bug to project try again later.";
+            }
         
-        $stmt->close();
+            $stmt->close();
+        } else {
+            echo "User already in org!";
+        }
     }
 }
 
