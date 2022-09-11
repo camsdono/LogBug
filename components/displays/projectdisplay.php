@@ -4,7 +4,7 @@
 
     session_start();
 
-    if(!$_SESSION['username'] == null) {
+    if($_SESSION['username'] != null) {
         $username = $_SESSION['username'];
     } else {
         header("Location: ../auth/login.php");
@@ -31,11 +31,15 @@
     $totalBugs = $getTotalBugsRes->num_rows;
     $totalPages = ceil($totalBugs / 6);
 
-    if($page > $totalPages) {
-        header("Location: projectdisplay.php?id=$projectid&page=1");
+    if($totalBugs > 0) {
+        if($page > $totalPages) {
+            header("Location: projectdisplay.php?id=$projectid&page=1");
+        }
+    
+        $count = 0;
     }
 
-    $count = 0;
+    
     
 ?>
 
@@ -63,9 +67,8 @@
         <link rel="stylesheet" href="../../styles/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
+    <body  class="blue">
         <section class="blue">
-            <div class="curve"></div>
             <div class="topnav" id="myTopnav">
                 <a href="../root/home.php">Home</a>
                 <a href="../root/organization.php">Organizations</a>
