@@ -1,6 +1,6 @@
-## V0.01 Release!!!! 
+# V0.01 Release!!!! 
 
-# V0.01 Is now OUT!
+## V0.01 Is now OUT!
 
 Overview:
     Logbug is used to keep track of bugs and projects and to also help manage teams
