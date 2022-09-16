@@ -9,7 +9,7 @@ Created By: Camsdono Studios
 - Login/Signup
 - Overview Page
 - Org Creation
-- Joining Orgs / Via Email Or JoinCode 
+- Joining Orgs / Via Email
 - Project Creation
 - Bug Creation
 - Assign Users

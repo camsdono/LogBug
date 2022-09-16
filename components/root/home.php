@@ -62,6 +62,8 @@ $getBugsRes = $conn->query($getBugs);
                     <p><?=mysqli_num_rows($getOrgUserRes)?></p>
                 </div>
             </div>
+
+            <button id='notification-button' value="notification">notification</button>
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
@@ -69,3 +71,4 @@ $getBugsRes = $conn->query($getBugs);
     </body>
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
+<script src="../../js/notifications.js"></script>
