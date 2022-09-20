@@ -35,74 +35,82 @@ if(!$_SESSION['username'] == null) {
         <link rel="stylesheet" href="../../styles/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <section class="blue">
-            <div class="curve"></div>
-            <div class="topnav" id="myTopnav">
-                <a href="../root/home.php">Home</a>
-                <a href="../root/organization.php">Organizations</a>
-                <a href="#">Tickets</a>
+    <body class="blue scroll-body">
+        <div class="topnav" id="myTopnav">
+            <a href="../root/home.php">Home</a>
+            <a href="../root/organization.php">Organizations</a>
+            <a href="#">Tickets</a>
 
-                <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
+            <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        
+        <?php
+        
+        if(mysqli_num_rows($getBugRes) > 0) {
+            while ($row = mysqli_fetch_array($getBugRes)) {
+            ?>
+        
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs-item">
+                    <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a>
+                </li>
+            </ul>
+        
+            <div class="org-description">
+                <p><?=$row['bugDesc']?></p>
+            </div>
+        
+            <div class="due-date">
+                <?php
+                    if($row['dueDate'] != null) {
+                ?>
+
+                <p>Due Date: <?=$row['dueDate']?></p><br>
+
+                <a class="assign-user" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign Users</a>
+
+                <?php
+                    }
+                ?>
             </div>
             
-            <?php
-            
-            if(mysqli_num_rows($getBugRes) > 0) {
-                while ($row = mysqli_fetch_array($getBugRes)) {
-                ?>
-            
-                <ul class="breadcrumbs">
-                    <li class="breadcrumbs-item">
-                        <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a>
-                    </li>
-                    <li class="breadcrumbs-item">
-                        <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a>
-                    </li>
-                </ul>
-            
-                <div class="org-description">
-                    <p><?=$row['bugDesc']?></p>
-                </div>
-            
-                <div class="due-date">
-                    <?php
-                        if($row['dueDate'] != null) {
-                    ?>
-
-                    <p>Due Date: <?=$row['dueDate']?></p>
-
-                    <a href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a>
-
-                    <?php
-                        }
-                    ?>
-                </div>
-                
-                <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
-                <div class="members">
-                    <?php
-                        $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID";
-                        $getMembersRes = $conn->query($getMembers);
-                        
-                        if(mysqli_num_rows($getMembersRes) > 0) {
-                            while ($row = mysqli_fetch_array($getMembersRes)) {
-                    ?>
-                                <p><?=$row['username']?></p>
-                    <?php
-                            }
-                        }
-                    ?>
-                </div>
+            <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
+            <div class="members">
                 <?php
-            }
-            }
-            ?>
+                    $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID";
+                    $getMembersRes = $conn->query($getMembers);
+                    
+                    if(mysqli_num_rows($getMembersRes) > 0) {
+                        while ($row = mysqli_fetch_array($getMembersRes)) {
+                ?>
+                            <p><?=$row['username']?></p>
+                <?php
+                        }
+                    }
+                ?>
+            </div>
 
-            
-        </section>
+            <h3 class="members">Comments:</h3>
+            <div class="comments">
+                <form>
+                    <div class="input-row">
+                        <input type="text" placeholder="Enter Comment...">
+                    </div>
+                    <div class="input-row">
+                        <input type="submit" value="Send">
+                    </div>
+                </form>
+            </div>
+            <?php
+        }
+        }
+        ?>
+
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>
