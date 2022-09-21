@@ -36,35 +36,34 @@ $getBugsRes = $conn->query($getBugs);
         <link rel="stylesheet" href="../../styles/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <section class="blue">
-            <div class="curve"></div>
-            <div class="topnav" id="myTopnav">
-                <a href="./home.php">Home</a>
-                <a href="./organization.php">Organizations</a>
-                <a href="#">Tickets</a>
-                <a href="../../backend/auth/logout.php">Logout</a>
-                <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
+    <body  class="blue">
+       
+        <div class="topnav" id="myTopnav">
+            <a href="./home.php">Home</a>
+            <a href="./organization.php">Organizations</a>
+            <a href="#">Tickets</a>
+            <a href="../../backend/auth/logout.php">Logout</a>
+            <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="welcome-message">
+            <h2 style="text-align: center;">Welcome <?=$username?></h2>
+        </div>
+        <div class="info-row">
+            <h4 style="margin-left: 5px;">Stats:</h4>
+            <div class="info">
+                <h5>Bugs Created:</h5>
+                <p><?=mysqli_num_rows($getBugsRes)?></p>
             </div>
-            <div class="welcome-message">
-                <h2>Welcome <?=$username?></h2>
+            <div class="info">
+                <h5>Orgs In:</h5>
+                <p><?=mysqli_num_rows($getOrgUserRes)?></p>
             </div>
-            <div class="info-row">
-                <h4 style="margin-left: 5px;">Stats:</h4>
-                <div class="info">
-                    <h5>Bugs Created:</h5>
-                    <p><?=mysqli_num_rows($getBugsRes)?></p>
-                </div>
-                <div class="info">
-                    <h5>Orgs In:</h5>
-                    <p><?=mysqli_num_rows($getOrgUserRes)?></p>
-                </div>
-            </div>
+        </div>
 
-            <button id='notification-button' value="notification">notification</button>
-        </section>
+        <a href="../teams/chat/chat.php">Chat</a>
+        
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>
