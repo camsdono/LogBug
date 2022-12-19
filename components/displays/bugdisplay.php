@@ -74,13 +74,13 @@ if(!$_SESSION['username'] == null) {
 
                     <p>Due Date: <?=$row['dueDate']?></p>
 
-                    <a href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a>
-
                     <?php
                         }
                     ?>
                 </div>
-                
+                <div class="assign-holder">
+                    <a class="due-date assign-user-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a>
+                </div>
                 <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
                 <div class="members">
                     <?php

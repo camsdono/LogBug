@@ -38,9 +38,6 @@
     
         $count = 0;
     }
-
-    
-    
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +115,6 @@
                         <?php
                     } 
                 }
-
 
                 if($totalPages > 1) {
                     ?>

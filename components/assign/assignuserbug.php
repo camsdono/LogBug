@@ -29,6 +29,8 @@ $orgID = $project['orgID'];
 $orgMembers = "SELECT * FROM org_members WHERE orgID=$orgID";
 $orgMembersRes = $conn->query($orgMembers);
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,10 +65,12 @@ $orgMembersRes = $conn->query($orgMembers);
             </div>
 
             <h2>Assign User To Bug</h2>
-
-            <div class="back-button" onclick="window.location = '../displays/projectdisplay.php?id=<?=$projectid?>&page=1'">
-                <h4 class="back-button-item">Back</h4>
+            <div class="back-button-holder">
+                <div class="back-button" onclick="window.location = '../displays/bugdisplay.php?bugID=<?=$bugID?>'">
+                    <h4 class="back-button-item">Back</h4>
+                </div>
             </div>
+            
 
             <form method="POST" action="../../backend/assignprocess/assignbugprocess.php">
                 <div class="input-row">
@@ -78,21 +82,27 @@ $orgMembersRes = $conn->query($orgMembers);
                 </div>
 
                 <div class="input-row">
-                    <select name="members[]" multiple style="height: 10vh; font-size: 16px;">
+                    <select name="members[]" multiple style="height: 10vh; font-size: 16px;" required>
                     <?php
                     while ($row1 = mysqli_fetch_array($orgMembersRes)) {
+
                         $username = $row1['orgMember'];
-                    ?>
-                        <option value="<?php echo $username;?>"><?php echo $username;?></option>
-                    <?php
+
+                        $checkBugMembers = "SELECT * FROM bug_members WHERE bugID='$bugID' AND username='$username'";
+                        $checkBugMembersRes = $conn->query($checkBugMembers);
+                        if(mysqli_num_rows($checkBugMembersRes) < 1) {
+                           
+                            echo "<option value='$username'>$username</option>";
+                        }
+                    }
+
+                    if(mysqli_num_rows($checkBugMembersRes) > 0) { 
+                        echo "<option value='$username' disabled>No users avaliable</option>";
                     }
                     
                     ?>
                     </select>
-                   
                 </div>
-                
-                
                 
                 <div class="input-row">
                     <input type="submit" value="Assign" name="assign-btn">

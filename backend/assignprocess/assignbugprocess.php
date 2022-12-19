@@ -11,30 +11,36 @@ if (isset($_POST["assign-btn"])) {
     $users = $_POST['members'];
    
 
-    foreach ($users as $user) {
+    foreach ($users as $user) {                                                                                   
         $selectUser = "SELECT * FROM users WHERE username='$user'";
         $selectUserRes = $conn->query($selectUser);
-        
 
-        if(mysqli_num_rows($selectUserRes) > 0) {
-            while ($row = mysqli_fetch_array($selectUserRes)) {
-                $userID = $row['id'];
+        $checkBugMembers = "SELECT * FROM bug_members WHERE bugID='$bugID' AND username='$user'";
+        $checkBugMembersRes = $conn->query($checkBugMembers);
+
+
+        if(mysqli_num_rows($checkBugMembersRes) < 1) {
+            if(mysqli_num_rows($selectUserRes) > 0) {
+                while ($row = mysqli_fetch_array($selectUserRes)) {
+                    $userID = $row['id'];
+                }
             }
-        }
-        $stmt = $conn->prepare("INSERT INTO bug_members (bugName, bugID, username, userID) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $bugName, $bugID, $user, $userID);
-
-        $stmt->execute();
-        $res = mysqli_stmt_get_result($stmt);
-
-        if(!$res) {
-            header("Location: ../../components/displays/bugdisplay.php?bugID=$bugID");
+            $stmt = $conn->prepare("INSERT INTO bug_members (bugName, bugID, username, userID) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $bugName, $bugID, $user, $userID);
+    
+            $stmt->execute();
+            $res = mysqli_stmt_get_result($stmt);
+    
+            if(!$res) {
+                header("Location: ../../components/displays/bugdisplay.php?bugID=$bugID");
+            } else {
+                echo "An error has occured adding bug to project try again later.";
+            }
+            
+            $stmt->close();
         } else {
-            echo "An error has occured adding bug to project try again later.";
+            echo "User is already assigned to bug!";
         }
-        
-        $stmt->close();
     }
-   
 }
 ?>

@@ -37,7 +37,6 @@ $getBugsRes = $conn->query($getBugs);
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body  class="blue">
-       
         <div class="topnav" id="myTopnav">
             <a href="./home.php">Home</a>
             <a href="./organization.php">Organizations</a>
@@ -61,8 +60,6 @@ $getBugsRes = $conn->query($getBugs);
                 <p><?=mysqli_num_rows($getOrgUserRes)?></p>
             </div>
         </div>
-
-        <a href="../teams/chat/chat.php">Chat</a>
         
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>

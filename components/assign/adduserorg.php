@@ -20,6 +20,9 @@ $orgName = $orgInfoRow['orgName'];
 $orgDesc = $orgInfoRow['orgDesc'];
 $orgId = $orgInfoRow['id'];
 
+$orgMembers = "SELECT * FROM org_members WHERE orgID='$orgID'";
+$orgMembersRes = $conn->query($orgMembers);
+
 ?>
 
 <!DOCTYPE html>
@@ -89,6 +92,28 @@ $orgId = $orgInfoRow['id'];
                 </div>
             </form>
         </div>
+
+        <h3 style="width: 100%; margin-left: 15px;">Org Users:</h3>
+        <?php while($orgMembersRow = mysqli_fetch_array($orgMembersRes)) { ?>
+        <div class="org-members">
+           
+            <div class="item">
+                <?php echo $orgMembersRow['orgMember']; ?>
+            </div>
+                <div class="item">
+                    <div class="button button-small button-assertive"> 
+                        <div class="input-row remove-btn">
+                            <form method="POST" action="../../backend/deleteprocess/removeuserorg.php">
+                                <input type="hidden" name="orgMember" value="<?=$orgMembersRow['orgMember']; ?>" />
+                                <input type="hidden" name="orgID" value="<?=$orgID; ?>" />
+                                <input type="submit" value="Remove User"  name="org-remove-user-btn"/>
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <?php } ?>
     </body>
     <footer>
         <p class="footer-txt">@Camsdono Studios</p>

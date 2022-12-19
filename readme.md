@@ -4,6 +4,8 @@ A better place to keep track of your bugs and manage teams
 
 Created By: Camsdono Studios
 
+Future Versions Plan:
+
 ## V0.01 - The Basics
 
 - Login/Signup
