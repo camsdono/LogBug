@@ -35,74 +35,90 @@ if(!$_SESSION['username'] == null) {
         <link rel="stylesheet" href="../../styles/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <section class="blue">
-            <div class="curve"></div>
-            <div class="topnav" id="myTopnav">
-                <a href="../root/home.php">Home</a>
-                <a href="../root/organization.php">Organizations</a>
-                <a href="#">Tickets</a>
+    <body  class="blue">
+       
+        <div class="topnav" id="myTopnav">
+            <a href="../root/home.php">Home</a>
+            <a href="../root/organization.php">Organizations</a>
+            <a href="#">Tickets</a>
 
-                <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-            
-            <?php
-            
-            if(mysqli_num_rows($getBugRes) > 0) {
-                while ($row = mysqli_fetch_array($getBugRes)) {
-                ?>
-            
-                <ul class="breadcrumbs">
-                    <li class="breadcrumbs-item">
-                        <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a>
-                    </li>
-                    <li class="breadcrumbs-item">
-                        <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a>
-                    </li>
-                </ul>
-            
-                <div class="org-description">
-                    <p><?=$row['bugDesc']?></p>
-                </div>
-            
-                <div class="due-date">
-                    <?php
-                        if($row['dueDate'] != null) {
-                    ?>
-
-                    <p>Due Date: <?=$row['dueDate']?></p>
-
-                    <?php
-                        }
-                    ?>
-                </div>
-                <div class="assign-holder">
-                    <a class="due-date assign-user-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a>
-                </div>
-                <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
-                <div class="members">
-                    <?php
-                        $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID";
-                        $getMembersRes = $conn->query($getMembers);
-                        
-                        if(mysqli_num_rows($getMembersRes) > 0) {
-                            while ($row = mysqli_fetch_array($getMembersRes)) {
-                    ?>
-                                <p><?=$row['username']?></p>
-                    <?php
-                            }
-                        }
-                    ?>
-                </div>
-                <?php
-            }
-            }
+            <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        
+        <?php
+        
+        if(mysqli_num_rows($getBugRes) > 0) {
+            while ($row = mysqli_fetch_array($getBugRes)) {
             ?>
+        
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs-item">
+                    <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a>
+                </li>
+                <li class="breadcrumbs-item">
+                    <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a>
+                </li>
+            </ul>
+        
+            <div class="org-description">
+                <p><?=$row['bugDesc']?></p>
+            </div>
+        
+            <div class="due-date">
+                <?php
+                    if($row['dueDate'] != null) {
+                ?>
 
-            
-        </section>
+                <p>Due Date: <?=$row['dueDate']?></p>
+
+                <?php
+                    }
+                ?>
+            </div>
+            <div class="assign-holder">
+                <a class="due-date assign-user-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a>
+            </div>
+            <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
+            <div class="members">
+                <?php
+                    $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID";
+                    $getMembersRes = $conn->query($getMembers);
+                    
+                    if(mysqli_num_rows($getMembersRes) > 0) {
+                        while ($row = mysqli_fetch_array($getMembersRes)) {
+                ?>
+                            <p><?=$row['username']?></p>
+                <?php
+                        }
+                    }
+                ?>
+            </div>
+            <?php
+        }
+        }
+        ?>
+
+        <div class="comments">
+            <h3>Comments:</h3>
+            <?php
+                $getComments = "SELECT * FROM bug_comments WHERE bugID=$bugID";
+                $getCommentsRes = $conn->query($getComments);
+                
+                if(mysqli_num_rows($getCommentsRes) > 0) {
+                    while ($row = mysqli_fetch_array($getCommentsRes)) {
+                    ?>
+                        <div class="comment">
+                            <p><?=$row['message']?></p>
+                            <p class="comment-author">- <?=$row['commentAuthor']?></p>
+                        </div>
+                    <?php
+                    }
+                }
+                ?>
+        </div>
+       
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>

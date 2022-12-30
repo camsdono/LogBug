@@ -65,8 +65,6 @@
                     </div>
                 </form>
             </div>
-            
-            <div class="curve"></div>
         </section>
     
         <footer>
