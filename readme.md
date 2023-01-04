@@ -20,3 +20,4 @@ Future Versions Plan:
 
 - Create Comments On Bugs
 - Audit Log
+- More cool features 
