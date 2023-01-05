@@ -1,5 +1,7 @@
 # LogBug
 
+Planned Release Date: Mid 2023
+
 A better place to keep track of your bugs and manage teams
 
 Created By: Camsdono Studios
