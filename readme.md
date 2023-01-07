@@ -1,4 +1,5 @@
 # LogBug
+This project is licensed under the terms of the MIT license
 
 Planned Release Date: Mid 2023
 
