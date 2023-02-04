@@ -1,7 +1,4 @@
 # LogBug
-This project is licensed under the terms of the MIT license
-
-Planned Release Date: Mid 2023
 
 A better place to keep track of your bugs and manage teams
 
@@ -23,4 +20,3 @@ Future Versions Plan:
 
 - Create Comments On Bugs
 - Audit Log
-- More cool features 
