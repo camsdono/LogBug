@@ -140,6 +140,11 @@ h1 {
     transition: ease-in-out 0.2s;
 }
 
+.comment-holder {
+    margin-left: 15px;
+    padding: 10px;
+}
+
 .create-org {
     display: inline-block;
     margin-left: 5px;
@@ -461,6 +466,16 @@ select {
     font-family: sans-serif;
 }
 
+.comemnt-bug {
+    position: relative;
+    display: block;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
 .members p {
     margin: 0;
     margin-bottom: 10px;
@@ -520,6 +535,28 @@ select {
 }
 
 .assign-user-btn:hover {
+    background-color: rgb(7, 160, 7);
+    transition: ease-in-out 0.2s;
+}
+
+.comments-holder {
+    margin-top: 50px;
+    cursor: pointer;
+    padding: 0px 0px;
+    width: 100%;
+    background-color: green initial;
+}
+
+.comment-btn {
+    border-radius: 5px;
+    text-align: center;
+    width: 5%;
+    background-color: green;
+    text-decoration: none;
+    color: white;
+}
+
+.comment-btn:hover {
     background-color: rgb(7, 160, 7);
     transition: ease-in-out 0.2s;
 }
@@ -623,6 +660,16 @@ select {
 
     .info-no-data {
         margin-left: 10px;
+    }
+
+    
+    .assign-user-btn {
+        border-radius: 5px;
+        text-align: center;
+        width: 22%;
+        background-color: green;
+        text-decoration: none;
+        color: white;
     }
 }
 

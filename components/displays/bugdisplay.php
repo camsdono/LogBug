@@ -55,93 +55,97 @@ if(!$_SESSION['username'] == null) {
         
             <ul class="breadcrumbs">
                 <li class="breadcrumbs-item">
-                    <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a>
-                </li>
-                <li class="breadcrumbs-item">
-                    <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a>
-                </li>
-            </ul>
-        
-            <div class="org-description">
-                <p>Description: <?=$row['bugDesc']?></p>
-            </div>
-
-            <div class="bug-options-bar">
-                <div class="bug-options">
-                    <div class="bug-option" onclick="ChangeOption(1)">
-                        Users
-                    </div>
-                    <div class="bug-option" onclick="ChangeOption(2)">
-                        Comments
-                    </div>
-                </div>
-            </div>
+                    <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a> 
+                </li> 
+                <li class="breadcrumbs-item"> 
+                    <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a> 
+                </li> 
+            </ul> 
+         
+            <div class="org-description"> 
+                <p>Description: <?=$row['bugDesc']?></p> 
+            </div> 
+ 
+            <div class="bug-options-bar"> 
+                <div class="bug-options"> 
+                    <div class="bug-option" onclick="ChangeOption(1)"> 
+                        Users 
+                    </div> 
+                    <div class="bug-option" onclick="ChangeOption(2)"> 
+                        Comments 
+                    </div> 
+                </div> 
+            </div> 
+             
+            <div class="users-holder" id="users"> 
+            <div class="assign-holder"> 
+                <a class="due-date assign-user-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a> 
+            </div> 
+            <h3 class="members" style="margin-bottom: 0px;">Assigned Members:</h3> 
+            <div class="members"> 
+                <?php 
+                    $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID"; 
+                    $getMembersRes = $conn->query($getMembers); 
+                     
+                    if(mysqli_num_rows($getMembersRes) > 0) { 
+                        while ($row = mysqli_fetch_array($getMembersRes)) { 
+                ?> 
+                            <p><?=$row['username']?></p> 
+                <?php 
+                        } 
+                    } 
+                ?> 
+            </div> 
+            </div> 
+            <div class="comment-holder" id="comments" > 
+                <div class="comments-holder"> 
+                    <a class="comemnt-bug comment-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Add Comment</a> 
+                </div> 
+                <div class="comments"> 
+                <h3>Comments:</h3> 
+                <?php 
+                    $getComments = "SELECT * FROM bug_comments WHERE bugID=$bugID"; 
+                    $getCommentsRes = $conn->query($getComments); 
+                     
+                    if(mysqli_num_rows($getCommentsRes) > 0) { 
+                        while ($row = mysqli_fetch_array($getCommentsRes)) { 
+                        ?> 
+                            <div class="comment"> 
+                                <p><?=$row['message']?></p> 
+                                <p class="comment-author">- <?=$row['commentAuthor']?></p> 
+                            </div> 
+                        <?php 
+                        } 
+                    } 
+                    ?> 
+                </div> 
             
-            <div class="users-holder" id="users">
-            <div class="assign-holder">
-                <a class="due-date assign-user-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a>
-            </div>
-            <h3 class="members" style="margin-bottom: 0px;">Members:</h3>
-            <div class="members">
-                <?php
-                    $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID";
-                    $getMembersRes = $conn->query($getMembers);
-                    
-                    if(mysqli_num_rows($getMembersRes) > 0) {
-                        while ($row = mysqli_fetch_array($getMembersRes)) {
-                ?>
-                            <p><?=$row['username']?></p>
-                <?php
-                        }
-                    }
-                ?>
-            </div>
-            </div>
-            <div class="comment-holder" id="comments" >
-                <div class="comments">
-                <h3>Comments:</h3>
-                <?php
-                    $getComments = "SELECT * FROM bug_comments WHERE bugID=$bugID";
-                    $getCommentsRes = $conn->query($getComments);
-                    
-                    if(mysqli_num_rows($getCommentsRes) > 0) {
-                        while ($row = mysqli_fetch_array($getCommentsRes)) {
-                        ?>
-                            <div class="comment">
-                                <p><?=$row['message']?></p>
-                                <p class="comment-author">- <?=$row['commentAuthor']?></p>
-                            </div>
-                        <?php
-                        }
-                    }
-                    ?>
-                </div>
-           
-            </div>
-            <?php
-        }
-        }
-        ?>
-        </div>
-        
-        <footer>
-            <p class="footer-txt">@Camsdono Studios</p>
-        </footer>
-    </body>
-</html>
-<script src="../../js/openCloseNavBar.js"></script>
-<script>
-    var user = document.getElementById("users");
-    var comments = document.getElementById("comments");
-    comments.style.display = "none";
-    function ChangeOption(id) {
-        if(id == 1) {
-            user.style.display = "block";
-            comments.style.display = "none";
-        }
-        if(id == 2) {
-            user.style.display = "none";
-            comments.style.display = "block";
-        }
-    }
-</script>
+            </div> 
+            <?php 
+        } 
+        } 
+        ?> 
+        </div> 
+         
+        <footer> 
+            <p class="footer-txt">@Camsdono Studios</p> 
+        </footer> 
+    </body> 
+</html> 
+<script src="../../js/openCloseNavBar.js"></script> 
+<script> 
+    var user = document.getElementById("users"); 
+    var comments = document.getElementById("comments"); 
+    comments.style.display = "none"; 
+
+    function ChangeOption(id) { 
+        if(id == 1) { 
+            user.style.display = "block"; 
+            comments.style.display = "none"; 
+        } 
+        if(id == 2) { 
+            user.style.display = "none"; 
+            comments.style.display = "block"; 
+        } 
+    } 
+</script> 
