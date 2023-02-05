@@ -78,10 +78,10 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
 
         <div class="option-bar">
             <div class="option-bar-item">
-                <a href="../assign/adduserorg.php?id=<?=$orgid?>"><i class="fa fas fa-users fa-lg option-icon"></i></a>
+                <a title="Member Options" href="../assign/adduserorg.php?id=<?=$orgid?>"><i class="fa fas fa-users fa-lg option-icon"></i></a>
             </div>
             <div class="option-bar-item">
-                <a href="../edit/orgsettings.php?id=<?=$orgid?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
+                <a title="Org Settings" href="../edit/orgsettings.php?id=<?=$orgid?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
             </div>
         </div>
         <i class=""></i>

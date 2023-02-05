@@ -113,6 +113,33 @@ h1 {
     font-family: sans-serif;
 }
 
+.bug-options-bar {
+    width: 100vw;
+    display: inline;
+    user-select: none;
+}
+
+.bug-options {
+    width: 100%;
+    display: inline;
+}
+
+.bug-option {
+    width: 100%;
+    display: inline;
+    margin: 25px 25px;
+    padding: 15px 15px;
+    background-color: #7d7d7d;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.bug-option:hover {
+    background-color: #6a6a6a;
+    transition: ease-in-out 0.2s;
+}
+
 .create-org {
     display: inline-block;
     margin-left: 5px;
@@ -463,6 +490,7 @@ select {
     font-family: sans-serif;
 }
 
+
 .option-icon:hover {
     color: dimgrey;
     cursor: pointer;
@@ -475,6 +503,7 @@ select {
 }
 
 .assign-holder {
+    margin-top: 50px;
     cursor: pointer;
     padding: 5px 5px;
     width: 100%;

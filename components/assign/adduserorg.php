@@ -96,7 +96,9 @@ $orgMembersRes = $conn->query($orgMembers);
         <h3 style="width: 100%; margin-left: 15px;">Org Users:</h3>
         <?php while($orgMembersRow = mysqli_fetch_array($orgMembersRes)) { ?>
         <div class="org-members">
-           
+           <?php
+                if($orgMembersRow['confirmJoined'] == 1) {
+           ?>
             <div class="item">
                 <?php echo $orgMembersRow['orgMember']; ?>
             </div>
@@ -113,7 +115,7 @@ $orgMembersRes = $conn->query($orgMembers);
                 </div>
             </div>
         </div>
-        <?php } ?>
+        <?php } } ?>
     </body>
     <footer>
         <p class="footer-txt">@Camsdono Studios</p>
