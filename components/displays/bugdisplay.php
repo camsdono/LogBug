@@ -81,7 +81,7 @@ if(!$_SESSION['username'] == null) {
             <div class="assign-holder"> 
                 <a class="due-date assign-user-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Assign User</a> 
             </div> 
-            <h3 class="members" style="margin-bottom: 0px;">Assigned Members:</h3> 
+            <h3 class="members" style="margin-bottom: 0px;">Assigned Members:</h3>
             <div class="members"> 
                 <?php 
                     $getMembers = "SELECT * FROM bug_members WHERE bugID=$bugID"; 
@@ -98,9 +98,12 @@ if(!$_SESSION['username'] == null) {
             </div> 
             </div> 
             <div class="comment-holder" id="comments" > 
-                <div class="comments-holder"> 
-                    <a class="comemnt-bug comment-btn" href="../assign/assignuserbug.php?id=<?=$row['id']?>">Add Comment</a> 
-                </div> 
+                <div class="create-comment-holder">
+                    <form action="" method="POST" class="comment-field">
+                        <input type="text" class="comment-msg" placeholder="Comment Message..."> 
+                        <input type="submit" value="Send Comment" class="comment-send"/>
+                    </form>
+                </div>
                 <div class="comments"> 
                 <h3>Comments:</h3> 
                 <?php 
@@ -111,8 +114,8 @@ if(!$_SESSION['username'] == null) {
                         while ($row = mysqli_fetch_array($getCommentsRes)) { 
                         ?> 
                             <div class="comment"> 
-                                <p><?=$row['message']?></p> 
-                                <p class="comment-author">- <?=$row['commentAuthor']?></p> 
+                                <p><?=$row['message']?> - <?=$row['commentAuthor']?></p> 
+                               
                             </div> 
                         <?php 
                         } 
@@ -121,7 +124,7 @@ if(!$_SESSION['username'] == null) {
                 </div> 
             
             </div> 
-            <?php 
+            <?php  
         } 
         } 
         ?> 

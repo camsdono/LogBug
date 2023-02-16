@@ -20,9 +20,9 @@
 
         <link rel="stylesheet" href="../../styles/styles.css" />
     </head>
-    <body>
+    <body class="blue">
         
-        <section class="blue">
+        <section>
             <h1 id="login-detail">Login</h1>
             <div class="sign-options">
                 <div class="button-holder">

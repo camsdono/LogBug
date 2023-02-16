@@ -113,6 +113,7 @@ h1 {
     font-family: sans-serif;
 }
 
+
 .bug-options-bar {
     width: 100vw;
     display: inline;
@@ -215,6 +216,21 @@ h1 {
     display: none;
 }
 
+.create-comment-holder{
+    margin-top: 50px;
+}
+
+.comment-send {
+    width: 12%;
+    cursor: pointer;
+}
+
+.comment-field input[type=submit]:hover {
+    transition: ease-in-out 0.3s;
+    background-color: rgb(218, 218, 218);
+    cursor: pointer;
+}
+
 .info {
     margin-left: 5px;
     text-align: center;
@@ -244,7 +260,7 @@ h1 {
 .info p {
     margin: 0;
 }
-
+  
 .info h5 {
     font-size: 1rem;
 }
@@ -263,7 +279,6 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 400px;
 }
 
 .body {
@@ -329,7 +344,7 @@ select {
 }
 
 .blue {
-    background: #3c31dd;
+    background: #392fc4;
     z-index: 0;
 }
 
@@ -523,12 +538,12 @@ select {
     padding: 5px 5px;
     width: 100%;
     background-color: green initial;
-}
+} 
 
 .assign-user-btn {
     border-radius: 5px;
     text-align: center;
-    width: 5%;
+    width: 10%;
     background-color: green;
     text-decoration: none;
     color: white;
@@ -547,19 +562,6 @@ select {
     background-color: green initial;
 }
 
-.comment-btn {
-    border-radius: 5px;
-    text-align: center;
-    width: 5%;
-    background-color: green;
-    text-decoration: none;
-    color: white;
-}
-
-.comment-btn:hover {
-    background-color: rgb(7, 160, 7);
-    transition: ease-in-out 0.2s;
-}
 
 .item {
     float:left;

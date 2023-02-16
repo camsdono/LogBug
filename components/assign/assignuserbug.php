@@ -63,13 +63,13 @@ $orgMembersRes = $conn->query($orgMembers);
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
-
-            <h2>Assign User To Bug</h2>
             <div class="back-button-holder">
                 <div class="back-button" onclick="window.location = '../displays/bugdisplay.php?bugID=<?=$bugID?>'">
                     <h4 class="back-button-item">Back</h4>
                 </div>
             </div>
+            <h2>Assign User To Bug</h2>
+            
             
 
             <form method="POST" action="../../backend/assignprocess/assignbugprocess.php">
