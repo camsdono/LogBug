@@ -13,6 +13,9 @@ if($_SESSION['username'] != null) {
 $getOrgInfo = "SELECT * FROM org_members WHERE orgMember='$username' AND confirmJoined=1";
 $result = $conn->query($getOrgInfo);
 
+$getPendingOrgs = "SELECT * FROM org_members WHERE orgMember='$username' AND confirmJoined=0";
+$pendingOrgs = $conn->query($getPendingOrgs);
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +52,59 @@ $result = $conn->query($getOrgInfo);
 
             <h2>Organizations</h2>
             <?php
+            if(mysqli_num_rows($pendingOrgs) > 0) {
+                ?>
+
+                <div class="list-holder">
+                    <div class="list-header">
+                        <h3>Pending Orgs</h3>
+                    </div>
+                    <div class="list-header">
+                        <h3 onclick="showOrgs()" id="show-orgs" style="font-size: 1.8rem;">↑</h3>
+                    </div>
+                </div>
+                
+                <div class="card-row" id="orgs">
+                    <?php
+                while ($row = mysqli_fetch_array($pendingOrgs)) {
+                    $orgID = $row["orgID"];
+                    $getOrg = "SELECT * FROM orgs WHERE id='$orgID'";
+                    $getOrgRes = $conn->query($getOrg);
+                       
+                    while ($row1 = $getOrgRes->fetch_row()) {
+                       ?>
+                           <div class="card1">
+                                <h3><?=$row['orgName']?></h3>
+                                <div class="button-holder">
+                                    <div class="button-item">
+                                        <form action="../backend/assignprocess/userjoinconfirm.php" method="post">
+                                            <div class="button-row">
+                                                <input type="hidden" name="orgId" value="<?=$orgID ?>">
+                                            </div>
+                                            <div class="button-row">
+                                                <input type="submit" name="confirm-btn" value="Confirm" class="button-confirm">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="button-item">
+                                    <form action="../backend/assignprocess/userjoinconfirm.php" method="post">
+                                            <div class="button-row">
+                                                <input type="hidden" name="orgId" value="<?=$orgID ?>">
+                                            </div>
+                                            <div class="button-row">
+                                                <input type="submit" name="deny-btn" value="Deny" class="button-confirm">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                           </div>
+                       <?php
+                    }
+                }
+                ?>
+                </div>
+                <?php
+            }
             if(mysqli_num_rows($result) > 0) {
                 ?>
                 <div class="org-row">
@@ -81,9 +137,19 @@ $result = $conn->query($getOrgInfo);
             ?>
 
         </section>
-        <footer>
-            <p class="footer-txt">@Camsdono Studios</p>
-        </footer>
     </body>
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
+<script>
+    function showOrgs() {
+        var x = document.getElementById("orgs");
+        var y = document.getElementById("show-orgs");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.innerHTML = "↑";
+        } else {
+            x.style.display = "none";
+            y.innerHTML = "↓";
+        }
+    }
+</script>

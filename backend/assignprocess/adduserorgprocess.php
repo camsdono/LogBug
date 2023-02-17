@@ -20,7 +20,7 @@ if (isset($_POST["org-assign-user-btn"])) {
 
         $getUserID = $getUserRow['id'];
 
-        $getUserData = "SELECT * FROM org_members WHERE memberID=$getUserID";
+        $getUserData = "SELECT * FROM org_members WHERE memberID=$getUserID AND orgID=$orgid";
         $getUserDataResult = mysqli_query($conn, $getUserData);
 
         if(mysqli_num_rows($getUserDataResult) < 1) {
@@ -29,11 +29,15 @@ if (isset($_POST["org-assign-user-btn"])) {
     
             $stmt->execute();
             $res = mysqli_stmt_get_result($stmt);
-    
+
             if(!$res) {
+                //$to_email_address = $getUserRow['email'];
+                //$subject = "LogBug: You have been added to an organisation: $orgname";
+                //$message = "You have been added to an organisation: $orgname. Your role is: $userRole. Verify your account by clicking the link below: http://thelogbug.com/backend/assignprocess/verifyorg.php?code=$assignCode";
+                //mail($to_email_address,$subject,$message);
                 header("Location: ../../components/assign/adduserorg.php?id=$orgid");
             } else {
-                echo "An error has occured adding bug to project try again later.";
+                echo "An error has occured adding user to org try again later.";
             }
         
             $stmt->close();

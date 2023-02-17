@@ -19,12 +19,11 @@
 
         <link rel="stylesheet" href="./styles/styles.css" />
     </head>
-    <body>
-        <section class="blue">
+    <body  class="blue">
+        <section>
             <h1>Log Bug!</h1>
             <p class="title-sub">A website to keep track of all your bugs and to manage your teams. Click <a href="./components/auth/login.php">Here</a> To Get Started</p>
             
-            <div class="curve"></div>
         </section>
     
         <footer>
