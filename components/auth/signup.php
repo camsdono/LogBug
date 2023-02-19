@@ -27,16 +27,16 @@
             <div id="signup-form" class="signup-form">
                 <form action="../../backend/auth/loginprocess.php" method="POST">  
                     <div class="input-row">
-                        <input type="text" placeholder="Name" name="name" require>
+                        <input type="text" placeholder="Name" name="name" maxlength="50" required>
                     </div>
                     <div class="input-row">
-                        <input type="email" placeholder="Email" name="email" require>
+                        <input type="email" placeholder="Email" name="email" maxlength="50" required>
                     </div>
                     <div class="input-row">
-                        <input type="text" placeholder="Username" name="username" require>
+                        <input type="text" placeholder="Username" name="username" maxlength="25" required>
                     </div>
                     <div class="input-row">
-                        <input type="password" placeholder="Password" name="password" require>
+                        <input type="password" placeholder="Password" name="password" maxlength="25" required>
                     </div>
                     <div class="input-row">
                         <input type="submit" value="Register" name="register-btn">

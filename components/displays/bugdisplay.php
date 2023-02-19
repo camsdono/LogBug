@@ -78,15 +78,15 @@ if(!$_SESSION['username'] == null) {
         
             <ul class="breadcrumbs">
                 <li class="breadcrumbs-item">
-                    <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=$row['projectName']?></a> 
+                    <a href="./projectdisplay.php?id=<?=$row['projectID']?>&page=1" class="breadcrumbs-link"><?=htmlspecialchars($row['projectName'])?></a> 
                 </li> 
                 <li class="breadcrumbs-item"> 
-                    <a href="#" class="breadcrumbs-link"><?=$row['bugName']?></a> 
+                    <a href="#" class="breadcrumbs-link"><?=htmlspecialchars($row['bugName'])?></a> 
                 </li> 
             </ul> 
          
             <div class="org-description"> 
-                <p>Description: <?=$row['bugDesc']?></p> 
+                <p>Description: <?=htmlspecialchars($row['bugDesc'])?></p> 
             </div> 
  
             <div class="bug-options-bar"> 
@@ -113,7 +113,7 @@ if(!$_SESSION['username'] == null) {
                     if(mysqli_num_rows($getMembersRes) > 0) { 
                         while ($row = mysqli_fetch_array($getMembersRes)) { 
                 ?> 
-                            <p><?=$row['username']?></p> 
+                            <p><?=htmlspecialchars($row['username'])?></p> 
                 <?php 
                         } 
                     } 
@@ -139,7 +139,7 @@ if(!$_SESSION['username'] == null) {
                         while ($row = mysqli_fetch_array($getCommentsRes)) { 
                         ?> 
                             <div class="comment"> 
-                                <p><?=$row['message']?> - <?=$row['commentAuthor']?></p> 
+                                <p><?=htmlspecialchars($row['message'])?> - <?=htmlspecialchars($row['commentAuthor'])?></p> 
                             </div> 
                         <?php 
                         } 

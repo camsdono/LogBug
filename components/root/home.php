@@ -10,7 +10,7 @@ if(!$_SESSION['username'] == null) {
     header("Location: ../auth/login.php");
 }
 
-$getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username'";
+$getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username' and confirmJoined='1'";
 $getOrgUserRes = $conn->query($getOrgUser);
 
 $getBugs = "SELECT * FROM bugs WHERE createdUser='$username'";
@@ -47,7 +47,7 @@ $getBugsRes = $conn->query($getBugs);
             </a>
         </div>
         <div class="welcome-message">
-            <h2 style="text-align: center;">Welcome <?=$username?></h2>
+            <h2 style="text-align: center;">Welcome <?=htmlspecialchars($username)?></h2>
         </div>
         <div class="info-row">
             <h4 style="margin-left: 5px;">Stats:</h4>

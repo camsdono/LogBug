@@ -63,10 +63,10 @@ if(mysqli_num_rows($getProjectRes) > 0) {
 
             <form method="POST" action="../../backend/createprocesses/createbugprocess.php">
                 <div class="input-row">
-                    <input type="text" placeholder="Bug Name" name="bugName" require>
+                    <input type="text"  maxlength="20"  placeholder="Bug Name" name="bugName" require>
                 </div>
                 <div class="input-row">
-                    <input type="text" placeholder="Bug Description" name="bugDesc" require>
+                    <input type="text"  maxlength="50"  placeholder="Bug Description" name="bugDesc" require>
                 </div>
                 <label for="priority">priority:</label>
                 <div class="input-row">
@@ -81,10 +81,10 @@ if(mysqli_num_rows($getProjectRes) > 0) {
                     <input type="date" name="dueDate" require>
                 </div>
                 <div class="input-row" style="display: none;">
-                    <input type="text" value="<?=$projectid?>" name="projectID" >
+                    <input type="text" value="<?=$projectid?>" name="projectID" hidden>
                 </div>
                 <div class="input-row" style="display: none;">
-                    <input type="text"  value="<?=$projectName?>" name="projectName" >
+                    <input type="text" value="<?=htmlspecialchars($projectName)?>" name="projectName" hidden>
                 </div>
                 <div class="input-row">
                     <input type="submit" value="Add Bug" name="create-bug-btn">

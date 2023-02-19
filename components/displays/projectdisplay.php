@@ -69,7 +69,7 @@
 <html>
     
     <head>
-        <title id="title"><?=$row1['projectName']?></title>
+        <title id="title"><?=htmlspecialchars($row1['projectName'])?></title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -104,12 +104,12 @@
                     <a href="../root/organization.php?id=<?=$row1['orgID']?>" class="breadcrumbs-link">Your Organizations</a>
                 </li>
                 <li class="breadcrumbs-item">
-                    <a href="./orgdisplay.php?id=<?=$row1['orgID'] ?>" class="breadcrumbs-link"><?=$row1['orgName']?></a>
+                    <a href="./orgdisplay.php?id=<?=$row1['orgID'] ?>" class="breadcrumbs-link"><?=htmlspecialchars($row1['orgName'])?></a>
                 </li>
             </ul>
 
             <div class="org-description">
-                <p><?=$row1['projectDesc']?></p>
+                <p><?=htmlspecialchars($row1['projectDesc'])?></p>
             </div>
 
             <?php
@@ -131,7 +131,7 @@
                         <div class="bug-holder" onclick="window.location.href='./bugdisplay.php?bugID=<?=$bugID?>'">
                         <div class="bug-row">
                             <div class="bug-title">
-                                <h4><?=$row1['bugName']?></h4>
+                                <h4><?=htmlspecialchars($row1['bugName'])?></h4>
                             </div>
                         </div>
                         </div>

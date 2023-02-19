@@ -52,10 +52,10 @@ $orgid = $_GET['orgid'];
 
             <form method="POST" action="../../backend/createprocesses/createprojectprocess.php">
                 <div class="input-row">
-                    <input type="text" placeholder="Project Name" name="projectName" require>
+                    <input type="text" placeholder="Project Name" maxlength="20" name="projectName" require>
                 </div>
                 <div class="input-row">
-                    <input type="text" placeholder="Project Description" name="projectDesc" require>
+                    <input type="text" placeholder="Project Description" maxlength="50" name="projectDesc" require>
                 </div>
                 <div class="input-row" style="display: none">
                     <input type="text" value="<?=$orgid?>" name="orgID" require>

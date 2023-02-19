@@ -56,7 +56,7 @@ $orgId = $orgInfoRow['id'];
 
             <ul class="breadcrumbs">
                 <li class="breadcrumbs-item">
-                    <a href="../root/organization.php?id=<?=$orgID?>" class="breadcrumbs-link"><?=$orgName?></a>
+                    <a href="../root/organization.php?id=<?=$orgID?>" class="breadcrumbs-link"><?=htmlspecialchars($orgName)?></a>
                 </li>
                 <li class="breadcrumbs-item">
                     <a href="#" class="breadcrumbs-link">Org Settings</a>
@@ -73,7 +73,7 @@ $orgId = $orgInfoRow['id'];
                         <p>Organization Name: </p>
                     </div>
                     <div class="input-row">
-                        <input type="text" name="orgname" placeholder="<?=$orgName?>" />
+                        <input type="text" name="orgname" placeholder="<?=htmlspecialchars($orgName)?>" maxlength="20"/>
                     </div>
                     <div class="input-row">
                         <input type="hidden" name="orgid" value="<?=$orgId?>" />
@@ -88,7 +88,7 @@ $orgId = $orgInfoRow['id'];
                         <p>Organization Description: </p>
                     </div>
                     <div class="input-row">
-                        <input name="orgdesc" type="text" placeholder="<?=$orgDesc?>" />
+                        <input name="orgdesc" type="text" placeholder="<?=htmlspecialchars($orgDesc)?>" maxlength="50"/>
                     </div>
                     <div class="input-row">
                         <input type="hidden" name="orgid" value="<?=$orgId?>" />

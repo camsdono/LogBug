@@ -61,7 +61,7 @@ $orgMembersRes = $conn->query($orgMembers);
                 <a href="../root/organization.php?id=<?=$orgId?>" class="breadcrumbs-link">Your Organizations</a>
             </li>
             <li class="breadcrumbs-item">
-                <a href="../displays/orgdisplay.php?id=<?=$orgId?>" class="breadcrumbs-link"><?=$orgName?></a>
+                <a href="../displays/orgdisplay.php?id=<?=$orgId?>" class="breadcrumbs-link"><?=htmlspecialchars($orgName)?></a>
             </li>
         </ul>
 
@@ -72,7 +72,7 @@ $orgMembersRes = $conn->query($orgMembers);
         <div class="settings">
             <form method="POST" action="../../backend/assignprocess/adduserorgprocess.php">
                 <div class="input-row">
-                    <input type="text" name="username" placeholder="Username" />
+                    <input type="text" maxlength="25" name="username" placeholder="Username" />
                 </div>
                 <label for="userrole">User Role:</label>
                 <div class="input-row">
@@ -86,7 +86,7 @@ $orgMembersRes = $conn->query($orgMembers);
                     <input type="hidden" name="orgid" value="<?=$orgId?>" />
                 </div>
                 <div class="input-row">
-                    <input type="hidden" name="orgname" value="<?=$orgName?>" />
+                    <input type="hidden" name="orgname" value="<?=htmlspecialchars($orgName)?>" />
                 </div>
                 <div class="input-row">
                     <input type="submit" value="Add User"  name="org-assign-user-btn"/>
@@ -101,13 +101,13 @@ $orgMembersRes = $conn->query($orgMembers);
                 if($orgMembersRow['confirmJoined'] == 1) {
            ?>
             <div class="item">
-                <?php echo $orgMembersRow['orgMember']; ?>
+                <?php echo htmlspecialchars($orgMembersRow['orgMember']); ?>
             </div>
                 <div class="item">
                     <div class="button button-small button-assertive"> 
                         <div class="input-row remove-btn">
                             <form method="POST" action="../../backend/deleteprocess/removeuserorg.php">
-                                <input type="hidden" name="orgMember" value="<?=$orgMembersRow['orgMember']; ?>" />
+                                <input type="hidden" name="orgMember" value="<?=htmlspecialchars($orgMembersRow['orgMember']); ?>" />
                                 <input type="hidden" name="orgID" value="<?=$orgID; ?>" />
                                 <input type="submit" value="Remove User"  name="org-remove-user-btn"/>
                             </form>

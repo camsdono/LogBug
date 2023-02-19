@@ -27,10 +27,10 @@
             <div id="login-form" class="login-form">
                 <form action="../../backend/auth/loginprocess.php" method="POST">  
                     <div class="input-row">
-                        <input type="text" placeholder="Username" name="username" require>
+                        <input type="text" placeholder="Username" name="username" required>
                     </div>
                     <div class="input-row">
-                        <input type="password" placeholder="Password" name="password" require>
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="input-row">
                         <input type="submit" value="Login" name="login-btn">

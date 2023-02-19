@@ -30,6 +30,4 @@ if (isset($_POST["org-edit-name-btn"])) {
     $stmt1->close();
 }
 
-
-
 ?>

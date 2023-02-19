@@ -48,10 +48,10 @@ if(!$_SESSION['username'] == null) {
 
             <form method="POST" action="../../backend/createprocesses/createorgprocess.php">
                 <div class="input-row">
-                    <input type="text" placeholder="Org Name" name="orgName" require>
+                    <input type="text" placeholder="Org Name" maxlength="20" name="orgName" require>
                 </div>
                 <div class="input-row">
-                    <input type="text" placeholder="Org Description" name="orgDesc" require>
+                    <input type="text" placeholder="Org Description" maxlength="50" name="orgDesc" require>
                 </div>
                 <div class="input-row">
                     <input type="submit" value="Create Organization" name="create-org-btn">
