@@ -34,7 +34,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
             while ($row = mysqli_fetch_array($result)) {
     ?>
     <head>
-        <title id="title"><?=$row['orgName']?></title>
+        <title id="title"><?=htmlspecialchars($row['orgName'])?></title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,6 +55,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
             <a href="../root/home.php">Home</a>
             <a href="../root/organization.php">Organizations</a>
             <a href="#">Tickets</a>
+             <a href="../../backend/auth/logout.php">Logout</a>
 
             <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                 <i class="fa fa-bars"></i>
@@ -66,7 +67,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
                 <a href="../root/organization.php?id=<?=$orgid?>" class="breadcrumbs-link">Your Organizations</a>
             </li>
             <li class="breadcrumbs-item">
-                <a href="#" class="breadcrumbs-link"><?=$row['orgName']?></a>
+                <a href="#" class="breadcrumbs-link"><?=htmlspecialchars($row['orgName'])?></a>
             </li>
         </ul>
 
@@ -84,7 +85,6 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
                 <a title="Org Settings" href="../edit/orgsettings.php?id=<?=$orgid?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
             </div>
         </div>
-        <i class=""></i>
 
 
         <?php
@@ -99,7 +99,7 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
                         $projectid = $row1['id'];
                         ?>
                             <div class="card" onclick="location.href='../displays/projectdisplay.php?id=<?=$projectid?>&page=<?=1?>'">
-                                <h3><?=$row1['projectName']?></h3>
+                                <h3><?=htmlspecialchars($row1['projectName'])?></h3>
                             </div>
                         <?php
                     }

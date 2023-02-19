@@ -16,8 +16,15 @@
     if($projectid == null) {
         echo "No Project ID Found";
     }
+
+    if($page == null) {
+        $page = 1;
+    }
+
     $getProjectInfo = "SELECT * FROM projects WHERE id='$projectid'";
     $result = $conn->query($getProjectInfo);
+
+
 
     $limit = 6 * $page;
     $offset = $limit - 6;
@@ -38,17 +45,31 @@
     
         $count = 0;
     }
+
+
+    if(mysqli_num_rows($result) > 0) {
+        while ($row1 = mysqli_fetch_array($result)) {
+            $orgid = $row1['orgID'];
+            $orgname = $row1['orgName'];
+
+            $getBugMembers = "SELECT * FROM org_members WHERE orgID='$orgid' AND orgMember='$username'";
+            $getBugMembersRes = $conn->query($getBugMembers);
+
+            if(mysqli_num_rows($getBugMembersRes) < 1) {
+                header("Location: ../root/organization.php");
+            }
+
+            if(mysqli_num_rows($getBugMembersRes) > 0) {
+                while ($row = mysqli_fetch_array($getBugMembersRes)) {
+                    $orgMember = $row['orgMember'];
+    
 ?>
 
 <!DOCTYPE html>
 <html>
-    <?php
-        if(mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_array($result)) {
-                $orgid = $row['orgID'];
-    ?>
+    
     <head>
-        <title id="title"><?=$row['projectName']?></title>
+        <title id="title"><?=$row1['projectName']?></title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,23 +91,25 @@
                 <a href="../root/home.php">Home</a>
                 <a href="../root/organization.php">Organizations</a>
                 <a href="#">Tickets</a>
+                <a href="../../backend/auth/logout.php">Logout</a>
 
                 <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
 
+
             <ul class="breadcrumbs">
                 <li class="breadcrumbs-item">
-                    <a href="../root/organization.php?id=<?=$row['orgID']?>" class="breadcrumbs-link">Your Organizations</a>
+                    <a href="../root/organization.php?id=<?=$row1['orgID']?>" class="breadcrumbs-link">Your Organizations</a>
                 </li>
                 <li class="breadcrumbs-item">
-                    <a href="./orgdisplay.php?id=<?=$row['orgID'] ?>" class="breadcrumbs-link"><?=$row['orgName']?></a>
+                    <a href="./orgdisplay.php?id=<?=$row1['orgID'] ?>" class="breadcrumbs-link"><?=$row1['orgName']?></a>
                 </li>
             </ul>
 
             <div class="org-description">
-                <p><?=$row['projectDesc']?></p>
+                <p><?=$row1['projectDesc']?></p>
             </div>
 
             <?php
@@ -140,11 +163,14 @@
             }
             ?>
         </section>
-        <footer>
-            <p class="footer-txt">@Camsdono Studios</p>
-        </footer>
     </body>
+    
     <?php
+                     
+                }
+                    } else {
+                        header("Location: ../root/organization.php");
+                    }
             }
         } else {
             header("Location: ../root/organization.php");

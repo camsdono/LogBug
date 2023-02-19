@@ -37,6 +37,7 @@ if(!$_SESSION['username'] == null) {
                 <a href="../root/home.php">Home</a>
                 <a href="../root/organization.php">Organizations</a>
                 <a href="#">Tickets</a>
+                <a href="../../backend/auth/logout.php">Logout</a>
 
                 <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                     <i class="fa fa-bars"></i>

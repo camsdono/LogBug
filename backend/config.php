@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "bug_tracker";
+$dbname = "logbug";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

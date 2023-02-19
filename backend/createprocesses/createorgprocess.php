@@ -5,13 +5,21 @@ require('../config.php');
 if (isset($_POST["create-org-btn"])) {
     session_start();
 
+    date_default_timezone_set("Europe/London");
+    $date = date("Y-m-d H:i:s");
+
     $orgOwner = $_SESSION['username'];
     $joinCode = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
+    //check if user has created a org within a hour 
+    $checkOrg = "SELECT * FROM orgs WHERE orgOwner='$orgOwner' AND createdDate > DATE_SUB(NOW(), INTERVAL 30 MINUTE)";
+    $checkOrgRes = mysqli_query($conn, $checkOrg);
 
-    $stmt = $conn->prepare("INSERT INTO orgs (orgName, orgDesc, joinCode, orgOwner) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $orgName, $orgDesc, $joinCode, $orgOwner);
-
-    
+    if(mysqli_num_rows($checkOrgRes) > 0) {
+        echo "You have already created an organization within the half hour.";
+        exit();
+    }
+    $stmt = $conn->prepare("INSERT INTO orgs (orgName, orgDesc, joinCode, orgOwner, createdDate) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $orgName, $orgDesc, $joinCode, $orgOwner, $date);
 
     // set parameters and execute
     $orgName = $_POST['orgName'];
@@ -39,16 +47,6 @@ if (isset($_POST["create-org-btn"])) {
     $res1 = mysqli_stmt_get_result($addmemberorg);
 
     if(!$res && !$res1) {
-       //get data from form
-        $message = "You have been invited to join an organization on BugTracker. Please click the link below to join the organization. http://localhost/bugtracker/components/assign/joinorg.php?joinCode=$joinCode";
-        $to = "camsdonostudios@gmail.com";
-        $subject = "BugTracker Organization Invite";
-        $txt ="Email = " . $email . "\r\n Message =" . $message;
-        $headers = "From: logbugnoreply@gmail.com" . "\r\n" .
-            "CC: logbugnoreply@gmail.com";
-        if($email!=NULL){
-            mail($to,$subject,$txt,$headers);
-        }
         header("Location: ../../components/root/organization.php");
     } else {
         echo "An error has occured creating org try again later.";

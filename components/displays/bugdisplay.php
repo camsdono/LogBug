@@ -9,11 +9,33 @@ $bugID = $_GET['bugID'];
 $getBug = "SELECT * FROM bugs WHERE id=$bugID";
 $getBugRes = $conn->query($getBug);
 
+
 if(!$_SESSION['username'] == null) {
     $username = $_SESSION['username'];
+    
+    //get org member
+    $getOrgMember = "SELECT * FROM org_members WHERE orgMember='$username'";
+    $getOrgMemberRes = $conn->query($getOrgMember);
+    
+    if(mysqli_num_rows($getOrgMemberRes) > 0) {
+        while ($row = mysqli_fetch_array($getOrgMemberRes)) {
+            $orgID = $row['orgID'];
+            //get project id
+            $getProjectID = "SELECT * FROM projects WHERE orgID=$orgID";
+            $getProjectIDRes = $conn->query($getProjectID);
+
+            if (mysqli_num_rows($getProjectIDRes) > 1) {
+                header("Location: ../root/organization.php");
+            }
+        }
+    } else {
+        header("Location: ../root/organization.php");
+    }
 } else {
     header("Location: ../auth/login.php");
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -41,6 +63,7 @@ if(!$_SESSION['username'] == null) {
             <a href="../root/home.php">Home</a>
             <a href="../root/organization.php">Organizations</a>
             <a href="#">Tickets</a>
+            <a href="../../backend/auth/logout.php">Logout</a>
 
             <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                 <i class="fa fa-bars"></i>
@@ -99,9 +122,11 @@ if(!$_SESSION['username'] == null) {
             </div> 
             <div class="comment-holder" id="comments" > 
                 <div class="create-comment-holder">
-                    <form action="" method="POST" class="comment-field">
-                        <input type="text" class="comment-msg" placeholder="Comment Message..."> 
-                        <input type="submit" value="Send Comment" class="comment-send"/>
+                    <form  method="POST" action="../../backend/createprocesses/createcommentprocess.php"  class="comment-field">
+                        <input type="text" name="comment-msg" class="comment-msg" placeholder="Comment Message..."> 
+                        <input type="hidden" name="bugID" value="<?=$bugID?>" hidden>
+                        <input type="hidden" name="commentAuthor" value="<?=$username?>" hidden>
+                        <input type="submit" value="Send Comment" name="comment-send" class="comment-send"/>
                     </form>
                 </div>
                 <div class="comments"> 
@@ -115,7 +140,6 @@ if(!$_SESSION['username'] == null) {
                         ?> 
                             <div class="comment"> 
                                 <p><?=$row['message']?> - <?=$row['commentAuthor']?></p> 
-                               
                             </div> 
                         <?php 
                         } 
@@ -129,10 +153,6 @@ if(!$_SESSION['username'] == null) {
         } 
         ?> 
         </div> 
-         
-        <footer> 
-            <p class="footer-txt">@Camsdono Studios</p> 
-        </footer> 
     </body> 
 </html> 
 <script src="../../js/openCloseNavBar.js"></script> 

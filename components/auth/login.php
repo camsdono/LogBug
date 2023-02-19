@@ -24,14 +24,6 @@
         
         <section>
             <h1 id="login-detail">Login</h1>
-            <div class="sign-options">
-                <div class="button-holder">
-                    <input onclick="LoginPage()" type="button" value="Login">
-                </div>
-                <div class="button-holder">
-                    <input onclick="SignupPage()" type="button" value="Register">
-                </div>
-            </div>
             <div id="login-form" class="login-form">
                 <form action="../../backend/auth/loginprocess.php" method="POST">  
                     <div class="input-row">
@@ -46,30 +38,12 @@
                 </form>
             </div>
 
-            <div id="signup-form" class="signup-form">
-                <form action="../../backend/auth/loginprocess.php" method="POST">  
-                    <div class="input-row">
-                        <input type="text" placeholder="Name" name="name" require>
-                    </div>
-                    <div class="input-row">
-                        <input type="email" placeholder="Email" name="email" require>
-                    </div>
-                    <div class="input-row">
-                        <input type="text" placeholder="Username" name="username" require>
-                    </div>
-                    <div class="input-row">
-                        <input type="password" placeholder="Password" name="password" require>
-                    </div>
-                    <div class="input-row">
-                        <input type="submit" value="Register" name="register-btn">
-                    </div>
-                </form>
+            <div id="signup-link">
+                <p>Don't have an account? <a class="url"  href="signup.php">Signup</a></p>
             </div>
-        </section>
     
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>
         </footer>
     </body>
 </html>
-<script src="../../js/login.js"></script>

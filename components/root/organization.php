@@ -44,6 +44,7 @@ $pendingOrgs = $conn->query($getPendingOrgs);
                 <a href="./home.php">Home</a>
                 <a href="./organization.php">Organizations</a>
                 <a href="#">Tickets</a>
+                <a href="../../backend/auth/logout.php">Logout</a>
 
                 <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                     <i class="fa fa-bars"></i>
@@ -74,10 +75,10 @@ $pendingOrgs = $conn->query($getPendingOrgs);
                     while ($row1 = $getOrgRes->fetch_row()) {
                        ?>
                            <div class="card1">
-                                <h3><?=$row['orgName']?></h3>
+                                <h3><?=htmlspecialchars($row['orgName'])?></h3>
                                 <div class="button-holder">
                                     <div class="button-item">
-                                        <form action="../backend/assignprocess/userjoinconfirm.php" method="post">
+                                        <form action="../../backend/assignprocess/userjoinconfirm.php" method="post">
                                             <div class="button-row">
                                                 <input type="hidden" name="orgId" value="<?=$orgID ?>">
                                             </div>
@@ -87,7 +88,7 @@ $pendingOrgs = $conn->query($getPendingOrgs);
                                         </form>
                                     </div>
                                     <div class="button-item">
-                                    <form action="../backend/assignprocess/userjoinconfirm.php" method="post">
+                                    <form action="../../backend/assignprocess/userjoinconfirm.php" method="post">
                                             <div class="button-row">
                                                 <input type="hidden" name="orgId" value="<?=$orgID ?>">
                                             </div>
@@ -120,7 +121,7 @@ $pendingOrgs = $conn->query($getPendingOrgs);
                     while ($row1 = $getOrgRes->fetch_row()) {
                        ?>
                            <div class="card" onclick="location.href='../displays/orgdisplay.php?id=<?=$orgID ?>'">
-                                <h3><?=$row['orgName']?></h3>
+                                <h3><?=htmlspecialchars($row['orgName'])?></h3>
                            </div>
                        <?php
                     }
