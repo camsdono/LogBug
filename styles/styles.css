@@ -76,6 +76,16 @@
     background-color: #333;
     overflow: hidden;
     width: 100%;
+    cursor: pointer;
+}
+
+
+.topnav > :nth-last-child(2) {
+    float: right;
+}
+
+.topnav > :nth-last-child(3) {
+    float: right;
 }
   
 
@@ -651,6 +661,7 @@ select {
     line-height: 48px;
     margin-right: auto;
 }
+
 
 @media screen and (max-width: 700px) {
     input {

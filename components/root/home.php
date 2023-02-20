@@ -41,7 +41,8 @@ $getBugsRes = $conn->query($getBugs);
             <a href="./home.php">Home</a>
             <a href="./organization.php">Organizations</a>
             <a href="#">Tickets</a>
-            <a href="../../backend/auth/logout.php">Logout</a>
+            <a><i class="fa fa-lg fa-user-circle-o"></i></a>
+            <a href="../displays/notificationdisplay.php"><i alt="notification-ico" class="fa fa-solid fa-bell"></i></a>
             <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -67,4 +68,3 @@ $getBugsRes = $conn->query($getBugs);
     </body>
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
-<script src="../../js/notifications.js"></script>
