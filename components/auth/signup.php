@@ -1,8 +1,14 @@
 <?php
+session_start();
+$token = $_SESSION["token"] = md5(session_id().time());
 
+if($token == null){
+    exit();
+} else {
+    $start_time = microtime(true);
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html>
     <head>
         <title id="title">Signup</title>
@@ -27,16 +33,25 @@
             <div id="signup-form" class="signup-form">
                 <form action="../../backend/auth/loginprocess.php" method="POST">  
                     <div class="input-row">
-                        <input type="text" placeholder="Name" name="name" maxlength="50" required>
+                        <input type="text" placeholder="Name" name="name" maxlength="25" required>
                     </div>
                     <div class="input-row">
-                        <input type="email" placeholder="Email" name="email" maxlength="50" required>
+                        <input type="email" placeholder="Email" name="email" maxlength="30" required>
                     </div>
                     <div class="input-row">
                         <input type="text" placeholder="Username" name="username" maxlength="25" required>
                     </div>
                     <div class="input-row">
                         <input type="password" placeholder="Password" name="password" maxlength="25" required>
+                    </div>
+                    <div class="input-row">
+                        <input type="password" placeholder="Confirm Password" name="confirm-password" maxlength="25" required>
+                    </div>
+                    <div class="input-row">
+                        <input type="hidden" name="start-time" value="<?=$start_time?>" onkeydown="return false;" style="pointer-events: none; display: none; ">
+                    </div>
+                    <div class="input-row" style="display: none;">
+                        <input type="hidden" name="token" value="">
                     </div>
                     <div class="input-row">
                         <input type="submit" value="Register" name="register-btn">
@@ -51,3 +66,6 @@
         </footer>
     </body>
 </html>
+<?php
+}
+?>
