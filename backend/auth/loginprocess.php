@@ -2,6 +2,7 @@
 
 require('../config.php');
 require('../global/addauditlog.php');
+require('../global/checkrequests.php');
 
 if (isset($_POST["login-btn"])) {
     session_start();
@@ -24,7 +25,7 @@ if (isset($_POST["login-btn"])) {
             $ip=$_SERVER['REMOTE_ADDR'];
         }
 
-        $sql2 = "SELECT * FROM blacklist WHERE ip='$ip'";
+        $sql2 = "SELECT * FROM blacklists WHERE ip='$ip'";
         $result2 = $conn->query($sql2);
 
         if(mysqli_num_rows($result2) > 0) {
@@ -88,10 +89,10 @@ if (isset($_POST["register-btn"])) {
         $hours = (int)($time_diff/60/60);
         $minutes = (int)($time_diff/60)-$hours*60;
         $seconds = (int)$time_diff-$hours*60*60-$minutes*60;
-        $min_time = 2;
+        $min_time = 0;
 
         if($seconds < $min_time) {
-            echo "Please wait 2 seconds before submitting the form again. Thank you.";
+            echo "Please wait 8 seconds before submitting the form again. Thank you.";
             exit();
         } else {
             
@@ -107,29 +108,31 @@ if (isset($_POST["register-btn"])) {
                 $ip=$_SERVER['REMOTE_ADDR'];
             }
 
-            $sql2 = "SELECT * FROM blacklist WHERE ip='$ip'";
+            $sql2 = "SELECT * FROM blacklists WHERE ip='$ip'";
             $result2 = $conn->query($sql2);
             
             if(mysqli_num_rows($result2) > 0) {
                 echo "IP is blacklisted";
                 exit();
             }
-            $stmt->execute();
 
-            $message = "User registered";
-            $process = "Register";
-            $userID = $stmt->insert_id;;
-            $userName = $username;
-    
-           
-    
-            
-    
-            addAuditLog($message, $process, $userID, $userName, $ip, True);
-    
-            $stmt->close();
-    
-            header("Location: ../../components/auth/signup.php?");
+            if (CheckRequests($ip)) {
+                exit();
+                header("Location: ../../components/auth/signup.php?");
+            } else {
+                $stmt->execute();
+
+                $message = "User registered";
+                $process = "Register";
+                $userID = $stmt->insert_id;;
+                $userName = $username;
+        
+                addAuditLog($message, $process, $userID, $userName, $ip, True);
+        
+                $stmt->close();
+        
+                header("Location: ../../components/auth/signup.php?");
+            }
         }
     }
 }
