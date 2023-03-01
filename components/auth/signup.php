@@ -1,6 +1,13 @@
 <?php
 session_start();
 $token = $_SESSION["token"] = md5(session_id().time());
+$announcment = $_GET['a'];
+
+if($announcment != null){
+    if($announcment == "RequestMany") {
+        echo "<script>alert('Take a chill pill. Too many requests. Please try again later.');</script>";
+    }
+}
 
 if($token == null){
     exit();

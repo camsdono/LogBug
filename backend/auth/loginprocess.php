@@ -32,6 +32,7 @@ if (isset($_POST["login-btn"])) {
             echo "IP is blacklisted";
             exit();
         }
+
         while ($row = mysqli_fetch_assoc($result)) {
             $_SESSION["id"] = $row['id'];
         }
@@ -49,7 +50,6 @@ if (isset($_POST["login-btn"])) {
     } else {
         echo "Incorrect Login Details";
     }
-    
 }
 
 if (isset($_POST["register-btn"])) {
@@ -57,7 +57,6 @@ if (isset($_POST["register-btn"])) {
     $stmt = $conn->prepare("INSERT INTO users (name, email, username, password) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $name, $email, $username, $encryptedpass);
 
-    // set parameters and execute
     $username = $_POST['username'];
     $email = $_POST['email'];
 
@@ -89,18 +88,17 @@ if (isset($_POST["register-btn"])) {
         $hours = (int)($time_diff/60/60);
         $minutes = (int)($time_diff/60)-$hours*60;
         $seconds = (int)$time_diff-$hours*60*60-$minutes*60;
-        $min_time = 0;
+        $min_time = 3;
 
         if($seconds < $min_time) {
-            echo "Please wait 8 seconds before submitting the form again. Thank you.";
+            echo "Please wait 3 seconds before submitting the form again. Thank you.";
             exit();
         } else {
-            
             $encryptedpass = md5($password);
             
             if(!empty($_SERVER['HTTP_CLIENT_IP'])){
                 $ip=$_SERVER['HTTP_CLIENT_IP'];
-              }
+            }
             elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
                 $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
             }
@@ -118,7 +116,7 @@ if (isset($_POST["register-btn"])) {
 
             if (CheckRequests($ip)) {
                 exit();
-                header("Location: ../../components/auth/signup.php?");
+                header("Location: ../../components/auth/signup.php?a=RequestMany");
             } else {
                 $stmt->execute();
 

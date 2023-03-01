@@ -30,9 +30,8 @@ if(!$_SESSION['username'] == null) {
         <link rel="stylesheet" href="../../styles/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <section class="blue">
-            <div class="curve"></div>
+    <body  class="blue">
+        <section>
             <div class="topnav" id="myTopnav">
                 <a href="../root/home.php">Home</a>
                 <a href="../root/organization.php">Organizations</a>

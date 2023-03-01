@@ -54,7 +54,6 @@ if (isset($_POST["create-org-btn"])) {
 
     $stmt->close();
     $addmemberorg->close();
-    
 }
 
 ?>

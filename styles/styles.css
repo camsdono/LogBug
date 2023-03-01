@@ -79,7 +79,7 @@
     cursor: pointer;
 }
 
-
+/*
 .topnav > :nth-last-child(2) {
     float: right;
 }
@@ -87,6 +87,8 @@
 .topnav > :nth-last-child(3) {
     float: right;
 }
+
+*/
   
 
 .topnav a {
