@@ -1,4 +1,5 @@
 <?php
+
 require('../config.php');
 
 if (isset($_POST["org-assign-user-btn"])) {
@@ -36,4 +37,5 @@ if (isset($_POST["org-assign-user-btn"])) {
         echo "User does not exist!";
     }
 }
+
 ?>

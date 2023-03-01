@@ -41,11 +41,21 @@ $getBugsRes = $conn->query($getBugs);
             <a href="./home.php">Home</a>
             <a href="./organization.php">Organizations</a>
             <a href="#">Tickets</a>
-            <a href="../../backend/auth/logout.php">Logout</a>
-            <!--
-            <a><i class="fa fa-lg fa-user-circle-o"></i></a>
+            <a><i  class="dropbtn fa fa-lg fa-user-circle-o"></i></a>
+
+            <div class="dropdown">
+    <button class="dropbtn">Dropdown 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div> 
+           
             <a href="../displays/notificationdisplay.php"><i alt="notification-ico" class="fa fa-solid fa-bell"></i></a>
-            -->
+
             <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
                 <i class="fa fa-bars"></i>
             </a>
