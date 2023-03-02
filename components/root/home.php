@@ -37,22 +37,19 @@ $getBugsRes = $conn->query($getBugs);
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body  class="blue">
-        <div class="topnav" id="myTopnav">
-            <a href="./home.php">Home</a>
-            <a href="./organization.php">Organizations</a>
-            <a href="#">Tickets</a>
-            <a><i  class="dropbtn fa fa-lg fa-user-circle-o"></i></a>
-
-            <div class="dropdown">
-    <button class="dropbtn">Dropdown 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div> 
+    <nav class="profile-nav">
+        <div class="dropdown">
+            <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="profile-image" src="https://via.placeholder.com/50x50" alt="Profile Image">
+            <span class="profile-name">John Doe</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="#">Logout</a>
+            </div>
+        </div>
+    </nav>
            
             <a href="../displays/notificationdisplay.php"><i alt="notification-ico" class="fa fa-solid fa-bell"></i></a>
 

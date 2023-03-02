@@ -20,7 +20,7 @@ if (isset($_POST["org-assign-user-btn"])) {
         $getUserDataResult = mysqli_query($conn, $getUserData);
 
         if (mysqli_num_rows($getUserDataResult) < 1) {
-            $stmt = $conn->prepare("INSERT INTO org_members (orgName, orgID, orgMember, memberID, orgRole, assignCode) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO org_members (orgName, orgID, orgMember, memberID, orgRole, assignCode, confirmJoined) VALUES (?, ?, ?, ?, ?, ?, 0)");
             $stmt->bind_param("sisiss", $orgname, $orgid, $username, $getUserID, $userRole, $assignCode);
 
             if ($stmt->execute()) {
