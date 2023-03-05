@@ -16,6 +16,8 @@ $getOrgUserRes = $conn->query($getOrgUser);
 $getBugs = "SELECT * FROM bugs WHERE createdUser='$username' AND closedBug='0'";
 $getBugsRes = $conn->query($getBugs);
 
+$getAuditLog = "SELECT * FROM audit_log WHERE username='$username' AND process='bugCreated'  LIMIT 5";
+$getAuditLogRes = $conn->query($getAuditLog);
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,8 +64,13 @@ $getBugsRes = $conn->query($getBugs);
         </a>
 
         <div class="dashboard">
-            <div class="overview-title">
-                <h1>Analytics Overview</h1>
+            <div class="titles">
+                <div class="overview-title">
+                    <h1 style="display: inline-block;">Analytics Overview</h1>
+                </div>
+                <div class="overview-title">
+                    <h1 style="display: inline-block;">Recent Activity</h1>
+                </div>
             </div>
 
             <div class="card-row">
@@ -85,18 +92,23 @@ $getBugsRes = $conn->query($getBugs);
                         <h5>Organization Owner Count</h5>
                     </div>
                 </div>
-                <div class="user-card">
-                <div class="info-user">
-                    <div class="pfp"><img class="profile-image" src="https://via.placeholder.com/35x35" alt="Profile Image"></div>
-                    <div class="user-name"><?=htmlspecialchars($username)?></div>
-                </div>
+                <div class="recent-bugs">
+                    <div class="recent-bug">
+                        <ul class="recent-act">
+                            <?php
+                            if (mysqli_num_rows($getAuditLogRes) == 0) {
+                                echo "<li class='recent-bug'>No recent activity</li>";
+                            }
+                            while ($row = mysqli_fetch_array($getAuditLogRes)) {
+                            ?>
+                            <li class="recent-bug"><?=htmlspecialchars($row['message'])?></li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
             </div>
             </div>
-           
-
-            
-            
-                
         </div>
     </body>
 </html>

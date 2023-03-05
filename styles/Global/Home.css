@@ -18,24 +18,51 @@ body {
 }
 
 /* make user-card display to the right of the page from card-row */
-.user-card {
+.recent-bugs {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: flex-end;
     margin: 0;
-    margin-left: 20%;
+    margin-left: 13%;
     padding: 0;
-    width: 300px;
-    height: 150px;
+    width: 500px;
+    height: 300px;
     background-color: #FFFFFF;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: ease-in-out 0.2s;
+    border-radius: 10px;
 }
 
-.user-card .info-user {
+.recent-bug {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 35%;
+    margin-bottom: 40%;
+    margin-top: 5%;
+    font-size: 1rem;
+}
+
+.recent-bug {
+    color: #000000;
+}
+
+.recent-bug li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+.recent-act {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -44,9 +71,8 @@ body {
     margin: 0;
 }
 
-.info-user {
-    color: #000000;
-}
+
+
 
 .card {
     width: 300px;
@@ -105,11 +131,24 @@ body {
     margin-left: 5vw;
     padding: 0;
     color: #000;
+    width: 100%;
 }
 
 .overview-title h1 {
     font-weight: normal;
 }
+
+.titles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
 
 .profile-nav {
     display: flex;
