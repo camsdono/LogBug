@@ -66,10 +66,10 @@ $getAuditLogRes = $conn->query($getAuditLog);
         <div class="dashboard">
             <div class="titles">
                 <div class="overview-title">
-                    <h1 style="display: inline-block;">Analytics Overview</h1>
+                    <h1 style="display: inline-block; margin-right: 50%;">Analytics Overview</h1>
                 </div>
                 <div class="overview-title">
-                    <h1 style="display: inline-block;">Recent Activity</h1>
+                    <h1 style="display: inline-block; margin-right: 12%;">Recent Activity</h1>
                 </div>
             </div>
 
