@@ -18,6 +18,17 @@ $getBugsRes = $conn->query($getBugs);
 
 $getAuditLog = "SELECT * FROM audit_log WHERE username='$username' AND process='bugCreated'  LIMIT 5";
 $getAuditLogRes = $conn->query($getAuditLog);
+
+//Get user details
+$getDetails = "SELECT * FROM users WHERE username='$username'";
+$getDetailsRes = $conn->query($getDetails);
+
+//get color preferences from userdetials
+if(mysqli_num_rows($getDetailsRes) > 0) {
+    while ($row = mysqli_fetch_array($getDetailsRes)) {
+        $color = $row['colorPref'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +47,13 @@ $getAuditLogRes = $conn->query($getAuditLog);
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
         <!---<link rel="stylesheet" href="../../styles/styles.css" /> -->
-        <link rel="stylesheet" href="../../styles/Global/Home.css" /> 
+        <?php
+        if($color == 'dark') {
+            echo '<link rel="stylesheet" href="../../styles/Global/DarkHome.css" />';
+        } else {
+            echo '<link rel="stylesheet" href="../../styles/Global/LightHome.css" />';
+        }
+        ?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -44,7 +61,7 @@ $getAuditLogRes = $conn->query($getAuditLog);
         <nav class="profile-nav">
             <div class="links">
                 <a href="home.php">Home</a>
-                <a href="orgs.php">Orgs</a>
+                <a href="./organization.php">Orgs</a>
             </div>
             <div class="dropdown">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -101,10 +118,10 @@ $getAuditLogRes = $conn->query($getAuditLog);
                             }
                             while ($row = mysqli_fetch_array($getAuditLogRes)) {
                             ?>
-                            <li class="recent-bug"><?=htmlspecialchars($row['message'])?></li>
+                            <li class="recent-bug"><a href="../displays/bugdisplay.php?bugID=<?=$row['objectID']?>"><?=htmlspecialchars($row['message'])?></a></li>
                             <?php
                             }
-                            ?>
+                            ?>                                                                                                                                                    
                         </ul>
                     </div>
             </div>
