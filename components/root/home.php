@@ -23,12 +23,6 @@ $getAuditLogRes = $conn->query($getAuditLog);
 $getDetails = "SELECT * FROM users WHERE username='$username'";
 $getDetailsRes = $conn->query($getDetails);
 
-//get color preferences from userdetials
-if(mysqli_num_rows($getDetailsRes) > 0) {
-    while ($row = mysqli_fetch_array($getDetailsRes)) {
-        $color = $row['colorPref'];
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,15 +40,18 @@ if(mysqli_num_rows($getDetailsRes) > 0) {
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-        <!---<link rel="stylesheet" href="../../styles/styles.css" /> -->
-        <?php
-        if($color == 'dark') {
-            echo '<link rel="stylesheet" href="../../styles/Global/DarkHome.css" />';
-        } else {
-            echo '<link rel="stylesheet" href="../../styles/Global/LightHome.css" />';
-        }
-        ?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script>
+            //get color theme from localstorage if exitsts
+            if (localStorage.getItem('theme') == 'dark') {
+                document.write('<link rel="stylesheet" href="../../styles/Global/DarkHome.css">');
+                <?php $color = "dark"; ?>
+            } else {
+                document.write('<link rel="stylesheet" href="../../styles/Global/LightHome.css">');
+                <?php $color = "light"; ?>
+            }
+        </script>
     </head>
 
     <body>
@@ -71,7 +68,7 @@ if(mysqli_num_rows($getDetailsRes) > 0) {
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Dark Mode</a>
+                    <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
             </div>
@@ -131,6 +128,13 @@ if(mysqli_num_rows($getDetailsRes) > 0) {
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
 <script>
+    var color = document.getElementById('color');
+
+    if (localStorage.getItem('theme') == 'dark') {
+        color.innerHTML = 'Light Mode';
+    } else {
+        color.innerHTML = 'Dark Mode';
+    }
     document.querySelector('.dropdown-toggle').addEventListener('mouseover', function() {
         document.querySelector('.dropdown-menu').style.display = 'flex';
     });
@@ -144,5 +148,15 @@ if(mysqli_num_rows($getDetailsRes) > 0) {
 
     document.querySelector('.dropdown-menu').addEventListener('mouseleave', function() {
         document.querySelector('.dropdown-menu').style.display = 'none';
+    });
+
+    document.querySelector('.color-select').addEventListener('click', function() {
+        if (localStorage.getItem('theme') == 'dark') {
+            localStorage.setItem('theme', 'light');
+            location.reload();
+        } else {
+            localStorage.setItem('theme', 'dark');
+            location.reload();
+        }
     });
 </script>

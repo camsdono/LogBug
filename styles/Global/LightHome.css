@@ -3,6 +3,7 @@
     --card-bg-color: #FFFFFF;
     --text-color: #000000;
     --white-text-color: #FFFFFF;
+    --gray-bg-color: #dbdbdb;
 }
 
 body {
@@ -31,7 +32,7 @@ body {
     justify-content: flex-end;
     align-items: flex-end;
     margin: 0;
-    margin-left: 20%;
+    margin-left: 30%;
     padding: 0;
     width: 500px;
     height: 300px;
@@ -241,7 +242,7 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: var(--white-text-color);
+    background-color: var(--gray-bg-color);
 }
 
 .icon {
