@@ -41,17 +41,7 @@ $getDetailsRes = $conn->query($getDetails);
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <script>
-            //get color theme from localstorage if exitsts
-            if (localStorage.getItem('theme') == 'dark') {
-                document.write('<link rel="stylesheet" href="../../styles/Global/DarkHome.css">');
-                <?php $color = "dark"; ?>
-            } else {
-                document.write('<link rel="stylesheet" href="../../styles/Global/LightHome.css">');
-                <?php $color = "light"; ?>
-            }
-        </script>
+        <link rel="stylesheet" href="../../styles/Global/Home.css">
     </head>
 
     <body>
@@ -127,36 +117,4 @@ $getDetailsRes = $conn->query($getDetails);
     </body>
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
-<script>
-    var color = document.getElementById('color');
-
-    if (localStorage.getItem('theme') == 'dark') {
-        color.innerHTML = 'Light Mode';
-    } else {
-        color.innerHTML = 'Dark Mode';
-    }
-    document.querySelector('.dropdown-toggle').addEventListener('mouseover', function() {
-        document.querySelector('.dropdown-menu').style.display = 'flex';
-    });
-    document.querySelector('.dropdown-menu').addEventListener('mouseover', function() {
-        document.querySelector('.dropdown-menu').style.display = 'flex';
-    });
-
-    document.querySelector('.dropdown-toggle').addEventListener('mouseleave', function() {
-        document.querySelector('.dropdown-menu').style.display = 'none';
-    });
-
-    document.querySelector('.dropdown-menu').addEventListener('mouseleave', function() {
-        document.querySelector('.dropdown-menu').style.display = 'none';
-    });
-
-    document.querySelector('.color-select').addEventListener('click', function() {
-        if (localStorage.getItem('theme') == 'dark') {
-            localStorage.setItem('theme', 'light');
-            location.reload();
-        } else {
-            localStorage.setItem('theme', 'dark');
-            location.reload();
-        }
-    });
-</script>
+<script src="../../js/changeTheme.js"></script>

@@ -1,9 +1,14 @@
+* {
+    transition: all 0.2s ease-in-out;
+}
+
 :root {
     --main-bg-color: #F4F7FE;
     --card-bg-color: #FFFFFF;
     --text-color: #000000;
     --white-text-color: #FFFFFF;
     --gray-bg-color: #dbdbdb;
+    --nav-hover-color: #c5c5c5;
 }
 
 body {
@@ -40,6 +45,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: ease-in-out 0.2s;
     border-radius: 10px;
+    border: solid 1px var(--gray-bg-color);
 }
 
 .recent-bug {
@@ -101,6 +107,7 @@ body {
     background-color: var(--card-bg-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: ease-in-out 0.2s;
+    border: solid 1px var(--gray-bg-color);
 }
 
 .card:hover {
@@ -164,6 +171,7 @@ body {
 
 
 .profile-nav {
+    transition: all 0.2s ease-in-out;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -188,7 +196,7 @@ body {
 }
 
 .profile-nav .links a:hover {
-    background-color: var(--white-text-color);
+    background-color: var(--nav-hover-color);
     border-radius: 5px;
 }
 
@@ -211,6 +219,7 @@ body {
 .profile-name {
     font-size: 16px;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 .dropdown-menu {
@@ -267,5 +276,84 @@ body {
 
     .profile-nav {
         display: none;
+    }
+}
+
+@media screen and (max-width: 1730px) {
+    .card {
+        width: 250px;
+        height: 250px;
+    }
+
+    .recent-bugs {
+        margin-left: 25%;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .recent-bugs {
+        margin-left: 20%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .recent-bugs {
+        margin-left: 17%;
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    .recent-bugs {
+        margin-left: 15%;
+    }
+}
+
+
+@media screen and (max-width: 1300px) {
+    .recent-bugs {
+        margin-left: 15%;
+    }
+}
+
+@media screen and (max-width: 1295px) {
+    .recent-bugs {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 1260px) {
+    .recent-bugs {
+        margin-left: 12%;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .recent-bugs {
+        margin-left: 11%;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .recent-bugs {
+        margin-left: 1vw;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .recent-bugs {
+        margin-left: 1vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .recent-bugs {
+        margin-left: 1vw;
+        
+    }
+}
+
+@media screen and (max-width: 710px) {
+    .recent-bugs {
+        width: 80%;    
     }
 }
