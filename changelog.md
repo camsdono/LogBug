@@ -13,3 +13,16 @@ Features:
     - Project creation inside of orgs
     - Bug Creation inside of projects
     - Ability to assign users to a bug
+
+# V0.01.1 
+    - Security and bug fixes
+
+# V0.01.2
+    - Security and bug fixes
+
+## V0.02 WIP
+
+Features:
+    - Security and bug fixes
+    - New UI  (Light And Dark Colour Scheme)
+    - Page Routing 

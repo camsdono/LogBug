@@ -35,75 +35,43 @@ $pendingOrgs = $conn->query($getPendingOrgs);
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-        <link rel="stylesheet" href="../../styles/styles.css" />
+        <link rel="stylesheet" href="../../styles/Global/Orgs.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body class="blue">
-        <section >
-            <div class="topnav" id="myTopnav">
-                <a href="./home.php">Home</a>
-                <a href="./organization.php">Organizations</a>
-                <a href="#">Tickets</a>
-                <a href="../../backend/auth/logout.php">Logout</a>
-
-                <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
+    <body>
+        <nav class="profile-nav">
+            <div class="links">
+                <a href="home.php">Home</a>
+                <a href="./organization.php">Orgs</a>
             </div>
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="profile-image" src="https://via.placeholder.com/35x35" alt="Profile Image">
+                    <span class="profile-name"><?=htmlspecialchars($username)?></span>
+                </button>
+                <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
+                    <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+            <i class="fa fa-bars"></i>
+        </a>
 
             <h2>Organizations</h2>
             <?php
             if(mysqli_num_rows($pendingOrgs) > 0) {
                 ?>
-
-                <div class="list-holder">
-                    <div class="list-header">
-                        <h3>Pending Orgs</h3>
+                    <div class="pending-orgs">
+                        <div class="pending-org-holder">
+                            <div class="pending-org">
+                                <!-- show the pending requests -->
+                            </div>
+                        </div>
                     </div>
-                    <div class="list-header">
-                        <h3 onclick="showOrgs()" id="show-orgs" style="font-size: 1.8rem;">↑</h3>
-                    </div>
-                </div>
-                
-                <div class="card-row" id="orgs">
-                    <?php
-                while ($row = mysqli_fetch_array($pendingOrgs)) {
-                    $orgID = $row["orgID"];
-                    $getOrg = "SELECT * FROM orgs WHERE id='$orgID'";
-                    $getOrgRes = $conn->query($getOrg);
-                       
-                    while ($row1 = $getOrgRes->fetch_row()) {
-                       ?>
-                           <div class="card1">
-                                <h3><?=htmlspecialchars($row['orgName'])?></h3>
-                                <div class="button-holder">
-                                    <div class="button-item">
-                                        <form action="../../backend/assignprocess/userjoinconfirm.php" method="post">
-                                            <div class="button-row">
-                                                <input type="hidden" name="orgId" value="<?=$orgID ?>">
-                                            </div>
-                                            <div class="button-row">
-                                                <input type="submit" name="confirm-btn" value="Confirm" class="button-confirm">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="button-item">
-                                    <form action="../../backend/assignprocess/userjoinconfirm.php" method="post">
-                                            <div class="button-row">
-                                                <input type="hidden" name="orgId" value="<?=$orgID ?>">
-                                            </div>
-                                            <div class="button-row">
-                                                <input type="submit" name="deny-btn" value="Deny" class="button-confirm">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                           </div>
-                       <?php
-                    }
-                }
-                ?>
-                </div>
                 <?php
             }
             if(mysqli_num_rows($result) > 0) {
@@ -136,8 +104,6 @@ $pendingOrgs = $conn->query($getPendingOrgs);
             }
 
             ?>
-
-        </section>
     </body>
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
@@ -154,3 +120,4 @@ $pendingOrgs = $conn->query($getPendingOrgs);
         }
     }
 </script>
+<script src="../../js/changeTheme.js"></script>
