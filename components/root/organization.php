@@ -132,7 +132,7 @@ $pendingOrgs = $conn->query($getPendingOrgs);
                                             <input type="text" placeholder="Org Name" maxlength="20" minlength="3" name="orgName" required>
                                         </div>
                                         <div class="input-row">
-                                            <input type="text" placeholder="Org Description" maxlength="50" minlength="3" name="orgDesc" required>
+                                            <input type="text" placeholder="Org Description" maxlength="35" minlength="3" name="orgDesc" required>
                                         </div>
                                         <div class="input-row">
                                             <input type="submit" value="Create Organization" name="create-org-btn">
@@ -157,6 +157,8 @@ $pendingOrgs = $conn->query($getPendingOrgs);
     var orgbutton = document.getElementById("org-create");
     var closebutton = document.getElementsByClassName("close-button")[0];
     var nav = document.getElementById("nav");
+    var orgName = document.getElementsByName("orgName")[0];
+    var orgDesc = document.getElementsByName("orgDesc")[0];
 
     orgbutton.addEventListener("click", function() {
         popup.style.display = "block";
@@ -168,5 +170,31 @@ $pendingOrgs = $conn->query($getPendingOrgs);
         popup.style.display = "none";
         main.style.filter = "blur(0px)";
         nav.style.filter = "blur(0px)";
+        ClearInputs();
     });
+
+    // When the user clicks anywhere outside of the modal, close it if it is open
+    window.onclick = function(event) {
+        if (event.target == popup) {
+            popup.style.display = "none";
+            main.style.filter = "blur(0px)";
+            nav.style.filter = "blur(0px)";
+            ClearInputs();
+        }
+    }
+
+    // if the user presses escape close the modal
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            popup.style.display = "none";
+            main.style.filter = "blur(0px)";
+            nav.style.filter = "blur(0px)";
+            ClearInputs();
+        }
+    });
+
+    function ClearInputs() {
+        orgName.value = "";
+        orgDesc.value = "";
+    }
 </script>
