@@ -56,6 +56,8 @@ if(!$_SESSION['username'] == null) {
                     <input type="submit" value="Create Organization" name="create-org-btn">
                 </div>
             </form>
+            
+            <div class="inner-footer"></div>
         </section>
         <footer>
             <p class="footer-txt">@Camsdono Studios</p>

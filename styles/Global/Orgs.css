@@ -9,6 +9,8 @@
     --white-text-color: #FFFFFF;
     --gray-bg-color: #dbdbdb;
     --nav-hover-color: #c5c5c5;
+    --dark-text-color: #000000;
+    --gray-text-color: #808080;
 }
 
 body {
@@ -80,6 +82,7 @@ body {
     right: 0;
     text-align: center;
     z-index: 1;
+    user-select: none;
 }
 
 .dropdown-menu .dropdown-item:first-child {
@@ -97,6 +100,7 @@ body {
     color: var(--text-color);
     text-decoration: none;
     transition: ease-in-out 0.1s;
+    user-select: none;
 }
 
 .dropdown-item:hover {
@@ -105,6 +109,279 @@ body {
 
 .icon {
     display: none;
+}
+
+.pending-orgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2vh;
+}
+
+.pending-org-holder {   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border-radius: 5px;
+    padding: 20px;
+    border: solid 1px var(--gray-bg-color);
+}
+
+.pending-org {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* get pending org title and display it at the begining of the org-holder */
+.pending-org-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    margin-left: 50%;
+    color: var(--text-color);
+}
+
+.pending-org-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.pending-org-button {
+    /* display side by side and center */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    border-radius: 5px;
+    padding: 12px;
+    margin: 3px;
+}
+
+.pending-org-button:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.pending-org-buttons a {
+    text-decoration: none;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+.orgName {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+.create-org-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.create-org-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border-radius: 5px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.create-org-btn {
+    text-decoration: none;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+.create-org-btn {
+    text-decoration: none;
+    color: var(--text-color);
+    overflow-x: hidden;
+    padding: 12px;
+    
+}
+
+.create-org-button:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.buttonHolder{
+    margin-top: 10px;
+}
+
+.button{
+    cursor: pointer;
+    display: inline-block;
+    background-color: grey;
+    padding: 8px 25px;
+    margin: 5px;
+}
+
+.button:hover{
+    transform: scale(1.1);
+}
+
+.button:active{
+    transform: scale(0.9);
+}
+
+.innerModal {
+    user-select: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    width: 100vw;
+    z-index: 50;
+}
+
+.fixedHolder {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+}
+
+td {
+    padding: 20px;
+}
+
+.innerModalHolder {
+    position: relative;
+    background-color: var(--card-bg-color);
+    border: solid 1px var(--gray-bg-color);
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.close-button {
+    overflow: unset;
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: var(--nav-hover-color);
+}
+
+.innerHeader {
+    padding: 20px;
+}
+
+.innerTitle {
+    color: var(--text-color);
+}
+
+
+.innerContent {
+    padding-bottom: 20px;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+input {
+    width: 50%;
+    height: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--gray-bg-color);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 5px;
+    color: var(--gray-text-color);
+}
+
+input::placeholder {
+    color: var();
+}
+
+input:focus {
+    transition: ease-in-out 0.5s;
+    border: 1px solid var(--text-color);
+    transform: scale(1.05);
+}
+
+input[type=submit] {
+    width: 50%;
+    background-color: var(--nav-hover-color);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: var(--gray-bg-color);
+    color: white;
 }
 
 /* Mobile */
