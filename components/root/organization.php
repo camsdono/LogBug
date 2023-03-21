@@ -132,7 +132,7 @@ $pendingOrgs = $conn->query($getPendingOrgs);
                                             <input type="text" placeholder="Org Name" maxlength="20" minlength="3" name="orgName" required>
                                         </div>
                                         <div class="input-row">
-                                            <input type="text" placeholder="Org Description" maxlength="50" minlength="3" name="orgDesc" required>
+                                            <input type="text" placeholder="Org Description" maxlength="35" minlength="3" name="orgDesc" required>
                                         </div>
                                         <div class="input-row">
                                             <input type="submit" value="Create Organization" name="create-org-btn">
@@ -149,24 +149,7 @@ $pendingOrgs = $conn->query($getPendingOrgs);
         </pop-up>
     </body>
 </html>
+
+<script src="../../js/displays/createorgDisplay.js"></script>
 <script src="../../js/openCloseNavBar.js"></script>
 <script src="../../js/changeTheme.js"></script>
-<script>
-    var popup = document.getElementById("pop-up");
-    var main = document.getElementById("main");
-    var orgbutton = document.getElementById("org-create");
-    var closebutton = document.getElementsByClassName("close-button")[0];
-    var nav = document.getElementById("nav");
-
-    orgbutton.addEventListener("click", function() {
-        popup.style.display = "block";
-        main.style.filter = "blur(5px)";
-        nav.style.filter = "blur(5px)";
-    });
-
-    closebutton.addEventListener("click", function() {
-        popup.style.display = "none";
-        main.style.filter = "blur(0px)";
-        nav.style.filter = "blur(0px)";
-    });
-</script>

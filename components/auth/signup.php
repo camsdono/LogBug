@@ -1,7 +1,14 @@
 <?php
 session_start();
 $token = $_SESSION["token"] = md5(session_id().time());
-$announcment = $_GET['a'];
+
+
+if (isset($_GET['a'])) {
+    $announcment = $_GET['a'];
+    
+  } else {
+    $announcment = null;
+  }
 
 if($announcment != null){
     if($announcment == "RequestMany") {
@@ -31,13 +38,13 @@ if($token == null){
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-        <link rel="stylesheet" href="../../styles/styles.css" />
+       <link rel="stylesheet" href="../../styles/Global/Login.css">
     </head>
-    <body class="blue">
-        
-        <section>
-            <h1 id="login-detail">Signup</h1>
+    <body>
+        <section class="login-page">
+         
             <div id="signup-form" class="signup-form">
+                <h1 class="login-detail">Signup</h1>
                 <form action="../../backend/auth/loginprocess.php" method="POST">  
                     <div class="input-row">
                         <input type="text" placeholder="Name" name="name" maxlength="25" required>
@@ -54,18 +61,22 @@ if($token == null){
                     <div class="input-row">
                         <input type="password" placeholder="Confirm Password" name="confirm-password" maxlength="25" required>
                     </div>
+                  
                     <div class="input-row">
+                        <input type="submit" value="Register" name="register-btn">
+                    </div>
+                    <div class="input-row" style="display: none;">
                         <input type="hidden" name="start-time" value="<?=$start_time?>" onkeydown="return false;" style="pointer-events: none; display: none; ">
                     </div>
                     <div class="input-row" style="display: none;">
                         <input type="hidden" name="token" value="">
                     </div>
-                    <div class="input-row">
-                        <input type="submit" value="Register" name="register-btn">
+                    <div class="login-link">
+                        <a href="../auth/login.php">Already have an account? Login</a>
                     </div>
                 </form>
+                
             </div>
-            <p>Already have an account? <a class="url" href="../auth/login.php">Login</a></p>
         </section>
     
         <footer>

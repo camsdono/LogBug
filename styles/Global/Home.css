@@ -148,6 +148,7 @@ body {
     font-weight: normal;
 }
 
+
 .overview-title {
     text-align: center;
     font-size: .9rem;
@@ -247,6 +248,7 @@ body {
     color: var(--text-color);
     text-decoration: none;
     transition: ease-in-out 0.1s;
+    user-select: none;
 }
 
 .dropdown-item:hover {
@@ -274,6 +276,16 @@ body {
     }
 
     .profile-nav {
+        display: none;
+    }
+
+    .overview-title .recent-act-text {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1112px) {
+    .recent-act-text {
         display: none;
     }
 }
@@ -323,7 +335,7 @@ body {
 @media screen and (max-width: 1260px) {
     .recent-bugs {
         margin-left: 12%;
-    }
+    } 
 }
 
 @media screen and (max-width: 1250px) {
