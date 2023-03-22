@@ -38,7 +38,7 @@ if($token == null){
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-       <link rel="stylesheet" href="../../styles/Global/Login.css">
+       <link rel="stylesheet" href="../../styles/Global/Signup.css">
     </head>
     <body>
         <section class="login-page">

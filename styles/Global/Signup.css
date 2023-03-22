@@ -76,16 +76,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20%;
-    margin-bottom: 10%;
-}
-
-/* Change the white to any color */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    height: 22%;
+    margin-bottom: 6%;
 }
 
 .input-row input {
@@ -106,10 +98,9 @@ input:-webkit-autofill:active{
     color: var(--gray-text-color);
 }
 
-
 .input-row input[type="submit"] {
     width: 100%;
-    height: 80%;
+    height: 100%;
     border: none;
     outline: none;
     background-color: var(--button-bg-color);
@@ -118,24 +109,12 @@ input:-webkit-autofill:active{
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
-    /* Move submit button to the bottom of the page */
-    margin-top: 55%;
 }
 
 .input-row input[type="submit"]:hover {
     transition: ease-in-out 0.5s;
     box-shadow: inset 400px 0 0 0 #D80286;
     color: var(--white-text-color);
-}
-
-.login-link {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 10%;
-    margin-top: 25%;
 }
 
 .login-link a {

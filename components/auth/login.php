@@ -18,32 +18,28 @@
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-        <link rel="stylesheet" href="../../styles/styles.css" />
+        <link rel="stylesheet" href="../../styles/Global/Login.css">
     </head>
-    <body class="blue">
-        
-        <section>
-            <h1 id="login-detail">Login</h1>
-            <div id="login-form" class="login-form">
-                <form action="../../backend/auth/loginprocess.php" method="POST">  
+    <body>
+        <section class="login-page">
+            <div id="signup-form" class="signup-form">
+                <h1 class="login-detail">Login</h1>
+                <form action="../../backend/auth/loginprocess.php" class="input-form" method="POST">  
                     <div class="input-row">
-                        <input type="text" placeholder="Username" name="username" required>
+                        <input type="text" placeholder="Username" name="username" maxlength="25" required>
                     </div>
                     <div class="input-row">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="Password" name="password" maxlength="25" required>
                     </div>
                     <div class="input-row">
                         <input type="submit" value="Login" name="login-btn">
                     </div>
+                    <div class="login-link">
+                        <a href="../auth/signup.php">Don't have an account? Signup</a>
+                    </div>
                 </form>
             </div>
-
-            <div id="signup-link">
-                <p>Don't have an account? <a class="url"  href="signup.php">Signup</a></p>
-            </div>
-    
-        <footer>
-            <p class="footer-txt">@Camsdono Studios</p>
-        </footer>
+        </section>
+       
     </body>
 </html>
