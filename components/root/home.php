@@ -1,6 +1,7 @@
 <?php
 
 require('../../backend/config.php');
+require('../../backend/global/pfpmanager.php');
 
 session_start();
 
@@ -9,6 +10,8 @@ if(!$_SESSION['username'] == null) {
 } else {
     header("Location: ../auth/login.php");
 }
+
+$pfp = $_SESSION['pfp'];
 
 $getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username' and confirmJoined='1' AND orgRole='owner'";
 $getOrgUserRes = $conn->query($getOrgUser);
@@ -52,7 +55,7 @@ $getDetailsRes = $conn->query($getDetails);
             </div>
             <div class="dropdown">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="profile-image" src="https://via.placeholder.com/35x35" alt="Profile Image">
+                    <img class="profile-image" width="35" height="35" src="<?=$pfp?>" alt="Profile Image">
                     <span class="profile-name"><?=htmlspecialchars($username)?></span>
                 </button>
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">

@@ -3,6 +3,7 @@
 require('../config.php');
 require('../global/addauditlog.php');
 require('../global/checkrequests.php');
+require('../global/pfpmanager.php');
 
 if (isset($_POST["login-btn"])) {
     session_start();
@@ -35,6 +36,9 @@ if (isset($_POST["login-btn"])) {
 
         while ($row = mysqli_fetch_assoc($result)) {
             $_SESSION["id"] = $row['id'];
+            
+            CheckPFP($pfp, $username);
+            $_SESSION["pfp"] = $row['pfp'];
         }
         
         $_SESSION["username"] = $username;
@@ -54,11 +58,17 @@ if (isset($_POST["login-btn"])) {
 
 if (isset($_POST["register-btn"])) {
     session_start();
-    $stmt = $conn->prepare("INSERT INTO users (name, email, username, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $username, $encryptedpass);
+    $stmt = $conn->prepare("INSERT INTO users (name, email, username, password, pfp) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $name, $email, $username, $encryptedpass, $pfp);
 
     $username = $_POST['username'];
     $email = $_POST['email'];
+
+    // Get the first character of the username
+    $firstChar = substr($username, 0, 1);
+
+    // Create the PFP
+    $pfp = CreatePFP($firstChar);
 
     $sql1 = "SELECT * FROM users WHERE username='$username' OR email='$email'"; 
     $result1 = $conn->query($sql1); 
@@ -128,6 +138,9 @@ if (isset($_POST["register-btn"])) {
                 addAuditLog($message, $process, $userID, $userName, $ip, True);
         
                 $stmt->close();
+
+                
+
         
                 header("Location: ../../components/auth/signup.php?");
             }
