@@ -14,7 +14,7 @@ function CreatePFP($character) {
     // create the image with font size 50
 
     $font = "../../fonts/Roboto/Roboto-Bold.ttf";
-    imagettftext($image, 50, 0, 30, 70, $textColor, $font, $character);
+    imagettftext($image, 40, 0, 35, 66, $textColor, $font, $character);
 
     // check if the file exists 
     if (file_exists($path . $character . ".png")) {
@@ -27,10 +27,12 @@ function CreatePFP($character) {
 
 function CheckPFP($pfp, $username) {
     if (file_exists($pfp)) {
-        $pfp = $pfp;
+        return $pfp = $pfp;
     } else {
-        $pfp = CreatePFP($username[0]);
+        return $pfp = CreatePFP($username[0]);
     }
 }
+
+// Note: Need to add custom pfp support soon 
 
 ?>

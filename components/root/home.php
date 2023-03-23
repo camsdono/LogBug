@@ -12,6 +12,7 @@ if(!$_SESSION['username'] == null) {
 }
 
 $pfp = $_SESSION['pfp'];
+$pfp = CheckPFP($pfp, $username); 
 
 $getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username' and confirmJoined='1' AND orgRole='owner'";
 $getOrgUserRes = $conn->query($getOrgUser);

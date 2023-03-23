@@ -11,6 +11,7 @@
     --nav-hover-color: #c5c5c5;
     --dark-text-color: #000000;
     --gray-text-color: #808080;
+    --link-color: #ff18cd;
 }
 
 body {
@@ -383,6 +384,77 @@ input[type=submit]:hover {
     background-color: var(--gray-bg-color);
     color: white;
 }
+
+.no-org-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 3%;
+}
+
+.no-org {
+    background-color: var(--card-bg-color);
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin: 10px;
+    border: solid 1px var(--gray-bg-color);
+    text-align: center;
+    width: 25%;
+    cursor: pointer;
+}
+
+.or {
+    color: var(--text-color);
+    margin: 10px;
+}
+
+.or-text {
+    color: var(--text-color);
+}
+
+.or-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--gray-bg-color);
+}
+
+.org-holder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 3%;
+}
+
+.org {
+    background-color: var(--card-bg-color);
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin: 10px;
+    border: solid 1px var(--gray-bg-color);
+    text-align: center;
+    width: 20%;
+    cursor: pointer;
+}
+
+.org:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.orgName {
+    color: var(--text-color);
+    max-width: 200px;
+}
+
 
 /* Mobile */
 @media screen and (max-width: 600px) {

@@ -37,8 +37,8 @@ if (isset($_POST["login-btn"])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $_SESSION["id"] = $row['id'];
             
-            CheckPFP($pfp, $username);
-            $_SESSION["pfp"] = $row['pfp'];
+            $pfp = CheckPFP($row['pfp'], $username);
+            $_SESSION["pfp"] = $pfp;
         }
         
         $_SESSION["username"] = $username;

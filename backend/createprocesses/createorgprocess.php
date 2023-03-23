@@ -1,6 +1,8 @@
 <?php
 
 require('../config.php');
+require('../global/addauditlog.php');
+require('../global/ipmanager.php');
 
 if (isset($_POST["create-org-btn"])) {
     session_start();
@@ -47,6 +49,8 @@ if (isset($_POST["create-org-btn"])) {
     $res1 = mysqli_stmt_get_result($addmemberorg);
 
     if(!$res && !$res1) {
+        $ip = getIP();
+        addAuditLog("Organization Created", "Create Organization", $memberID, $orgOwner, $ip, False);
         header("Location: ../../components/root/organization.php");
     } else {
         echo "An error has occured creating org try again later.";
