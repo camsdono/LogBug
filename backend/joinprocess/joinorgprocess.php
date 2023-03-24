@@ -48,7 +48,7 @@ if (isset($_POST["join-org-btn"])) {
 
                 header("Location: ../../components/root/organization.php");
             } else {
-                echo "An error has occured adding bug to project try again later.";
+                echo "An error occured while joining the organization";
             }
             $stmt2->close();
         } else {
@@ -57,7 +57,6 @@ if (isset($_POST["join-org-btn"])) {
     } else {
         echo "Organization does not exist";
     }
-
 }
 
 ?>

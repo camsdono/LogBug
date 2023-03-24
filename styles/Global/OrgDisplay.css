@@ -1,0 +1,112 @@
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+:root {
+    --main-bg-color: #F4F7FE;
+    --card-bg-color: #FFFFFF;
+    --text-color: #000000;
+    --white-text-color: #FFFFFF;
+    --gray-bg-color: #dbdbdb;
+    --nav-hover-color: #c5c5c5;
+    --dark-text-color: #000000;
+    --gray-text-color: #808080;
+    --link-color: #ff18cd;
+}
+
+body {
+    margin: 0;
+    font-family: 'Prompt', sans-serif;
+    color: white;
+    background-color: var(--main-bg-color);
+    overflow-x: hidden;
+}
+
+.profile-nav {
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    background-color: var(--card-bg-color);
+}
+
+/* Get links and dispaly left of page */
+.profile-nav .links {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.profile-nav .links a {
+    font-size: 16px;
+    padding: 12px 30px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: ease-in-out 0.1s;
+}
+
+.profile-nav .links a:hover {
+    background-color: var(--nav-hover-color);
+    border-radius: 5px;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.dropdown-menu {
+    width: 150px;
+    background-color: var(--card-bg-color);
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    z-index: 1;
+}
+
+.dropdown-menu .dropdown-item:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.dropdown-menu .dropdown-item:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dropdown-item {
+    font-size: 16px;
+    padding: 12px 30px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: ease-in-out 0.1s;
+    user-select: none;
+}
+
+.dropdown-item:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.icon {
+    display: none;
+}

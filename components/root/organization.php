@@ -56,6 +56,7 @@ $pfp = CheckPFP($pfp, $username);
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Settings</a>
                     <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
+                    <a class="dropdown-item" href="#">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
             </div>
@@ -101,7 +102,7 @@ $pfp = CheckPFP($pfp, $username);
                     <?php
                     while ($row = mysqli_fetch_array($result))  {
                         ?>
-                        <div class="org">
+                        <div class="org" onclick="location.href = '../displays/orgdisplay.php?id=<?=$row['orgID']?>';">
                             <h3 class="orgName" title="Name: <?=htmlspecialchars($row['orgName'])?>"><?=htmlspecialchars($row['orgName'])?></h3>
                         </div>
                         <?php } ?>

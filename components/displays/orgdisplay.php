@@ -1,6 +1,8 @@
 <?php
 
 require('../../backend/config.php');
+require('../../backend/config.php');
+require('../../backend/global/pfpmanager.php');
 
 session_start();
 
@@ -9,6 +11,9 @@ if(!$_SESSION['username'] == null) {
 } else {
     header("Location: ../auth/login.php");
 }
+
+$pfp = $_SESSION['pfp'];
+$pfp = CheckPFP($pfp, $username); 
 
 $orgid = $_GET['id'];
 
@@ -21,9 +26,11 @@ $getProjectsRes = $conn->query($getProjects);
 $getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username' AND orgID='$orgid'";
 $getOrgUserRes = $conn->query($getOrgUser);
 
-if(mysqli_num_rows($getOrgUserRes) == null) {
+if(mysqli_num_rows($getOrgUserRes) == 0) {
     header("Location: ../root/organization.php");
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -47,80 +54,33 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-        <link rel="stylesheet" href="../../styles/styles.css" />
+        <link rel="stylesheet" href="../../styles/Global/OrgDisplay.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body class="blue body">
-        <div class="topnav" id="myTopnav">
-            <a href="../root/home.php">Home</a>
-            <a href="../root/organization.php">Organizations</a>
-            <a href="#">Tickets</a>
-             <a href="../../backend/auth/logout.php">Logout</a>
-
-            <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </div>
-        
-        <ul class="breadcrumbs">
-            <li class="breadcrumbs-item">
-                <a href="../root/organization.php?id=<?=$orgid?>" class="breadcrumbs-link">Your Organizations</a>
-            </li>
-            <li class="breadcrumbs-item">
-                <a href="#" class="breadcrumbs-link"><?=htmlspecialchars($row['orgName'])?></a>
-            </li>
-        </ul>
-
-        
-
-        <div class="org-description">
-            <p><?=$row['orgDesc']?></p>
-        </div>
-
-        <div class="option-bar">
-            <div class="option-bar-item">
-                <a title="Member Options" href="../assign/adduserorg.php?id=<?=$orgid?>"><i class="fa fas fa-users fa-lg option-icon"></i></a>
+   <body>
+    <nav class="profile-nav">
+            <div class="links">
+                <a href="../root/home.php">Home</a>
+                <a href="../root/organization.php">Orgs</a>
             </div>
-            <div class="option-bar-item">
-                <a title="Org Settings" href="../edit/orgsettings.php?id=<?=$orgid?>"><i class="fa fa-gear fa-lg option-icon"></i></a>
-            </div>
-        </div>
-
-
-        <?php
-            if(mysqli_num_rows($getProjectsRes) > 0) {
-                ?>
-                <div class="org-row">
-                    <a class="create-org" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create Project</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="profile-image" width="35" height="35" src="<?=$pfp?>" alt="Profile Image">
+                    <span class="profile-name"><?=htmlspecialchars($username)?></span>
+                </button>
+                <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
+                    <a class="dropdown-item" href="#">Support</a>
+                    <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
-                <div class="card-row">
-                    <?php
-                    while ($row1 = mysqli_fetch_array($getProjectsRes)) {
-                        $projectid = $row1['id'];
-                        ?>
-                            <div class="card" onclick="location.href='../displays/projectdisplay.php?id=<?=$projectid?>&page=<?=1?>'">
-                                <h3><?=htmlspecialchars($row1['projectName'])?></h3>
-                            </div>
-                        <?php
-                    }
-                    ?>
-                    </div>
-                    <?php
-            } else {
-                while ($row = mysqli_fetch_array($getOrgUserRes)) {
-                    if($row['orgRole'] == "owner" || $row['orgRole'] == "editor") {
-
-                ?>
-                    <h4>This Org Does Not Have Any Projets <a class="link" href="../creation/createproject.php?orgid=<?=$orgid ?>">Create</a> One!</h4>
-                <?php
-                    }
-                }
-            }
-        ?>
-        <footer>
-            <p class="footer-txt">@Camsdono Studios</p>
-        </footer>
-    </body>
+            </div>
+        </nav>
+        <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+            <i class="fa fa-bars"></i>
+        </a>
+   </body>
     <?php
             }
         } else {
@@ -129,3 +89,4 @@ if(mysqli_num_rows($getOrgUserRes) == null) {
     ?>
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
+<script src="../../js/changeTheme.js"></script>
