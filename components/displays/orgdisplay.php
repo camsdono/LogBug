@@ -29,8 +29,6 @@ $getOrgUserRes = $conn->query($getOrgUser);
 if(mysqli_num_rows($getOrgUserRes) == 0) {
     header("Location: ../root/organization.php");
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +78,75 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
         <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
             <i class="fa fa-bars"></i>
         </a>
+
+        <div class="big-holder">
+        <div class="org-information-holder">
+            <div class="org-information">
+                <div class="org-info">
+                    <h1 class="org-name"><?=htmlspecialchars($row['orgName'])?></h1>
+                    <p class="org-description"><?=htmlspecialchars($row['orgDesc'])?></p>
+                </div>
+
+              
+            </div>
+        </div>
+        
+        <div class="org-settings-holder">
+        <div class="org-settings">
+            <div class="org-option">
+                <div class="org-option-button">Settings</div>
+            </div>
+            <div class="org-option">
+                <div href="" class="org-option-button">Members</div>
+            </div>
+        </div>
+        </div>
+       
+        </div>
+
+       
+        
+        <div class="projects-holder">
+            <div class="projects">
+                <div class="projects-list">
+                    <?php
+                        if(mysqli_num_rows($getProjectsRes) > 0) {
+                            while ($row = mysqli_fetch_array($getProjectsRes)) {
+                    ?>
+                     <div class="projects-header">
+                        <h1 class="projects-title">Projects</h1>
+                    </div>
+                    <div class="project">
+                        <div class="project-info">
+                            <h1 class="project-name"><?=htmlspecialchars($row['projectName'])?></h1>
+                            <p class="project-description"><?=htmlspecialchars($row['projectDesc'])?></p>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="project.php?id=<?=$row['id']?>" class="project-button">View</a>
+                        </div>
+                    </div>
+                    <?php
+                            }
+                        } else {
+                    ?>
+                    <div class="project">
+                        <div class="project-info">
+                            <h1 class="project-name">No Projects</h1>
+                            <p class="project-description">You have no projects in this organization.</p>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="fixedButton" title="Create Project">
+            <div class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
+        </div>
+
    </body>
     <?php
             }

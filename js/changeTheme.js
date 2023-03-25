@@ -6,6 +6,7 @@ var ligthText = "#000000";
 var whiteLightText = "#FFFFFF";
 var lightGrayBackground = "#F4F7FE";
 var lightNavHover = "#c5c5c5";
+var lightgrey = "#dedede";
 
 var darkBackground = "#0D1117";
 var darkCard = "#161B22";

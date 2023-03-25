@@ -12,6 +12,8 @@
     --dark-text-color: #000000;
     --gray-text-color: #808080;
     --link-color: #ff18cd;
+    --blue-crete-color: #2c3e50;
+    --blue-hover-color: #34495e;
 }
 
 body {
@@ -109,4 +111,185 @@ body {
 
 .icon {
     display: none;
+}
+
+.org-information-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.org-information {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    padding: 0 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: 1%;
+    background-color: var(--card-bg-color);
+    border-left: solid 1px var(--gray-bg-color);
+    border-right: solid 1px var(--gray-bg-color);
+    border-top: solid 1px var(--gray-bg-color);
+}
+
+.org-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.org-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.org-description {
+    font-size: 16px;
+    color: var(--gray-text-color);
+    margin-bottom: 10px;
+}
+
+.projects-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.projects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px var(--gray-bg-color);
+}
+
+.project-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    height: 30vh;
+   
+}
+
+.project-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.project-description {
+    font-size: 16px;
+    color: var(--gray-text-color);
+    margin-bottom: 10px;
+}
+
+.project-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.project-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.fixedButton{
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    padding: 20px;
+}
+
+.roundedFixedBtn{
+  height: 60px;
+  line-height: 65px;  
+  width: 60px;  
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: var(--blue-crete-color);
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.roundedFixedBtn:hover{
+  background-color: var(--blue-hover-color);
+}
+
+.org-settings-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.org-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 75%;
+    height: 100%;
+    padding: 0 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--card-bg-color);
+    border-left: solid 1px var(--gray-bg-color);
+    border-right: solid 1px var(--gray-bg-color);
+    border-bottom: solid 1px var(--gray-bg-color);
+}
+
+.org-option {
+    display: flex;
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+
+
+.org-option:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.org-option a {
+    text-decoration: none;
+    color: var(--text-color);
 }

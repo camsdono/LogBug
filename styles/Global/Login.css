@@ -85,7 +85,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 50px white inset !important;
 }
 
 .input-row input {
@@ -151,8 +151,8 @@ input:-webkit-autofill:active{
 
 @media screen and (max-width: 1280px) {
     .signup-form {
-        width: 25%;
-        height: 70%;
+        width: 35%;
+        height: 50%;
     }
 }
 
