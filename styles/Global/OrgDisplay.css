@@ -293,3 +293,206 @@ body {
     text-decoration: none;
     color: var(--text-color);
 }
+
+.settings-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px var(--gray-bg-color);
+}
+
+.settings-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.settings-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+  
+}
+
+.settings-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 60%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.settings-option-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.settings-option-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.settings-option-description {
+    font-size: 16px;
+    color: var(--gray-text-color);
+    margin-bottom: 10px;
+}
+
+.settings-option-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 8%;
+    max-width: 1200px;
+    padding: 20px 20px;
+    margin-bottom: 10px;
+}
+
+.setting-option-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    max-width: 1200px;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+    background-color: var(--blue-crete-color);
+}
+
+.setting-option-button:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.members-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.members {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px var(--gray-bg-color);
+}
+
+.members-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.member-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.members-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.member {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.member-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.member-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    max-width: 1200px;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+    background-color: var(--blue-crete-color);
+}
+
+.member-button:hover {
+    background-color: var(--gray-bg-color);
+}

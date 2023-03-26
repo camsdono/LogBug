@@ -79,7 +79,6 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             <i class="fa fa-bars"></i>
         </a>
 
-        <div class="big-holder">
         <div class="org-information-holder">
             <div class="org-information">
                 <div class="org-info">
@@ -92,21 +91,22 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
         </div>
         
         <div class="org-settings-holder">
-        <div class="org-settings">
-            <div class="org-option">
-                <div class="org-option-button">Settings</div>
+            <div class="org-settings">
+                <div class="org-option" id="project-button">
+                    <div  class="org-option-button">Projects</div>
+                </div>
+                <div class="org-option" id="settings-button">
+                    <div  class="org-option-button">Settings</div>
+                </div>
+                <div class="org-option" id="members-button">
+                    <div  class="org-option-button">Members</div>
+                </div>
             </div>
-            <div class="org-option">
-                <div href="" class="org-option-button">Members</div>
-            </div>
-        </div>
-        </div>
-       
         </div>
 
        
         
-        <div class="projects-holder">
+        <div class="projects-holder" id="project-holder">
             <div class="projects">
                 <div class="projects-list">
                     <?php
@@ -142,6 +142,54 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             </div>
         </div>
 
+        <div class="settings-holder" id="settings-holder">
+            <div class="settings">
+                <div class="settings-list">
+                    <div class="settings-header">
+                        <h1 class="settings-title">Settings</h1>
+                    </div>
+                    <div class="settings-option">
+                        <div class="settings-option-info">
+                            <h1 class="settings-option-name">Organization Name</h1>
+                            <p class="settings-option-description">Change the name of your organization.</p>
+                        </div>
+                        <div class="settings-option-buttons">
+                            <div class="setting-option-button">Change</div>
+                        </div>
+                    </div>
+                    <div class="settings-option">
+                        <div class="settings-option-info">
+                            <h1 class="settings-option-name">Organization Description</h1>
+                            <p class="settings-option-description">Change the description of your organization.</p>
+                        </div>
+                        <div class="settings-option-buttons">
+                            <div class="setting-option-button">Change</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="members-holder" id="members-holder">
+            <div class="members">
+                <div class="members-list">
+                    <div class="members-header">
+                        <h1 class="members-title">Members</h1>
+                    </div>
+                    <div class="member">
+                        <div class="member-info">
+                            <img class="profile-image" width="35" height="35" src="<?=$pfp?>" alt="Profile Image">
+                            <h1 class="member-name"><?=$username?></h1>
+                        </div>
+                        <div class="member-buttons">
+                            <div class="member-button">View</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="fixedButton" title="Create Project">
             <div class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
@@ -157,3 +205,4 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
 </html>
 <script src="../../js/openCloseNavBar.js"></script>
 <script src="../../js/changeTheme.js"></script>
+<script src="../../js/displays/orgDisplay.js"></script>
