@@ -26,6 +26,7 @@ $getProjectsRes = $conn->query($getProjects);
 $getOrgUser = "SELECT * FROM org_members WHERE orgMember='$username' AND orgID='$orgid'";
 $getOrgUserRes = $conn->query($getOrgUser);
 
+
 if(mysqli_num_rows($getOrgUserRes) == 0) {
     header("Location: ../root/organization.php");
 }
@@ -85,8 +86,6 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                     <h1 class="org-name"><?=htmlspecialchars($row['orgName'])?></h1>
                     <p class="org-description"><?=htmlspecialchars($row['orgDesc'])?></p>
                 </div>
-
-              
             </div>
         </div>
         
@@ -177,24 +176,36 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                     <div class="members-header">
                         <h1 class="members-title">Members</h1>
                     </div>
+                    <?php
+                        if(mysqli_num_rows($getOrgUserRes) > 0) {
+                            while ($row = mysqli_fetch_array($getOrgUserRes)) {
+                                $username1 = $row['orgMember'];
+                                $getPfp1 = "SELECT * FROM users WHERE username='$username1'";
+                                $getPfp1Res = mysqli_query($conn, $getPfp1);
+                                $row = mysqli_fetch_array($getPfp1Res);
+                                $pfp1 = $row['pfp'];
+                                echo $pfp1;
+                    ?>
                     <div class="member">
                         <div class="member-info">
-                            <img class="profile-image" width="35" height="35" src="<?=$pfp?>" alt="Profile Image">
-                            <h1 class="member-name"><?=$username?></h1>
+                            <img class="profile-image" width="35" height="35" src="<?=$pfp1?>" alt="Profile Image">
+                            <h1 class="member-name"><?=$username1?></h1>
                         </div>
                         <div class="member-buttons">
                             <div class="member-button">View</div>
                         </div>
                     </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
 
-
         <div class="fixedButton" title="Create Project">
             <div class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
         </div>
-
    </body>
     <?php
             }
