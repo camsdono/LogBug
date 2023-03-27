@@ -55,6 +55,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
 
         <link rel="stylesheet" href="../../styles/Global/OrgDisplay.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
    <body>
     <nav class="profile-nav">
@@ -110,18 +111,21 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                 <div class="projects-list">
                     <?php
                         if(mysqli_num_rows($getProjectsRes) > 0) {
+                            ?>
+                            <div class="projects-header">
+                                <h1 class="projects-title">Projects</h1>
+                            </div>
+                            <?php
                             while ($row = mysqli_fetch_array($getProjectsRes)) {
                     ?>
-                     <div class="projects-header">
-                        <h1 class="projects-title">Projects</h1>
-                    </div>
+                     
                     <div class="project">
                         <div class="project-info">
                             <h1 class="project-name"><?=htmlspecialchars($row['projectName'])?></h1>
                             <p class="project-description"><?=htmlspecialchars($row['projectDesc'])?></p>
                         </div>
                         <div class="project-buttons">
-                            <a href="project.php?id=<?=$row['id']?>" class="project-button">View</a>
+                            <div class="setting-option-button"> View </div>
                         </div>
                     </div>
                     <?php
@@ -184,15 +188,23 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                 $getPfp1Res = mysqli_query($conn, $getPfp1);
                                 $row = mysqli_fetch_array($getPfp1Res);
                                 $pfp1 = $row['pfp'];
-                                echo $pfp1;
+                                $pfp1 = CheckPFP($pfp1, $username1);
+
+                                // Get org member info
+                                $getOrgMemberInfo = "SELECT * FROM org_members WHERE orgMember='$username1'";
+                                $getOrgMemberInfoRes = mysqli_query($conn, $getOrgMemberInfo);
+                                $row = mysqli_fetch_array($getOrgMemberInfoRes);
                     ?>
                     <div class="member">
                         <div class="member-info">
                             <img class="profile-image" width="35" height="35" src="<?=$pfp1?>" alt="Profile Image">
                             <h1 class="member-name"><?=$username1?></h1>
                         </div>
-                        <div class="member-buttons">
-                            <div class="member-button">View</div>
+                        <div class="member-buttons" onclick="showModal(<?=$row['memberID']?>, <?=$row['orgID']?>)">
+                            <div class="member-button" >View</div>
+                        </div>
+                        <div class="member-buttons" style="margin-left: 20px;" onclick="showModal(<?=$row['memberID']?>, <?=$row['orgID']?>)">
+                            <div class="member-button" >Manage</div>
                         </div>
                     </div>
                     <?php
@@ -203,8 +215,72 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             </div>
         </div>
 
-        <div class="fixedButton" title="Create Project">
-            <div class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
+        <pop-up id="modal-container" style="display: none;">
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button" id="close-member-button">x</div>
+                                    <div class="innerTitle">
+                                        Member Information
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                    <div class="modal-content-text" id="modal-content-text">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </pop-up>
+        
+
+         <pop-up id="create-project-window" style="display: none;">
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button" id="close-project-button">x</div>
+                                    <div class="innerTitle">
+                                        Create Project
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                    <form method="POST" action="../../backend/createprocesses/createprojectprocess.php">
+                                        <div class="input-row">
+                                            <input type="text" placeholder="Project Name" maxlength="20" minlength="3" name="projectName" required>
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="text" placeholder="Project Description" maxlength="35" minlength="3" name="projectDesc" required>
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="hidden" name="orgID" value="<?=$orgid?>">
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="submit" value="Create Project" name="create-project-btn">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </pop-up>
+
+        <div class="fixedButton" title="Create Project" id="create-project">
+            <div  class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
         </div>
    </body>
     <?php
