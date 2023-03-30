@@ -14,6 +14,7 @@ var closeMember = document.getElementById("close-member-button");
 var closeManageMember = document.getElementById("close-manage-member-button");
 var memberPopup = document.getElementById("modal-container");
 var manageMemberPopup = document.getElementById("manage-member-popup");
+var memberPopup = document.getElementById("modal-container");
 
 
 settingsHolder.style.display = "none";
@@ -30,6 +31,7 @@ closeMember.addEventListener("click", function() {
     memberPopup.style.display = "none";
     ClearInputs();
 });
+
 
 closeManageMember.addEventListener("click", function() {
     manageMemberPopup.style.display = "none";

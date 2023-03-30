@@ -235,6 +235,8 @@ body {
     flex-direction: column;
     width: 100%;
     padding: 0 20px;
+    max-width: 1200px;
+    padding: 0 20px;
 }
 
 .project-buttons {
@@ -643,5 +645,3 @@ input[type=submit]:hover {
     background-color: var(--gray-bg-color);
     color: white;
 } 
-
-/* Revision Revision Revision */

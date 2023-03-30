@@ -204,6 +204,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                             <div class="member-button" >View</div>
                         </div>
                         <div class="member-buttons" style="margin-left: 20px;" onclick="ManageMemberPopup(<?=$row['memberID']?>, <?=$row['orgID']?>)">
+
                             <div class="member-button" >Manage</div>
                         </div>
                     </div>
@@ -341,7 +342,42 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                 </table>
             </div>
         </div>
-
+        </pop-up>
+         <pop-up id="create-project-window" style="display: none;">
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button" id="close-project-button">x</div>
+                                    <div class="innerTitle">
+                                        Create Project
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                    <form method="POST" action="../../backend/createprocesses/createprojectprocess.php">
+                                        <div class="input-row">
+                                            <input type="text" placeholder="Project Name" maxlength="20" minlength="3" name="projectName" required>
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="text" placeholder="Project Description" maxlength="35" minlength="3" name="projectDesc" required>
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="hidden" name="orgID" value="<?=$orgid?>">
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="submit" value="Create Project" name="create-project-btn">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         </pop-up>
 
         <div class="fixedButton" title="Create Project" id="create-project">
