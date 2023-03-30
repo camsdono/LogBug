@@ -303,7 +303,7 @@ td {
     border-radius: 10px;
 }
 
-.close-button {
+.close-button  {
     overflow: unset;
     position: absolute;
     top: -1px;
@@ -315,6 +315,24 @@ td {
     font-size: 20px;
     color: var(--text-color);
     cursor: pointer;
+}
+
+.close-button-create-project {
+    overflow: unset;
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.close-button-create-project:hover {
+    color: var(--nav-hover-color);
 }
 
 .close-button:hover {

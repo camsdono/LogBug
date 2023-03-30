@@ -183,15 +183,13 @@ body {
 }
 
 .project-info {
+    user-select: none;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
-    height: 30vh;
-   
+    clear: both;
 }
 
 .project-name {
@@ -205,6 +203,38 @@ body {
     font-size: 16px;
     color: var(--gray-text-color);
     margin-bottom: 10px;
+    max-width: 150px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.projects-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.project {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    height: 15vh;
+    margin-bottom: 20px;
+}
+
+.project-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
 }
 
 .project-buttons {
@@ -214,14 +244,6 @@ body {
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
-}
-
-.project-title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 10px;
 }
 
 .fixedButton{
@@ -253,6 +275,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 100;
 }
 
 .org-settings {
@@ -269,6 +292,7 @@ body {
     border-left: solid 1px var(--gray-bg-color);
     border-right: solid 1px var(--gray-bg-color);
     border-bottom: solid 1px var(--gray-bg-color);
+    user-select: none;
 }
 
 .org-option {
@@ -282,6 +306,7 @@ body {
     border-radius: 10px;
     transition: ease-in-out 0.1s;
     cursor: pointer;
+    user-select: none;
 }
 
 
@@ -478,6 +503,8 @@ body {
     margin-bottom: 10px;
 }
 
+
+
 .member-button {
     display: flex;
     justify-content: center;
@@ -496,3 +523,125 @@ body {
 .member-button:hover {
     background-color: var(--gray-bg-color);
 }
+
+.innerModal {
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    width: 100vw;
+}
+
+.fixedHolder {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+}
+
+td {
+    padding: 20px;
+}
+
+.innerModalHolder {
+    position: relative;
+    background-color: var(--card-bg-color);
+    border: solid 1px var(--gray-bg-color);
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.close-button {
+    overflow: unset;
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: var(--nav-hover-color);
+}
+
+.innerHeader {
+    padding: 20px;
+}
+
+.innerTitle {
+    color: var(--text-color);
+}
+
+
+.innerContent {
+    padding-bottom: 20px;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+input {
+    width: 50%;
+    height: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--gray-bg-color);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 5px;
+    color: var(--gray-text-color);
+}
+
+input::placeholder {
+    color: var(--gray-text-color);
+}
+
+input:focus {
+    transition: ease-in-out 0.5s;
+    border: 1px solid var(--text-color);
+    transform: scale(1.05);
+}
+
+input[type=submit] {
+    width: 50%;
+    background-color: var(--nav-hover-color);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: var(--gray-bg-color);
+    color: white;
+} 
+
+/* Revision Revision Revision */
