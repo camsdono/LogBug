@@ -14,6 +14,9 @@
     --link-color: #ff18cd;
     --blue-crete-color: #2c3e50;
     --blue-hover-color: #34495e;
+    --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
 }
 
 body {
@@ -642,4 +645,63 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: var(--gray-bg-color);
     color: white;
-} 
+}
+
+select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    min-width: 5ch;
+    max-width: 10ch;
+    border: none;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, var(--blue-crete-color), var(--blue-hover-color) 33%);
+    color: var(--white-text-color);
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+select option {
+    background-color: var(--card-bg-color);
+    background-image: linear-gradient(to right, var(--blue-crete-color), var(--blue-hover-color) 33%);
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--blue-crete-color);
+    color: var(--white-text-color);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--gray-bg-color);
+    color: var(--text-color);
+}

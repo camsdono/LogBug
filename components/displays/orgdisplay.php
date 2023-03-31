@@ -191,7 +191,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                 $pfp1 = CheckPFP($pfp1, $username1);
 
                                 // Get org member info
-                                $getOrgMemberInfo = "SELECT * FROM org_members WHERE orgMember='$username1'";
+                                $getOrgMemberInfo = "SELECT * FROM org_members WHERE orgMember='$username1' AND orgID='$orgid'";
                                 $getOrgMemberInfoRes = mysqli_query($conn, $getOrgMemberInfo);
                                 $row = mysqli_fetch_array($getOrgMemberInfoRes);
                     ?>
@@ -203,10 +203,15 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                         <div class="member-buttons" onclick="showModal(<?=$row['memberID']?>, <?=$row['orgID']?>)">
                             <div class="member-button" >View</div>
                         </div>
-                        <div class="member-buttons" style="margin-left: 20px;" onclick="ManageMemberPopup(<?=$row['memberID']?>, <?=$row['orgID']?>)">
-
+                        <?php
+                        // Check if the users role is owner
+                        if($row['orgRole'] == "owner") {?>
+                        <div class="member-buttons" id="manage-member" style="margin-left: 20px;" onclick="ManageMemberPopup(<?=$row['memberID']?>, <?=$row['orgID']?>)">
                             <div class="member-button" >Manage</div>
                         </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <?php
                             }
@@ -294,47 +299,10 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                     </div>
                                 </div>
                                 <div class="innerContent">
-                                    <div class="modal-content-text" id="modal-content-text">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </pop-up>
-        
+                                    <div class="modal-content-text" id="member-content-text">
+                                    <div class="custom-select" style="width:200px;">
 
-         <pop-up id="create-project-window" style="display: none;">
-            <div class="innerModal" id="modal" >
-            <div class="fixedHolder">
-                <table>
-                    <tr>
-                        <td>
-                            <div class="innerModalHolder" id="" style="max-width: 400px;">
-                                <div class="innerHeader">
-                                <div class="close-button" id="close-project-button">x</div>
-                                    <div class="innerTitle">
-                                        Create Project
                                     </div>
-                                </div>
-                                <div class="innerContent">
-                                    <form method="POST" action="../../backend/createprocesses/createprojectprocess.php">
-                                        <div class="input-row">
-                                            <input type="text" placeholder="Project Name" maxlength="20" minlength="3" name="projectName" required>
-                                        </div>
-                                        <div class="input-row">
-                                            <input type="text" placeholder="Project Description" maxlength="35" minlength="3" name="projectDesc" required>
-                                        </div>
-                                        <div class="input-row">
-                                            <input type="hidden" name="orgID" value="<?=$orgid?>">
-                                        </div>
-                                        <div class="input-row">
-                                            <input type="submit" value="Create Project" name="create-project-btn">
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </td>
@@ -343,7 +311,8 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             </div>
         </div>
         </pop-up>
-         <pop-up id="create-project-window" style="display: none;">
+
+        <pop-up id="manage-member-popup">
             <div class="innerModal" id="modal" >
             <div class="fixedHolder">
                 <table>
@@ -351,26 +320,26 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                         <td>
                             <div class="innerModalHolder" id="" style="max-width: 400px;">
                                 <div class="innerHeader">
-                                <div class="close-button" id="close-project-button">x</div>
+                                <div class="close-button" id="close-manage-member-button">x</div>
                                     <div class="innerTitle">
-                                        Create Project
+                                        Change Organization Name
                                     </div>
                                 </div>
                                 <div class="innerContent">
-                                    <form method="POST" action="../../backend/createprocesses/createprojectprocess.php">
+                                <div class="innerContent">
+                                    <form method="POST" action="../../backend/editprocess/orgsettings/orgnameeditprocess.php">
                                         <div class="input-row">
-                                            <input type="text" placeholder="Project Name" maxlength="20" minlength="3" name="projectName" required>
-                                        </div>
-                                        <div class="input-row">
-                                            <input type="text" placeholder="Project Description" maxlength="35" minlength="3" name="projectDesc" required>
+                                            <input type="text" placeholder="Orginization Name" maxlength="20" minlength="3" name="orgName" required>
                                         </div>
                                         <div class="input-row">
                                             <input type="hidden" name="orgID" value="<?=$orgid?>">
                                         </div>
                                         <div class="input-row">
-                                            <input type="submit" value="Create Project" name="create-project-btn">
+                                            <input type="submit" value="Update Name" name="update-orgname-btn">
                                         </div>
                                     </form>
+                                </div>
+                            </div>
                                 </div>
                             </div>
                         </td>
