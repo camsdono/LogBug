@@ -99,7 +99,7 @@ function showModal(userID, orgID) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+          
             var response = JSON.parse(this.responseText);
             var capitalRole = response.role.charAt(0).toUpperCase() + response.role.slice(1);
             var capitalName = response.name.charAt(0).toUpperCase() + response.name.slice(1);
@@ -115,19 +115,42 @@ function showModal(userID, orgID) {
 function ManageMemberPopup(userID, orgID) {
     var modalContainer = document.getElementById("manage-member-popup");
     var modalContent = document.getElementById("manage-member-content");
+    var modalContentText = document.getElementById("member-content-text");
     modalContainer.style.display = "block";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            
+            var response = JSON.parse(this.responseText);
+            var capitalRole = response.role.charAt(0).toUpperCase() + response.role.slice(1);
+
+            var htmlToInsert = "Current Role: " + capitalRole + "<br><br><select class='select' id='role-select' name='role-select'><option value='member'>Member</option><option value='editor'>Editor</option><option value='owner'>Owner</option></select><br><br><button onclick='ChangeRole("+ userID + "," + orgID + ")'>Update Role</button>";
+
+            setTimeout(function(){
+                modalContentText.innerHTML = htmlToInsert;
+            }, 500);
+        } else {
+            modalContentText.innerHTML = "Loading...";
+        }
+    };
+    xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
+    xhttp.send();
+}
+
+
+function ChangeRole(userID, orgID) {
+    var role = document.getElementById("role-select").value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             var response = JSON.parse(this.responseText);
-            var capitalRole = response.role.charAt(0).toUpperCase() + response.role.slice(1);
-            var capitalName = response.name.charAt(0).toUpperCase() + response.name.slice(1);
-            var capitalEmail = response.email.charAt(0).toUpperCase() + response.email.slice(1);
-            modalContent.innerHTML = "Name: " + capitalName + "<br>Email: " + capitalEmail + "<br>Role: " + capitalRole;
-
+            if (role ==  "member" || role == "editor") {
+                manageMemberButton.style.display = "none";
+            }
+            location.reload();
         }
     };
-    xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
+    xhttp.open("GET", "../../backend/global/changerole.php?userID=" + userID + "&orgID=" + orgID + "&role=" + role, true);
     xhttp.send();
 }

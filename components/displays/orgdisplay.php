@@ -312,7 +312,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
         </div>
         </pop-up>
 
-        <pop-up id="manage-member-popup">
+        <pop-up id="manage-member-popup" style="display: none;">
             <div class="innerModal" id="modal" >
             <div class="fixedHolder">
                 <table>
