@@ -145,34 +145,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             </div>
         </div>
 
-        <div class="settings-holder" id="settings-holder">
-            <div class="settings">
-                <div class="settings-list">
-                    <div class="settings-header">
-                        <h1 class="settings-title">Settings</h1>
-                    </div>
-                    <div class="settings-option">
-                        <div class="settings-option-info">
-                            <h1 class="settings-option-name">Organization Name</h1>
-                            <p class="settings-option-description">Change the name of your organization.</p>
-                        </div>
-                        <div class="settings-option-buttons">
-                            <div class="setting-option-button">Change</div>
-                        </div>
-                    </div>
-                    <div class="settings-option">
-                        <div class="settings-option-info">
-                            <h1 class="settings-option-name">Organization Description</h1>
-                            <p class="settings-option-description">Change the description of your organization.</p>
-                        </div>
-                        <div class="settings-option-buttons">
-                            <div class="setting-option-button">Change</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
 
         <div class="members-holder" id="members-holder">
             <div class="members">
@@ -215,6 +188,85 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                     </div>
                     <?php
                             }
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-holder" id="settings-holder">
+            <div class="settings">
+                <div class="settings-list">
+                    <div class="settings-header">
+                        <h1 class="settings-title">Settings</h1>
+                    </div>
+                    <?php
+                        // get org info
+                        $getOrgInfo = "SELECT * FROM org_members WHERE orgMember='$username' AND orgID='$orgid'";
+                        $getOrgInfoRes = mysqli_query($conn, $getOrgInfo);
+                        $row = mysqli_fetch_array($getOrgInfoRes);
+                        if($row['orgRole'] == "owner") {
+                    ?>
+                    <div class="settings-option">
+                        <div class="settings-option-info">
+                            <h1 class="settings-option-name">Organization Name</h1>
+                            <p class="settings-option-description">Change the name of your organization.</p>
+                        </div>
+                        <div class="settings-option-buttons">
+                            <div class="setting-option-button" id="change-name-btn">Change</div>
+                        </div>
+                    </div>
+                  
+                    <div class="settings-option">
+                        <div class="settings-option-info">
+                            <h1 class="settings-option-name">Organization Description</h1>
+                            <p class="settings-option-description">Change the description of your organization.</p>
+                        </div>
+                        <div class="settings-option-buttons">
+                            <div class="setting-option-button" id="change-desc-btn">Change</div>
+                        </div>
+                    </div>
+                    
+                    <?php
+                        }
+                        if ($row['orgRole'] == "editor" || $row['orgRole'] == "owner") {
+                            ?>
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <h1 class="settings-option-name">Get Join Code</h1>
+                                    <p class="settings-option-description">Get the organizations join code.</p>
+                                </div>
+                                <div class="settings-option-buttons">
+                                    <div class="setting-option-button" id="get-joincode-btn">Get</div>
+                                </div>
+                            </div>
+                        
+                            <?php 
+                        }
+                    ?>
+                    <div class="settings-option">
+                        <div class="settings-option-info">
+                            <h1 class="settings-option-name" style="color: red;">Leave Organization</h1>
+                            <p class="settings-option-description">Leave this organization.</p>
+                        </div>
+                        <div class="settings-option-buttons">
+                            <div class="setting-option-button" id="leave-org-btn">Leave</div>
+                        </div>
+                    </div>
+                    </div>
+                    <?php
+                        if ($row['orgRole'] == "member") {
+                        ?>
+                        <div class="settings-option">
+                            <div class="settings-option-info">
+                                <h1 class="settings-option-name" style="color: red;">Leave Organization</h1>
+                                <p class="settings-option-description">Leave this organization.</p>
+                            </div>
+                            <div class="settings-option-buttons">
+                                <div class="setting-option-button" id="leave-org-btn">Leave</div>
+                            </div>
+                        </div>
+                        <?php
                         }
                     ?>
                 </div>
@@ -312,7 +364,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
         </div>
         </pop-up>
 
-        <pop-up id="manage-member-popup" style="display: none;">
+        <pop-up id="manage-name-popup" style="display: none;">
             <div class="innerModal" id="modal" >
             <div class="fixedHolder">
                 <table>
@@ -320,7 +372,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                         <td>
                             <div class="innerModalHolder" id="" style="max-width: 400px;">
                                 <div class="innerHeader">
-                                <div class="close-button" id="close-manage-member-button">x</div>
+                                <div class="close-button" id="close-name-button">x</div>
                                     <div class="innerTitle">
                                         Change Organization Name
                                     </div>
@@ -329,13 +381,50 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                 <div class="innerContent">
                                     <form method="POST" action="../../backend/editprocess/orgsettings/orgnameeditprocess.php">
                                         <div class="input-row">
-                                            <input type="text" placeholder="Orginization Name" maxlength="20" minlength="3" name="orgName" required>
+                                            <input type="text" placeholder="Orginization Name" maxlength="20" minlength="3" name="orgname" required>
                                         </div>
                                         <div class="input-row">
-                                            <input type="hidden" name="orgID" value="<?=$orgid?>">
+                                            <input type="hidden" name="orgid" value="<?=$orgid?>">
                                         </div>
                                         <div class="input-row">
                                             <input type="submit" value="Update Name" name="update-orgname-btn">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </pop-up>
+
+        <pop-up id="manage-desc-popup" style="display: none;">
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button" id="close-desc-button">x</div>
+                                    <div class="innerTitle">
+                                        Change Organization Description
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                <div class="innerContent">
+                                    <form method="POST" action="../../backend/editprocess/orgsettings/orgdesceditprocess.php">
+                                        <div class="input-row">
+                                            <input type="text" placeholder="Orginization Description" maxlength="20" minlength="3" name="orgdesc" required>
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="hidden" name="orgid" value="<?=$orgid?>">
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="submit" value="Update Description" name="update-orgdesc-btn">
                                         </div>
                                     </form>
                                 </div>
@@ -363,3 +452,6 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
 <script src="../../js/openCloseNavBar.js"></script>
 <script src="../../js/changeTheme.js"></script>
 <script src="../../js/displays/orgDisplay.js"></script>
+<script>
+    CheckRole(<?=$_SESSION['id']?>, <?=$orgid?>)
+</script>

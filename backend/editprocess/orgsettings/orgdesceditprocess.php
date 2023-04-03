@@ -1,7 +1,7 @@
 <?php
 require('../../config.php');
 
-if (isset($_POST["org-edit-desc-btn"])) {
+if (isset($_POST["update-orgdesc-btn"])) {
     session_start();
 
     $orgid = $_POST['orgid'];
@@ -15,7 +15,7 @@ if (isset($_POST["org-edit-desc-btn"])) {
     $res = mysqli_stmt_get_result($stmt);
 
     if(!$res) {
-        header("Location: ../../../components/edit/orgsettings.php?id=$orgid");
+        header("Location: ../../../components/displays/orgdisplay.php?id=$orgid");
     } else {
         echo "An error has occured updating org settings try again later.";
     }

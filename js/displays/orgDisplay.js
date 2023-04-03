@@ -16,6 +16,14 @@ var memberPopup = document.getElementById("modal-container");
 var manageMemberPopup = document.getElementById("manage-member-popup");
 var memberPopup = document.getElementById("modal-container");
 
+var manageNamePopup = document.getElementById("manage-name-popup");
+var manageNameButton = document.getElementById("change-name-btn");
+var closeName = document.getElementById("close-name-button");
+
+var manageDescPopup = document.getElementById("manage-desc-popup");
+var manageDescButton = document.getElementById("change-desc-btn");
+var closeDesc = document.getElementById("close-desc-button");
+
 
 settingsHolder.style.display = "none";
 membersHolder.style.display = "none";
@@ -27,15 +35,50 @@ closebutton.addEventListener("click", function() {
     ClearInputs();
 });
 
+
 closeMember.addEventListener("click", function() {
     memberPopup.style.display = "none";
     ClearInputs();
+});
+
+closeName.addEventListener("click", function() {
+    manageNamePopup.style.display = "none";
 });
 
 
 closeManageMember.addEventListener("click", function() {
     manageMemberPopup.style.display = "none";
 });
+
+closeDesc.addEventListener("click", function() {
+    manageDescPopup.style.display = "none";
+});
+
+function CheckRole(userID, orgID) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            
+            var response = JSON.parse(this.responseText);
+            
+            if (response.role == "owner") {
+                manageNameButton.addEventListener("click", function() {
+                    manageNamePopup.style.display = "block";
+                });
+
+                
+                manageDescButton.addEventListener("click", function() {
+                    manageDescPopup.style.display = "block";
+                });
+            }
+
+        }
+    };
+    xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
+    xhttp.send();
+}
+
+
 
 window.onclick = function(event) {
     if (event.target == projectPopup) {
@@ -50,6 +93,14 @@ window.onclick = function(event) {
     if (event.target == manageMemberPopup) {
         manageMemberPopup.style.display = "none";
     }
+
+    if (event.target == manageNamePopup) {
+        manageNamePopup.style.display = "none";
+    }
+
+    if (event.target == manageDescPopup) {
+        manageDescPopup.style.display = "none";
+    }
 }
 
 
@@ -58,6 +109,8 @@ document.addEventListener('keydown', function(event) {
         projectPopup.style.display = "none";
         memberPopup.style.display = "none";
         manageMemberPopup.style.display = "none";
+        manageNamePopup.style.display = "none";
+        manageDescPopup.style.display = "none";
         ClearInputs();
     }
 });
@@ -66,7 +119,6 @@ document.addEventListener('keydown', function(event) {
 createProjectButton.addEventListener("click", function() {
     projectPopup.style.display = "block";
 });
-
 
 
 settingsButton.addEventListener("click", function() {
@@ -137,13 +189,11 @@ function ManageMemberPopup(userID, orgID) {
     xhttp.send();
 }
 
-
 function ChangeRole(userID, orgID) {
     var role = document.getElementById("role-select").value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             var response = JSON.parse(this.responseText);
             if (role ==  "member" || role == "editor") {
                 manageMemberButton.style.display = "none";
