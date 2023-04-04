@@ -259,6 +259,8 @@ body {
     display: none;
 }
 
+
+
 /* Mobile */
 @media screen and (max-width: 600px) {
     .icon {

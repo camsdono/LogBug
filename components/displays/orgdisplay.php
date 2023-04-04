@@ -226,7 +226,6 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                             <div class="setting-option-button" id="change-desc-btn">Change</div>
                         </div>
                     </div>
-                    
                     <?php
                         }
                         if ($row['orgRole'] == "editor" || $row['orgRole'] == "owner") {
@@ -243,16 +242,35 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                         
                             <?php 
                         }
+
+                        if ($row['orgRole'] == "owner") {
+                            ?>
+                             <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <h1 class="settings-option-name" style="color: red;">Delete Organization</h1>
+                                    <p class="settings-option-description">Delete this organization.</p>
+                                </div>
+                                <div class="settings-option-buttons">
+                                    <div class="setting-option-button" id="delete-org-btn">Delete</div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                        if ($row['orgRole'] != "owner") {
+                            ?>
+                            <div class="settings-option">
+                                <div class="settings-option-info">
+                                    <h1 class="settings-option-name" style="color: red;">Leave Organization</h1>
+                                    <p class="settings-option-description">Leave this organization.</p>
+                                </div>
+                                <div class="settings-option-buttons">
+                                    <div class="setting-option-button" id="leave-org-btn">Leave</div>
+                                </div>
+                            </div>
+                            <?php
+                        }
                     ?>
-                    <div class="settings-option">
-                        <div class="settings-option-info">
-                            <h1 class="settings-option-name" style="color: red;">Leave Organization</h1>
-                            <p class="settings-option-description">Leave this organization.</p>
-                        </div>
-                        <div class="settings-option-buttons">
-                            <div class="setting-option-button" id="leave-org-btn">Leave</div>
-                        </div>
-                    </div>
                     </div>
                     <?php
                         if ($row['orgRole'] == "member") {
@@ -266,6 +284,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                 <div class="setting-option-button" id="leave-org-btn">Leave</div>
                             </div>
                         </div>
+                       
                         <?php
                         }
                     ?>
@@ -298,9 +317,40 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             </div>
         </div>
         </pop-up>
-        
 
-         <pop-up id="create-project-window" style="display: none;">
+        <pop-up id="get-joincode" style="display: none;">
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button" id="close-joincode-button">x</div>
+                                    <div class="innerTitle">
+                                        Get Join Code
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                    <div class="modal-content-text" id="modal-content-text">
+                                        <p>Join Code: <?=$row['assignCode']?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </pop-up>
+
+        <?php
+            if ($row['orgRole'] == "owner") {?>
+            <div class="fixedButton" title="Create Project" id="create-project">
+                <div  class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
+            </div>
+
+            <pop-up id="create-project-window" style="display: none;">
             <div class="innerModal" id="modal" >
             <div class="fixedHolder">
                 <table>
@@ -437,10 +487,11 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
             </div>
         </div>
         </pop-up>
+            <?php
+            }
+        ?>
 
-        <div class="fixedButton" title="Create Project" id="create-project">
-            <div  class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
-        </div>
+       
    </body>
     <?php
             }

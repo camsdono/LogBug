@@ -63,7 +63,7 @@ $getDetailsRes = $conn->query($getDetails);
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Settings</a>
                     <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
-                    <a class="dropdown-item" href="../support/cartersupport.php">Support</a>
+                    <a class="dropdown-item" href="./support.php">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
             </div>

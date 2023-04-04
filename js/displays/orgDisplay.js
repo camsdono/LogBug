@@ -24,35 +24,17 @@ var manageDescPopup = document.getElementById("manage-desc-popup");
 var manageDescButton = document.getElementById("change-desc-btn");
 var closeDesc = document.getElementById("close-desc-button");
 
+var getJoincodeButton = document.getElementById("get-joincode-btn");
+var getJoincodePopup = document.getElementById("get-joincode");
+var closeJoincode = document.getElementById("close-joincode-button");
+
 
 settingsHolder.style.display = "none";
 membersHolder.style.display = "none";
 
 var id = 0;
 
-closebutton.addEventListener("click", function() {
-    projectPopup.style.display = "none";
-    ClearInputs();
-});
 
-
-closeMember.addEventListener("click", function() {
-    memberPopup.style.display = "none";
-    ClearInputs();
-});
-
-closeName.addEventListener("click", function() {
-    manageNamePopup.style.display = "none";
-});
-
-
-closeManageMember.addEventListener("click", function() {
-    manageMemberPopup.style.display = "none";
-});
-
-closeDesc.addEventListener("click", function() {
-    manageDescPopup.style.display = "none";
-});
 
 function CheckRole(userID, orgID) {
     var xhttp = new XMLHttpRequest();
@@ -70,8 +52,63 @@ function CheckRole(userID, orgID) {
                 manageDescButton.addEventListener("click", function() {
                     manageDescPopup.style.display = "block";
                 });
+
+                document.addEventListener('keydown', function(event) { 
+                    if (event.key === "Escape") {
+                        projectPopup.style.display = "none";
+                        memberPopup.style.display = "none";
+                        manageMemberPopup.style.display = "none";
+                        manageNamePopup.style.display = "none";
+                        manageDescPopup.style.display = "none";
+                        ClearInputs();
+                    }
+                });
+    
+                createProjectButton.addEventListener("click", function() {
+                    projectPopup.style.display = "block";
+                });
+    
+                closebutton.addEventListener("click", function() {
+                    projectPopup.style.display = "none";
+                    ClearInputs();
+                });
+                
+                
+                closeMember.addEventListener("click", function() {
+                    memberPopup.style.display = "none";
+                    ClearInputs();
+                });
+                
+                closeName.addEventListener("click", function() {
+                    manageNamePopup.style.display = "none";
+                });
+                
+                
+                closeManageMember.addEventListener("click", function() {
+                    manageMemberPopup.style.display = "none";
+                });
+                
+                closeDesc.addEventListener("click", function() {
+                    manageDescPopup.style.display = "none";
+                });
             }
 
+            if (response.role == "owner" || response.role == "editor") {
+                getJoincodeButton.addEventListener("click", function() {
+                    getJoincodePopup.style.display = "block";
+                });
+
+                closeJoincode.addEventListener("click", function() {
+                    getJoincodePopup.style.display = "none";
+                });
+
+                document.addEventListener('keydown', function(event) { 
+                    if (event.key === "Escape") {
+                        getJoincodePopup.style.display = "none";
+                    }
+                });
+                
+            }
         }
     };
     xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
@@ -79,47 +116,12 @@ function CheckRole(userID, orgID) {
 }
 
 
-
-window.onclick = function(event) {
-    if (event.target == projectPopup) {
-        projectPopup.style.display = "none";
-        ClearInputs();
-    }
-
-    if (event.target == memberPopup) {
-        memberPopup.style.display = "none";
-    }
-
-    if (event.target == manageMemberPopup) {
-        manageMemberPopup.style.display = "none";
-    }
-
-    if (event.target == manageNamePopup) {
-        manageNamePopup.style.display = "none";
-    }
-
-    if (event.target == manageDescPopup) {
-        manageDescPopup.style.display = "none";
-    }
-}
-
-
 document.addEventListener('keydown', function(event) {
     if (event.key === "Escape") {
-        projectPopup.style.display = "none";
         memberPopup.style.display = "none";
-        manageMemberPopup.style.display = "none";
-        manageNamePopup.style.display = "none";
-        manageDescPopup.style.display = "none";
         ClearInputs();
     }
 });
-
-
-createProjectButton.addEventListener("click", function() {
-    projectPopup.style.display = "block";
-});
-
 
 settingsButton.addEventListener("click", function() {
     settingsHolder.style.display = "flex";
