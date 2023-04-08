@@ -15,12 +15,7 @@ var whiteDarkText = "#FFFFFF";
 var darkGrayBackground = "#464646";
 var darkNavHover = "#575757";
 
-if (localStorage.getItem('theme') == 'dark') {
-    DarkTheme();
-    
-} else {
-    LightTheme();
-}
+DarkTheme();
 
 document.querySelector('.dropdown-toggle').addEventListener('mouseover', function() {
     document.querySelector('.dropdown-menu').style.display = 'flex';

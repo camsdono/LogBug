@@ -35,6 +35,13 @@ var closeLeaveOrg = document.getElementById("close-leave-org-button");
 var ConfirmLeaveOrgButton = document.getElementById("confirm-leave-org-btn");
 var CancelLeaveOrgButton = document.getElementById("cancel-leave-org-btn");
 
+var DeleteOrgButton = document.getElementById("delete-org-btn");
+var DeleteOrgPopup = document.getElementById("delete-org-popup");
+var closeDeleteOrg = document.getElementById("close-delete-org-button");
+
+var ConfirmDeleteOrgButton = document.getElementById("confirm-delete-org-btn");
+var CancelDeleteOrgButton = document.getElementById("cancel-delete-org-btn");
+
 
 settingsHolder.style.display = "none";
 membersHolder.style.display = "none";
@@ -65,6 +72,10 @@ function CheckRole(userID, orgID) {
                     manageDescPopup.style.display = "block";
                 });
 
+                DeleteOrgButton.addEventListener("click", function() {
+                    DeleteOrgPopup.style.display = "block";
+                });
+
                 document.addEventListener('keydown', function(event) { 
                     if (event.key === "Escape") {
                         projectPopup.style.display = "none";
@@ -72,6 +83,7 @@ function CheckRole(userID, orgID) {
                         manageMemberPopup.style.display = "none";
                         manageNamePopup.style.display = "none";
                         manageDescPopup.style.display = "none";
+                        DeleteOrgPopup.style.display = "none";
                         ClearInputs();
                     }
                 });
@@ -83,6 +95,14 @@ function CheckRole(userID, orgID) {
                 closebutton.addEventListener("click", function() {
                     projectPopup.style.display = "none";
                     ClearInputs();
+                });
+
+                closeDeleteOrg.addEventListener("click", function() {
+                    DeleteOrgPopup.style.display = "none";
+                });
+
+                CancelDeleteOrgButton.addEventListener("click", function() {
+                    DeleteOrgPopup.style.display = "none";
                 });
                 
                 
@@ -102,6 +122,10 @@ function CheckRole(userID, orgID) {
                 
                 closeDesc.addEventListener("click", function() {
                     manageDescPopup.style.display = "none";
+                });
+
+                ConfirmDeleteOrgButton.addEventListener("click", function() {
+                    DeleteOrg(userID, orgID);
                 });
             }
 
@@ -164,6 +188,18 @@ function LeaveOrg(userID, orgID) {
     xhttp.send("userID=" + userID + "&orgID=" + orgID);
 }
 
+function DeleteOrg(userID, orgID) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.href = "../../components/root/organization.php";
+        }
+    };
+    xhttp.open("POST", "../../backend/global/deleteorg.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("userID=" + userID + "&orgID=" + orgID);
+}
+
 
 document.addEventListener('keydown', function(event) {
     if (event.key === "Escape") {
@@ -203,8 +239,13 @@ function showModal(userID, orgID) {
             var capitalRole = response.role.charAt(0).toUpperCase() + response.role.slice(1);
             var capitalName = response.name.charAt(0).toUpperCase() + response.name.slice(1);
             var capitalEmail = response.email.charAt(0).toUpperCase() + response.email.slice(1);
-            modalContent.innerHTML = "Name: " + capitalName + "<br>Email: " + capitalEmail + "<br>Role: " + capitalRole;
 
+            setTimeout(function() {
+            modalContent.innerHTML = "Name: " + capitalName + "<br>Email: " + capitalEmail + "<br>Role: " + capitalRole;
+            }, 500);
+
+        } else {
+            modalContent.innerHTML = "Loading...";
         }
     };
     xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);

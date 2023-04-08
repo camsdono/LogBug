@@ -71,7 +71,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Settings</a>
-                    <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
+                    <a hidden style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
                     <a class="dropdown-item" href="#">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
@@ -154,6 +154,8 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                         <h1 class="members-title">Members</h1>
                     </div>
                     <?php
+                        $getOrgUser = "SELECT * FROM org_members WHERE orgID='$orgid'";
+                        $getOrgUserRes = mysqli_query($conn, $getOrgUser);
                         if(mysqli_num_rows($getOrgUserRes) > 0) {
                             while ($row = mysqli_fetch_array($getOrgUserRes)) {
                                 $username1 = $row['orgMember'];
@@ -177,8 +179,8 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                             <div class="member-button" >View</div>
                         </div>
                         <?php
-                        // Check if the users role is owner
-                        if($row['orgRole'] == "owner") {?>
+                        // Check if the logged in user is the owner of the org
+                        if($username == $row['orgMember'] && $row['orgRole'] == "owner") {?>
                         <div class="member-buttons" id="manage-member" style="margin-left: 20px;" onclick="ManageMemberPopup(<?=$row['memberID']?>, <?=$row['orgID']?>)">
                             <div class="member-button" >Manage</div>
                         </div>
@@ -254,6 +256,38 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                     <div class="setting-option-button" id="delete-org-btn">Delete</div>
                                 </div>
                             </div>
+
+                            <pop-up id="delete-org-popup" style="display: none;">
+                                <div class="innerModal" id="modal" >
+                                <div class="fixedHolder">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                                    <div class="innerHeader">
+                                                    <div class="close-button" id="close-delete-org-button">x</div>
+                                                        <div class="innerTitle">
+                                                            Delete Organization
+                                                        </div>
+                                                    </div>
+                                                    <div class="innerContent">
+                                                        <div class="modal-content-text">
+                                                            <p> Are you sure you want to delete this organization? </p>
+                                                        </div>
+                                                        <div class="modal-content-buttons">
+                                                            <div class="modal-content-button" id="confirm-delete-org-btn">Delete</div>
+
+                                                            <div class="modal-content-button" id="cancel-delete-org-btn">Cancel</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            </pop-up>
+
                             <?php
                         }
 
@@ -297,7 +331,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                                     </div>
                                 </div>
                                 <div class="innerContent">
-                                    <div class="modal-content-text" id="modal-content-text">
+                                    <div class="modal-content-text">
                                         <p> Are you sure you want to leave this organization? </p>
                                     </div>
                                     <div class="modal-content-buttons">

@@ -55,7 +55,7 @@ $pfp = CheckPFP($pfp, $username);
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Settings</a>
-                    <a style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
+                    <a  hidden style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
                     <a class="dropdown-item" href="#">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
