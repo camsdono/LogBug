@@ -272,25 +272,50 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                         }
                     ?>
                     </div>
-                    <?php
-                        if ($row['orgRole'] == "member") {
-                        ?>
-                        <div class="settings-option">
-                            <div class="settings-option-info">
-                                <h1 class="settings-option-name" style="color: red;">Leave Organization</h1>
-                                <p class="settings-option-description">Leave this organization.</p>
-                            </div>
-                            <div class="settings-option-buttons">
-                                <div class="setting-option-button" id="leave-org-btn">Leave</div>
-                            </div>
-                        </div>
-                       
-                        <?php
-                        }
-                    ?>
                 </div>
             </div>
         </div>
+
+        <?php
+            // Get org info
+            $getOrgInfo = "SELECT * FROM org_members WHERE orgMember='$username' AND orgID='$orgid'";
+            $getOrgInfoRes = mysqli_query($conn, $getOrgInfo);
+            $row = mysqli_fetch_array($getOrgInfoRes);
+            if($row['orgRole'] != "owner") {
+        ?>
+        <pop-up id="leave-org-popup" style="display: none;">
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button" id="close-leave-org-button">x</div>
+                                    <div class="innerTitle">
+                                        Leave Organization
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                    <div class="modal-content-text" id="modal-content-text">
+                                        <p> Are you sure you want to leave this organization? </p>
+                                    </div>
+                                    <div class="modal-content-buttons">
+                                        <div class="modal-content-button" id="confirm-leave-org-btn">Leave</div>
+
+                                        <div class="modal-content-button" id="cancel-leave-org-btn">Cancel</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </pop-up>
+        <?php
+            }
+        ?>
 
         <pop-up id="modal-container" style="display: none;">
             <div class="innerModal" id="modal" >

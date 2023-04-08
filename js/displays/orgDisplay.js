@@ -28,6 +28,13 @@ var getJoincodeButton = document.getElementById("get-joincode-btn");
 var getJoincodePopup = document.getElementById("get-joincode");
 var closeJoincode = document.getElementById("close-joincode-button");
 
+var LeaveOrgbutton = document.getElementById("leave-org-btn");
+var LeaveOrgPopup = document.getElementById("leave-org-popup");
+var closeLeaveOrg = document.getElementById("close-leave-org-button");
+
+var ConfirmLeaveOrgButton = document.getElementById("confirm-leave-org-btn");
+var CancelLeaveOrgButton = document.getElementById("cancel-leave-org-btn");
+
 
 settingsHolder.style.display = "none";
 membersHolder.style.display = "none";
@@ -40,6 +47,11 @@ function CheckRole(userID, orgID) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+
+            function ClearInputs() {
+                projectName.value = "";
+                projectDesc.value = "";
+            }
             
             var response = JSON.parse(this.responseText);
             
@@ -109,6 +121,30 @@ function CheckRole(userID, orgID) {
                 });
                 
             }
+
+            if (response.role == "editor" || response.role == "member") {
+                LeaveOrgbutton.addEventListener("click", function() {
+                    LeaveOrgPopup.style.display = "block";
+                });
+
+                closeLeaveOrg.addEventListener("click", function() {
+                    LeaveOrgPopup.style.display = "none";
+                });
+
+                CancelLeaveOrgButton.addEventListener("click", function() {
+                    LeaveOrgPopup.style.display = "none";
+                });
+
+                ConfirmLeaveOrgButton.addEventListener("click", function() {
+                    LeaveOrg(userID, orgID);
+                });
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === "Escape") {
+                        LeaveOrgPopup.style.display = "none";
+                    }
+                });
+            }
         }
     };
     xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
@@ -116,10 +152,22 @@ function CheckRole(userID, orgID) {
 }
 
 
+function LeaveOrg(userID, orgID) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.href = "../../components/root/organization.php";
+        }
+    };
+    xhttp.open("POST", "../../backend/global/leaveorg.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("userID=" + userID + "&orgID=" + orgID);
+}
+
+
 document.addEventListener('keydown', function(event) {
     if (event.key === "Escape") {
         memberPopup.style.display = "none";
-        ClearInputs();
     }
 });
 
@@ -141,10 +189,7 @@ projectButton.addEventListener("click", function() {
     membersHolder.style.display = "none";
 });
 
-function ClearInputs() {
-    projectName.value = "";
-    projectDesc.value = "";
-}
+
 
 function showModal(userID, orgID) {
     var modalContainer = document.getElementById("modal-container");
@@ -197,12 +242,24 @@ function ChangeRole(userID, orgID) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(this.responseText);
-            if (role ==  "member" || role == "editor") {
-                manageMemberButton.style.display = "none";
+            if (response.role != "owner") {
+                var xhttp1 = new XMLHttpRequest();
+                xhttp1.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var response = JSON.parse(this.responseText);
+                        if (role ==  "member" || role == "editor") {
+                            manageMemberButton.style.display = "none";
+                        }
+                    }
+                };
+                xhttp1.open("GET", "../../backend/global/changerole.php?userID=" + userID + "&orgID=" + orgID + "&role=" + role, true);
+                xhttp1.send();
+                
+            } else {
+                alert("You cannot change the role of the owner");
             }
-            location.reload();
         }
     };
-    xhttp.open("GET", "../../backend/global/changerole.php?userID=" + userID + "&orgID=" + orgID + "&role=" + role, true);
+    xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
     xhttp.send();
 }

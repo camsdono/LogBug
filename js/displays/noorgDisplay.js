@@ -19,7 +19,7 @@ closebutton.addEventListener("click", function() {
     popup.style.display = "none";
     main.style.filter = "none";
     nav.style.filter = "none";
-    noOrgHolder.style.display = "none";
+    noOrgHolder.style.display = "flex";
     ClearInputs();
 });
 
@@ -40,7 +40,7 @@ document.addEventListener('keydown', function(event) {
         popup.style.display = "none";
         main.style.filter = "none";
         nav.style.filter = "none";
-        noOrgHolder.style.display = "none";
+        noOrgHolder.style.display = "flex";
         ClearInputs();
     }
 });

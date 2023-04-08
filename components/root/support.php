@@ -9,25 +9,6 @@ if(!$_SESSION['username'] == null) {
     header("Location: ../auth/login.php");
 }
 
-function SendMessageToCarter($message) {
-    $data = array(
-        "text" => $message,
-        "key" => "e15b1dad-becf-42a1-b1df-bb4e852b1f36",
-        "playerId" => $_SESSION['username']
-    );
-    
-    $options = array(
-        "http" => array(
-            "header" => "Content-Type: application/json",
-            "method" => "POST",
-            "content" => json_encode($data)
-        )
-    );
-    
-    $context = stream_context_create($options);
-    $response = file_get_contents("https://api.carterlabs.ai/chat", false, $context);
-}
-
 
 
 ?>
@@ -52,24 +33,32 @@ function SendMessageToCarter($message) {
         <link rel="stylesheet" href="../../styles/Global/Support.css">
     </head>
     <body>
+    <div class="container">
     <div class="chat-container">
         <div class="messages-container">
-            <div class="message incoming">
-                <p>Hello, this is LogBug's Personal Support AI: Powered By Carter</p>
-            </div>
-            <div class="message outgoing">
-                <p>Hi there! I have a question about my account.</p>
-            </div>
-            <div class="message incoming">
-                <p>What's your question?</p>
-            </div>
         </div>
-        <form class="chat-form">
-            <input type="text" placeholder="Type your message...">
-            <button type="submit">Send</button>
-        </form>
+      <div class="chat-form">
+      <input type="text" id="message" placeholder="Type your message..." required>
+        <div class="send-button" title="send" onclick="sendMessageToCarter('<?php echo $username; ?>')">
+            <i class="fa fa-paper-plane"></i>
+        </div>
+      </div>
+        
+    </div>
     </div>
 
     </body>
 </html>
-
+<script src="../../js/displays/supportDisplay.js"></script>
+<script>
+    document.addEventListener('keydown', function(event) {
+    if (event.key === "Enter") {
+        var message = document.getElementById("message").value;
+        if (message == "") {
+            return;
+        } else {
+            sendMessageToCarter('<?php echo $username; ?>');
+        }
+    }
+    });
+</script>
