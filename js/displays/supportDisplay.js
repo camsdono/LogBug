@@ -44,4 +44,3 @@ function sendMessageToCarter(username) {
     document.getElementById("message").value = "";
 
 }
-

@@ -13,12 +13,27 @@ if(!$_SESSION['username'] == null) {
 
 $pfp = $_SESSION['pfp'];
 $pfp = CheckPFP($pfp, $username); 
+$projectID = $_GET['projectID'];
+
+// get project information from database
+$getProjects = "SELECT * FROM projects WHERE id='$projectID'";
+$getProjectsRes = $conn->query($getProjects);
+
 
 ?>
+<?php 
+        if (mysqli_num_rows($getProjectsRes) > 0) {
+            // output data of each row
+            while($row = mysqli_fetch_assoc($getProjectsRes)) {
+                $projectName = $row['projectName'];
+                $projectDescription = $row['projectDesc'];
+            }
+        ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title id="title"></title>
+
+        <title id="title"><?=htmlspecialchars($projectName)?></title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,11 +46,12 @@ $pfp = CheckPFP($pfp, $username);
         <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon/favicon-16x16.png">
         <link rel="manifest" href="../../images/favicon/site.webmanifest">
 
-        <link rel="stylesheet" href="../../styles/Global/OrgDisplay.css" />
+        <link rel="stylesheet" href="../../styles/Global/Project.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
-   <body>
+   <body> 
+        
         <nav class="profile-nav">
             <div class="links">
                 <a href="../root/home.php">Home</a>
@@ -58,7 +74,32 @@ $pfp = CheckPFP($pfp, $username);
         <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
             <i class="fa fa-bars"></i>
         </a>
+
+        <div class="org-information-holder">
+            <div class="org-information">
+                <div class="org-info">
+                    <h1 class="org-name"><?=htmlspecialchars($projectName)?></h1>
+                    <p class="org-description"><?=htmlspecialchars($projectDescription)?></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="org-settings-holder">
+            <div class="org-settings">
+                <div class="org-option" id="project-button">
+                    <div  class="org-option-button">Bugs</div>
+                </div>
+                <div class="org-option" id="settings-button">
+                    <div  class="org-option-button">Settings</div>
+                </div>
+            </div>
+        </div>
+
+       
    </body>
 </html>
+<?php } else { ?>
+            <h1>Project not found</h1>
+        <?php } ?>
 <script src="../../js/openCloseNavBar.js"></script>
 <script src="../../js/changeTheme.js"></script>
