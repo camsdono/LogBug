@@ -196,10 +196,14 @@ body {
 }
 
 .project-name {
-    font-size: 32px;
+    font-size: 25px;
     font-weight: bold;
     color: var(--text-color);
     margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 15ch;
 }
 
 .project-description {
@@ -207,8 +211,17 @@ body {
     color: var(--gray-text-color);
     margin-bottom: 10px;
 
-    overflow-x: hidden;
+    /* add ... to end of description if too long */
+    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 15ch;
+}
+
+.project-info p {
+    font-size: 16px;
+    color: var(--gray-text-color);
+    margin-bottom: 10px;
 }
 
 .projects-title {
@@ -692,7 +705,7 @@ select option {
     color: var(--text-color);
 }
 
-button {
+.edit-member-btn {
     background-color: var(--blue-crete-color);
     color: var(--white-text-color);
     padding: 14px 20px;
@@ -702,7 +715,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.edit-member-btn:hover {
     background-color: var(--gray-bg-color);
     color: var(--text-color);
 }

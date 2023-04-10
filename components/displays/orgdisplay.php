@@ -1,6 +1,6 @@
 <?php
 
-require('../../backend/config.php');
+
 require('../../backend/config.php');
 require('../../backend/global/pfpmanager.php');
 
@@ -121,11 +121,11 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                      
                     <div class="project">
                         <div class="project-info">
-                            <h1 class="project-name"><?=htmlspecialchars($row['projectName'])?></h1>
-                            <p class="project-description"><?=htmlspecialchars($row['projectDesc'])?></p>
+                            <h1 class="project-name" title="<?=htmlspecialchars($row['projectName'])?>"><?=htmlspecialchars($row['projectName'])?></h1>
+                            <p class="project-description" title="<?=htmlspecialchars($row['projectDesc'])?>"><?=htmlspecialchars($row['projectDesc'])?></p>
                         </div>
                         <div class="project-buttons">
-                            <div class="setting-option-button"> View </div>
+                            <div class="setting-option-button" onclick="OpenProject(<?=$row['id']?>)">View</div>
                         </div>
                     </div>
                     <?php
@@ -135,7 +135,7 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                     <div class="project">
                         <div class="project-info">
                             <h1 class="project-name">No Projects</h1>
-                            <p class="project-description">You have no projects in this organization.</p>
+                            <p class="project-description-text" style="min-width: 50%; overflow:visible;">You have no projects in this organization.</p>
                         </div>
                     </div>
                     <?php
@@ -179,8 +179,12 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                             <div class="member-button" >View</div>
                         </div>
                         <?php
-                        // Check if the logged in user is the owner of the org
-                        if($username == $row['orgMember'] && $row['orgRole'] == "owner") {?>
+                        // get org owner from orgs 
+                        $getOrgOwner = "SELECT * FROM orgs WHERE id='$orgid'";
+                        $getOrgOwnerRes = mysqli_query($conn, $getOrgOwner);
+                        $row1 = mysqli_fetch_array($getOrgOwnerRes);
+                        if($row1['orgOwner'] == $username) 
+                       {?>
                         <div class="member-buttons" id="manage-member" style="margin-left: 20px;" onclick="ManageMemberPopup(<?=$row['memberID']?>, <?=$row['orgID']?>)">
                             <div class="member-button" >Manage</div>
                         </div>

@@ -163,6 +163,10 @@ function CheckRole(userID, orgID) {
                     LeaveOrg(userID, orgID);
                 });
 
+                closeMember.addEventListener("click", function() {
+                    memberPopup.style.display = "none";
+                });
+
                 document.addEventListener('keydown', function(event) {
                     if (event.key === "Escape") {
                         LeaveOrgPopup.style.display = "none";
@@ -264,7 +268,7 @@ function ManageMemberPopup(userID, orgID) {
             var response = JSON.parse(this.responseText);
             var capitalRole = response.role.charAt(0).toUpperCase() + response.role.slice(1);
 
-            var htmlToInsert = "Current Role: " + capitalRole + "<br><br><select class='select' id='role-select' name='role-select'><option value='member'>Member</option><option value='editor'>Editor</option><option value='owner'>Owner</option></select><br><br><button onclick='ChangeRole("+ userID + "," + orgID + ")'>Update Role</button>";
+            var htmlToInsert = "Current Role: " + capitalRole + "<br><br><select class='select' id='role-select' name='role-select'><option value='member'>Member</option><option value='editor'>Editor</option><option value='owner'>Owner</option></select><br><br><button class='edit-member-btn' onclick='ChangeRole("+ userID + "," + orgID + ")'>Update Role</button>";
 
             setTimeout(function(){
                 modalContentText.innerHTML = htmlToInsert;
@@ -303,4 +307,8 @@ function ChangeRole(userID, orgID) {
     };
     xhttp.open("GET", "../../backend/global/getuserinfo.php?userID=" + userID + "&orgID=" + orgID, true);
     xhttp.send();
+}
+
+function OpenProject(projectID) {
+    window.location.href = "../../components/root/project.php?projectID=" + projectID;
 }
