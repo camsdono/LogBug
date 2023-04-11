@@ -19,6 +19,10 @@ $projectID = $_GET['projectID'];
 $getProjects = "SELECT * FROM projects WHERE id='$projectID'";
 $getProjectsRes = $conn->query($getProjects);
 
+$getBugs = "SELECT * FROM bugs WHERE projectID='$projectID'";
+$getBugsRes = $conn->query($getBugs);
+
+
 
 ?>
 <?php 
@@ -87,7 +91,7 @@ $getProjectsRes = $conn->query($getProjects);
         <div class="org-settings-holder">
             <div class="org-settings">
                 <div class="org-option" id="project-button">
-                    <div  class="org-option-button">Bugs</div>
+                    <div class="org-option-button">Bugs</div>
                 </div>
                 <div class="org-option" id="settings-button">
                     <div  class="org-option-button">Settings</div>
@@ -95,7 +99,36 @@ $getProjectsRes = $conn->query($getProjects);
             </div>
         </div>
 
-       
+       <div class="bugs-holder" id="bugs-holder">
+            <div class="bugs">
+                <div class="bugs-list">
+                    <?php 
+                    if (mysqli_num_rows($getBugsRes) > 0) {
+                        // get each bug
+                        while ($row1 =  mysqli_fetch_assoc($getBugsRes)) {
+                            ?>
+                             <div class="project">
+                                <div class="project-info">
+                                    <h1 class="project-name" title="<?=htmlspecialchars($row1['bugName'])?>"><?=htmlspecialchars($row1['bugName'])?></h1>
+                                    <p class="project-description" title="<?=htmlspecialchars($row1['bugDesc'])?>"><?=htmlspecialchars($row1['bugDesc'])?></p>
+                                </div>
+                                <div class="project-buttons">
+                                    <div class="setting-option-button" onclick="OpenProject(<?=$row1['id']?>)">View</div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <div class="no-bugs">
+                            <h2>No Bugs Found.</h2s>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+       </div>
    </body>
 </html>
 <?php } else { ?>
