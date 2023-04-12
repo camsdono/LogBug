@@ -90,7 +90,7 @@ $getBugsRes = $conn->query($getBugs);
         
         <div class="org-settings-holder">
             <div class="org-settings">
-                <div class="org-option" id="project-button">
+                <div class="org-option" id="bugs-button">
                     <div class="org-option-button">Bugs</div>
                 </div>
                 <div class="org-option" id="settings-button">
@@ -129,6 +129,18 @@ $getBugsRes = $conn->query($getBugs);
                 </div>
             </div>
        </div>
+
+       <pop-up id="bug-display-popup">
+            <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+        <h2 class="popup-title" >Popup Title <span id="close-bug-btn" class="close">&times;</span></h2>
+        <p>Some text in the Modal..</p>
+        </div>
+
+        </div>
+        </pop-up>
    </body>
 </html>
 <?php } else { ?>
@@ -136,3 +148,4 @@ $getBugsRes = $conn->query($getBugs);
         <?php } ?>
 <script src="../../js/openCloseNavBar.js"></script>
 <script src="../../js/changeTheme.js"></script>
+<script src="../../js/displays/projectDisplay.js"></script>

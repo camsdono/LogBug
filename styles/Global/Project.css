@@ -331,3 +331,150 @@ body {
 .setting-option-button:hover {
     background-color: var(--gray-bg-color);
 }
+
+#bug-display-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.popup-title {
+    text-align: center;
+    margin-top: 0;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content {
+    background-color: var(--card-bg-color);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--gray-bg-color);
+    border-radius: 10px;
+    width: 70%;
+    height: 70%;
+}
+
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+input {
+    width: 50%;
+    height: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--gray-bg-color);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 5px;
+    color: var(--gray-text-color);
+}
+
+input::placeholder {
+    color: var(--gray-text-color);
+}
+
+input:focus {
+    transition: ease-in-out 0.5s;
+    border: 1px solid var(--text-color);
+    transform: scale(1.05);
+}
+
+input[type=submit] {
+    width: 50%;
+    background-color: var(--nav-hover-color);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: var(--gray-bg-color);
+    color: white;
+}
+
+select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    min-width: 5ch;
+    max-width: 10ch;
+    border: none;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, var(--blue-crete-color), var(--blue-hover-color) 33%);
+    color: var(--white-text-color);
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+select option {
+    background-color: var(--card-bg-color);
+    background-image: linear-gradient(to right, var(--blue-crete-color), var(--blue-hover-color) 33%);
+    color: var(--text-color);
+}
