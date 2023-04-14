@@ -113,7 +113,7 @@ $getBugsRes = $conn->query($getBugs);
                                     <p class="project-description" title="<?=htmlspecialchars($row1['bugDesc'])?>"><?=htmlspecialchars($row1['bugDesc'])?></p>
                                 </div>
                                 <div class="project-buttons">
-                                    <div class="setting-option-button" onclick="OpenProject(<?=$row1['id']?>)">View</div>
+                                    <div class="setting-option-button" onclick="OpenBug(<?=$row1['id']?>)">View</div>
                                 </div>
                             </div>
                             <?php
@@ -130,16 +130,28 @@ $getBugsRes = $conn->query($getBugs);
             </div>
        </div>
 
-       <pop-up id="bug-display-popup">
+       <pop-up id="bug-display-popup" style="display: none;">
             <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <h2 class="popup-title" id="bug-title"></h2>
+                    <p class="bugstatus" id="bug-status"></p>
+                    <p class="bugdesc" id="bug-description"></p>
+                    <p class="bugpriority" id="bug-priority"></p>
 
-        <!-- Modal content -->
-        <div class="modal-content">
-        <h2 class="popup-title" >Popup Title <span id="close-bug-btn" class="close">&times;</span></h2>
-        <p>Some text in the Modal..</p>
-        </div>
+                    <div class="view-members">
+                        <div class="view-members-button">View Members</div>
+                    </div>
 
+                    <div class="view-members">
+                        <div class="view-members-button">View Comments</div>
+                    </div>
+                </div>
+            </div>
         </div>
+      </div>
+                </div>
+                
+            </div>
         </pop-up>
    </body>
 </html>

@@ -359,6 +359,8 @@ body {
 }
 
 .modal-content {
+    display: flex;
+    flex-direction: column;
     background-color: var(--card-bg-color);
     margin: auto;
     padding: 20px;
@@ -367,8 +369,6 @@ body {
     width: 70%;
     height: 70%;
 }
-
-
 
 .close {
     color: #aaa;
@@ -477,4 +477,23 @@ select option {
     background-color: var(--card-bg-color);
     background-image: linear-gradient(to right, var(--blue-crete-color), var(--blue-hover-color) 33%);
     color: var(--text-color);
+}
+
+
+.view-members {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.view-members-button {
+    background-color: var(--blue-crete-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-members-button:hover {
+    background-color: var(--blue-hover-color);
 }
