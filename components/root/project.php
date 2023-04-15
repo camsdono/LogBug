@@ -148,7 +148,7 @@ $getBugsRes = $conn->query($getBugs);
                 </div>
             </div>
         </div>
-      </div>
+      </div> 
                 </div>
                 
             </div>
