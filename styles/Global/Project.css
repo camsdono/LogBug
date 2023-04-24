@@ -481,17 +481,26 @@ select option {
 
 
 .view-members {
-    display: flex;
+    display: inline-block;
     justify-content: flex-end;
     margin-top: 16px;
+    width: fit-content;
+    margin: 5px 5px;
 }
 
 .view-members-button {
+    display: inline-block;
     background-color: var(--blue-crete-color);
     color: #fff;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.view-member-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .view-members-button:hover {

@@ -134,17 +134,26 @@ $getBugsRes = $conn->query($getBugs);
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <h2 class="popup-title" id="bug-title"></h2>
+                    <div class="view-member-row">
+                        <div class="view-members">
+                            <div class="view-members-button">General</div>
+                        </div>
+                        <div class="view-members">
+                            <div class="view-members-button">Members</div>
+                        </div>
+
+                        <div class="view-members">
+                            <div class="view-members-button">Comments</div>
+                        </div>
+
+                        <div class="view-members">
+                            <div class="view-members-button">Settings</div>
+                        </div>
+                    </div>
+
                     <p class="bugstatus" id="bug-status"></p>
                     <p class="bugdesc" id="bug-description"></p>
                     <p class="bugpriority" id="bug-priority"></p>
-
-                    <div class="view-members">
-                        <div class="view-members-button">View Members</div>
-                    </div>
-
-                    <div class="view-members">
-                        <div class="view-members-button">View Comments</div>
-                    </div>
                 </div>
             </div>
         </div>
