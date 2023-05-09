@@ -4,7 +4,6 @@ var bugPopup = document.getElementById("bug-display-popup");
 
 
 
-
 function OpenBug(bugID) {
     bugPopup.style.display = "flex";
 
@@ -13,10 +12,13 @@ function OpenBug(bugID) {
     var bugDescription = document.getElementById("bug-description");
     var bugPriority = document.getElementById("bug-priority");
 
+    var buttonHolder = document.getElementById("button-holder");
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          
+           
+            
             var response = JSON.parse(this.responseText);
             var capitalName = response.bugName.charAt(0).toUpperCase() + response.bugName.slice(1);
             var capitalDescription = response.bugDesc.charAt(0).toUpperCase() + response.bugDesc.slice(1);
@@ -28,7 +30,10 @@ function OpenBug(bugID) {
                 var capitalStatus = "Closed";
             }
 
+           
+
             setTimeout(function() {
+                // bug info
                 bugTitle.innerHTML = capitalName + " <span id='close-bug-btn' class='close'>&times;</span>";
                 bugStatus.innerHTML = "Bug Status: " + capitalStatus;
                 bugDescription.innerHTML = "Bug Description: " + capitalDescription;
@@ -43,6 +48,25 @@ function OpenBug(bugID) {
                     bugDescription.innerHTML = "";
                     bugPriority.innerHTML = "";
                 });
+
+                // Page Switching
+                var generalbtn = document.getElementById("general-btn");
+                var membersbtn = document.getElementById("members-btn");
+    
+                var generalpage = document.getElementById("general-page");
+                var memberspage = document.getElementById("members-page");
+
+                membersbtn.addEventListener("click", function() {
+                    generalpage.style.display = "none";
+                    memberspage.style.display = "block";
+                });
+
+                generalbtn.addEventListener("click", function() {
+                    generalpage.style.display = "block";
+                    memberspage.style.display = "none";
+                });
+
+                // close bug
                 
                 document.addEventListener('keydown', function(event) {
                     if (event.key === "Escape") {
@@ -54,6 +78,8 @@ function OpenBug(bugID) {
 
                     }
                 });
+
+                buttonHolder.style.display = "block";
             }, 500);
 
         } else {

@@ -106,7 +106,9 @@ $getBugsRes = $conn->query($getBugs);
                     if (mysqli_num_rows($getBugsRes) > 0) {
                         // get each bug
                         while ($row1 =  mysqli_fetch_assoc($getBugsRes)) {
+                          $bugID = $row1['id'];
                             ?>
+                           
                              <div class="project">
                                 <div class="project-info">
                                     <h1 class="project-name" title="<?=htmlspecialchars($row1['bugName'])?>"><?=htmlspecialchars($row1['bugName'])?></h1>
@@ -134,12 +136,12 @@ $getBugsRes = $conn->query($getBugs);
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <h2 class="popup-title" id="bug-title"></h2>
-                    <div class="view-member-row">
+                    <div class="view-member-row" id="button-holder" style="display: none;">
                         <div class="view-members">
-                            <div class="view-members-button">General</div>
+                            <div class="view-members-button" id="general-btn">General</div>
                         </div>
                         <div class="view-members">
-                            <div class="view-members-button">Members</div>
+                            <div class="view-members-button" id="members-btn">Members</div>
                         </div>
 
                         <div class="view-members">
@@ -151,15 +153,44 @@ $getBugsRes = $conn->query($getBugs);
                         </div>
                     </div>
 
-                    <p class="bugstatus" id="bug-status"></p>
-                    <p class="bugdesc" id="bug-description"></p>
-                    <p class="bugpriority" id="bug-priority"></p>
+                    <div class="general-page" id="general-page">
+                        <p class="bugstatus" id="bug-status"></p>
+                        <p class="bugdesc" id="bug-description"></p>
+                        <p class="bugpriority" id="bug-priority"></p>
+                    </div>
+
+                    <div class="member-page" id="members-page" style="display: none;">
+                        <div class="assign-user" id="assign-user-btn">
+                            <div class="assign-user-button" id="assign-user-button">Assign User</div>
+                        </div>
+                        <div class="members-list" id="members-list">
+                            <?php 
+                                // get each member from bug_members
+                                $getBugmembers = "SELECT * FROM bug_members WHERE bugID='$bugID'";
+                                $getBugMemRes = $conn->query($getBugmembers);
+
+                                // get each member
+                                while ($row2 =  mysqli_fetch_assoc($getBugMemRes)) {
+                                    $userID = $row2['userID'];
+                                    $getMember = "SELECT * FROM users WHERE id='$userID'";
+                                    $getMemberRes = $conn->query($getMember);
+
+                                    $row3 = mysqli_fetch_assoc($getMemberRes);
+                                    ?>
+                                    <div class="member">
+                                        <img class="member-image" width="35" height="35" src="<?=$row3['pfp']?>" alt="Profile Image">
+                                        <p class="member-name"><?=htmlspecialchars($row3['username'])?></p>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>    
       </div> 
                 </div>
-                
             </div>
         </pop-up>
    </body>

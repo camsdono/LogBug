@@ -481,6 +481,7 @@ select option {
 
 
 .view-members {
+    user-select: none;
     display: inline-block;
     justify-content: flex-end;
     margin-top: 16px;
@@ -489,6 +490,7 @@ select option {
 }
 
 .view-members-button {
+    user-select: none;
     display: inline-block;
     background-color: var(--blue-crete-color);
     color: #fff;
@@ -498,11 +500,76 @@ select option {
 }
 
 .view-member-row {
+    user-select: none;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 .view-members-button:hover {
+    background-color: var(--blue-hover-color);
+}
+
+.member {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 5px;
+}
+
+.member-name {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 5px;
+    color: var(--text-color);
+}
+
+/* for when we add profiles 
+.member-name:hover {
+    color: var(--blue-hover-color);
+}
+*/
+
+.member-image {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 5px;
+    border-radius: 50%;
+}
+
+.assign-user-btn {
+    width: 25%;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 5px;
+    background-color: var(--blue-crete-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.assign-user-button {
+    width: 4.5vw;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 5px;
+    background-color: var(--blue-crete-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.assign-user-button:hover {
     background-color: var(--blue-hover-color);
 }
