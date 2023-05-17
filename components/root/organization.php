@@ -84,7 +84,7 @@ $pfp = CheckPFP($pfp, $username);
                                     <a title="Accept Org" class="pending-org-button" href="../../backend/orgs/acceptorg.php?id=<?=$row['id']?>">Accept</a>
                                     <a title="Decline Org" class="pending-org-button" href="../../backend/orgs/declineorg.php?id=<?=$row['id']?>">Decline</a>
                                 </div>
-                            </div>
+                            </div>\
                             <?php } ?>
                         </div>
                     </div>

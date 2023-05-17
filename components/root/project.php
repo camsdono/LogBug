@@ -22,6 +22,17 @@ $getProjectsRes = $conn->query($getProjects);
 $getBugs = "SELECT * FROM bugs WHERE projectID='$projectID'";
 $getBugsRes = $conn->query($getBugs);
 
+// get userID 
+$getUserID = "SELECT * FROM users WHERE username='$username'";
+$getUserIDRes = $conn->query($getUserID);
+
+if (mysqli_num_rows($getUserIDRes) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($getUserIDRes)) {
+        $userID = $row['id'];
+    }
+}
+
 
 
 ?>
@@ -143,10 +154,11 @@ $getBugsRes = $conn->query($getBugs);
                         <div class="view-members">
                             <div class="view-members-button" id="members-btn">Members</div>
                         </div>
-
+                        <!--
                         <div class="view-members">
                             <div class="view-members-button">Comments</div>
                         </div>
+                        -->
 
                         <div class="view-members">
                             <div class="view-members-button">Settings</div>
@@ -160,8 +172,13 @@ $getBugsRes = $conn->query($getBugs);
                     </div>
 
                     <div class="member-page" id="members-page" style="display: none;">
-                        <div class="assign-user" id="assign-user-btn">
-                            <div class="assign-user-button" id="assign-user-button">Assign User</div>
+                        <div class="asign-member-popup" style="width: 50%;">
+                            <div class="input-holder">
+                                <input type="text" id="assign-user-input" placeholder="Username Or Email">
+                                <div class="button"  onclick="assignUserBug(<?=$bugID?>)">
+                                    <div class="button-text">Assign</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="members-list" id="members-list">
                             <?php 

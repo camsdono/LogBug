@@ -573,3 +573,55 @@ select option {
 .assign-user-button:hover {
     background-color: var(--blue-hover-color);
 }
+
+input[type=button] {
+    width: 50%;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--blue-crete-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button {
+    width: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Added property to center the text horizontally */
+    background-color: var(--blue-crete-color);
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: var(--blue-hover-color);
+}
+
+.button:active {
+    background-color: var(--blue-active-color);
+}
+
+.button-text {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 5px;
+    text-align: center;
+}
+
+.members-list {
+    height: 15vh;
+    overflow-y: auto;
+}
