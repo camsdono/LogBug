@@ -48,8 +48,6 @@ membersHolder.style.display = "none";
 
 var id = 0;
 
-
-
 function CheckRole(userID, orgID) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

@@ -5,6 +5,7 @@ var bugPopup = document.getElementById("bug-display-popup");
 
 
 function OpenBug(bugID) {
+    
     bugPopup.style.display = "flex";
 
     var bugTitle = document.getElementById("bug-title");
@@ -56,14 +57,25 @@ function OpenBug(bugID) {
                 var generalpage = document.getElementById("general-page");
                 var memberspage = document.getElementById("members-page");
 
+                var settingsbtn = document.getElementById("bug-settings");
+                var settingspage = document.getElementById("settings-page");
+
                 membersbtn.addEventListener("click", function() {
                     generalpage.style.display = "none";
                     memberspage.style.display = "block";
+                    settingspage.style.display = "none";
                 });
 
                 generalbtn.addEventListener("click", function() {
                     generalpage.style.display = "block";
                     memberspage.style.display = "none";
+                    settingspage.style.display = "none";
+                });
+
+                settingsbtn.addEventListener("click", function() {
+                    generalpage.style.display = "none";
+                    memberspage.style.display = "none";
+                    settingspage.style.display = "block";
                 });
 
                 // close bug
@@ -100,4 +112,54 @@ function OpenBug(bugID) {
     };
     xhttp.open("GET", "../../backend/global/getbuginfo.php?bugID=" + bugID, true);
     xhttp.send();
+}
+
+window.addEventListener('load', function() {
+    var pageReloaded = localStorage.getItem('assignBug');
+    var bugID = localStorage.getItem('bugID');
+
+    if (pageReloaded) {
+        // Clear the flag
+        localStorage.removeItem('assignBug');
+        localStorage.removeItem('bugID');
+        
+        // Call your function here
+        OpenBug(bugID);
+    }
+});
+
+function assignUserBug(bugID) {
+    var userID = document.getElementById("assign-user-input").value;
+
+    if (userID == "") {
+        alert("Please enter either a email or username.");
+        return;
+    } else {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "../../backend/global/assignuserbug.php?bugID=" + bugID + "&userID=" + userID, true);
+        xhttp.send();
+    
+        setTimeout(function() {
+            localStorage.setItem('assignBug', 'true');
+            localStorage.setItem('bugID', bugID);
+            
+            location.reload();
+        }
+        , 500);
+    }
+
+    
+}
+
+function CloseOpenBug(status, bugID) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../../backend/global/closeopenbug.php?bugID=" + bugID + "&status=" + status, true);
+    xhttp.send();
+
+    setTimeout(function() {
+        localStorage.setItem('assignBug', 'true');
+        localStorage.setItem('bugID', bugID);
+        location.reload();
+    }
+    , 500);
 }

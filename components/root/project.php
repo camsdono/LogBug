@@ -22,6 +22,7 @@ $getProjectsRes = $conn->query($getProjects);
 $getBugs = "SELECT * FROM bugs WHERE projectID='$projectID'";
 $getBugsRes = $conn->query($getBugs);
 
+
 // get userID 
 $getUserID = "SELECT * FROM users WHERE username='$username'";
 $getUserIDRes = $conn->query($getUserID);
@@ -33,6 +34,16 @@ if (mysqli_num_rows($getUserIDRes) > 0) {
     }
 }
 
+// get org role 
+$getOrgRole = "SELECT * FROM org_members WHERE memberID='$userID'";
+$getOrgRoleRes = $conn->query($getOrgRole);
+
+if (mysqli_num_rows($getOrgRoleRes) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($getOrgRoleRes)) {
+        $orgRole = $row['orgRole'];
+    }
+}
 
 
 ?>
@@ -118,6 +129,12 @@ if (mysqli_num_rows($getUserIDRes) > 0) {
                         // get each bug
                         while ($row1 =  mysqli_fetch_assoc($getBugsRes)) {
                           $bugID = $row1['id'];
+                          $bugPriority = $row1['priority'];
+                          if ($row1['closedBug'] == 0) {
+                                $closedBug = "Open";
+                            } else {
+                                $closedBug = "Closed";
+                            }
                             ?>
                            
                              <div class="project">
@@ -160,7 +177,7 @@ if (mysqli_num_rows($getUserIDRes) > 0) {
                         </div>
                         -->
 
-                        <div class="view-members">
+                        <div class="view-members" id="bug-settings">
                             <div class="view-members-button">Settings</div>
                         </div>
                     </div>
@@ -203,12 +220,126 @@ if (mysqli_num_rows($getUserIDRes) > 0) {
                             ?>
                         </div>
                     </div>
+
+                    <div class="settings-page" id="settings-page" style="display: none;">
+                        <div class="settings">
+                            <div class="settings-list">
+                                <div class="settings-header">
+                                    <h1 class="settings-title">Settings</h1>
+                                </div>
+                                <div class="settings-option">
+                                    <div class="settings-option-info">
+                                        <h1 class="settings-option-name" >Open/Close Bug</h1>
+                                        <p class="settings-option-description">Open Or Close Bug.</p>
+                                    </div>
+                                    <?php 
+                                    if ($closedBug == "Closed") {
+                                        ?>
+                                            <div class="settings-option-buttons" onclick="CloseOpenBug(1, <?=$bugID?>)">
+                                                <div class="setting-option-button" id="delete-bug-btn">Open</div>
+                                            </div>
+                                        <?php
+                                    } 
+
+                                    if ($closedBug == "Open") {
+                                        ?>
+                                            <div class="settings-option-buttons" onclick="CloseOpenBug(0, <?=$bugID?>)">
+                                                <div class="setting-option-button" id="delete-bug-btn">Close</div>
+                                            </div>
+                                        <?php
+                                    } ?>
+                                    
+                                </div>
+
+                                <div class="settings-option">
+                                    <div class="settings-option-info">
+                                        <h1 class="settings-option-name" >Update Priority</h1>
+                                        <p class="settings-option-description">Update The Bug Priority Level.</p>
+                                    </div>
+                                    <div class="settings-option-buttons">
+                                        <div class="setting-option-button" id="delete-bug-btn">Open</div>
+                                    </div>
+                                </div>
+                                <?php
+                                if ($orgRole == "owner" || $orgRole == "editor") {
+                                    ?>
+                                    <div class="settings-option">
+                                        <div class="settings-option-info">
+                                            <h1 class="settings-option-name">Change Name</h1>
+                                            <p class="settings-option-description">Change Name Of Bug.</p>
+                                        </div>
+                                        <div class="settings-option-buttons">
+                                            <div class="setting-option-button" id="change-name-btn">Change</div>
+                                        </div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="settings-option-info">
+                                            <h1 class="settings-option-name">Change Descripton</h1>
+                                            <p class="settings-option-description">Change Description Of Bug.</p>
+                                        </div>
+                                        <div class="settings-option-buttons">
+                                            <div class="setting-option-button" id="change-desc-btn">Change</div>
+                                        </div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="settings-option-info">
+                                            <h1 class="settings-option-name" style="color: red;">Delete Bug</h1>
+                                            <p class="settings-option-description">Delete Bug From Project.</p>
+                                        </div>
+                                        <div class="settings-option-buttons">
+                                            <div class="setting-option-button" id="delete-bug-btn">Delete</div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                } ?>
+                                
+
+                               
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>    
       </div> 
                 </div>
             </div>
+        </pop-up>
+
+        <pop-up id="pop-up" >
+            <div class="innerModal" id="modal" >
+            <div class="fixedHolder">
+                
+                <table>
+                    <tr>
+                        <td>
+                            <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                <div class="innerHeader">
+                                <div class="close-button">x</div>
+                                    <div class="innerTitle">
+                                        Update Bug Priority
+                                    </div>
+                                </div>
+                                <div class="innerContent">
+                                    <form method="POST" action="../../backend/editprocess/bugsettings/bugpriorityedit.php">
+                                        <div class="input-row">
+                                            <input type="text" placeholder="<?=$bugPriority?>" maxlength="10" minlength="3" name="bugPriority" required>
+                                        </div>
+                                        <div class="input-row">
+                                            <input type="hidden" value="<?=$bugID?>" hidden>
+                                        </div>
+                                        
+                                        <div class="input-row">
+                                            <input type="submit" value="Update Priority" name="update-bug-priority-btn">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         </pop-up>
    </body>
 </html>
