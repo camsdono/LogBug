@@ -42,6 +42,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($getOrgRoleRes)) {
         $orgRole = $row['orgRole'];
+        $orgID = $row['orgID'];
     }
 }
 
@@ -89,8 +90,8 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                     <span class="profile-name"><?=htmlspecialchars($username)?></span>
                 </button>
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Profile</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Settings</a>
                     <a hidden style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
                     <a class="dropdown-item" href="#">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
@@ -112,16 +113,16 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
         
         <div class="org-settings-holder">
             <div class="org-settings">
-                <div class="org-option" id="bugs-button">
-                    <div class="org-option-button">Bugs</div>
+                <div class="org-option" id="bugs-button" onclick="OpenProjectBugs()">
+                    <div class="org-option-button" >Bugs</div>
                 </div>
-                <div class="org-option" id="settings-button">
+                <div class="org-option" id="settings-button"  onclick="OpenProjectSettings()">
                     <div  class="org-option-button">Settings</div>
                 </div>
             </div>
         </div>
 
-       <div class="bugs-holder" id="bugs-holder">
+       <div class="bugs-holder" id="project-bugs-popup">
             <div class="bugs">
                 <div class="bugs-list">
                     <?php 
@@ -130,6 +131,8 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                         while ($row1 =  mysqli_fetch_assoc($getBugsRes)) {
                           $bugID = $row1['id'];
                           $bugPriority = $row1['priority'];
+                          $bugName = $row1['bugName'];
+                          $bugDesc = $row1['bugDesc'];
                           if ($row1['closedBug'] == 0) {
                                 $closedBug = "Open";
                             } else {
@@ -159,6 +162,66 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                 </div>
             </div>
        </div>
+
+       <!-- Actual settings page -->
+       <div class="bugs-holder" id="project-settings-page" style="display: none;">
+            <div class="bugs">
+            <div class="settings-page" id="settings-page">
+                    <div class="settings">
+                        <div class="settings-list">
+                            <div class="settings-header">
+                                <h1 class="settings-title">Project Settings</h1>
+                            </div>
+                            <?php
+                            if ($orgRole == "owner" || $orgRole == "editor") {
+                                ?>
+                                <div class="settings-option">
+                                    <div class="settings-option-info">
+                                        <h1 class="settings-option-name" style="color: red; width: 10vw;">Delete Project</h1>
+                                        <p class="settings-option-description">Delete Project.</p>
+                                    </div>
+                                    <div class="settings-option-buttons">
+                                        <div class="setting-option-button" onclick="OpenDeleteProject()" id="delete-bug-btn">Delete</div>
+                                    </div>
+                                </div>
+
+                                <pop-up id="delete-project-popup" style="display: none;">
+                                    <div class="innerModal" id="modal" >
+                                    <div class="fixedHolder">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                                        <div class="innerHeader">
+                                                        <div class="close-button"  onclick="CancelDeleteProject()" id="close-delete-org-button">x</div>
+                                                            <div class="innerTitle">
+                                                                Delete Project
+                                                            </div>
+                                                        </div>
+                                                        <div class="innerContent">
+                                                            <div class="modal-content-text">
+                                                                <p> Are you sure you want to delete this project? </p>
+                                                            </div>
+                                                            <div class="modal-content-buttons">
+                                                                <div class="modal-content-button" onclick="DeleteProject(<?=$projectID?>, <?=$orgID?>)" id="confirm-delete-org-btn">Delete</div>
+
+                                                                <div class="modal-content-button"  onclick="CancelDeleteProject()" id="cancel-delete-org-btn">Cancel</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                </pop-up>
+                                <?php
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
        <pop-up id="bug-display-popup" style="display: none;">
             <div id="myModal" class="modal">
@@ -257,7 +320,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                         <p class="settings-option-description">Update The Bug Priority Level.</p>
                                     </div>
                                     <div class="settings-option-buttons">
-                                        <div class="setting-option-button" id="delete-bug-btn">Open</div>
+                                        <div class="setting-option-button" onclick="OpenUpdatePriorityPopUp()" id="update-bug-priorty-btn">Update</div>
                                     </div>
                                 </div>
                                 <?php
@@ -269,7 +332,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                             <p class="settings-option-description">Change Name Of Bug.</p>
                                         </div>
                                         <div class="settings-option-buttons">
-                                            <div class="setting-option-button" id="change-name-btn">Change</div>
+                                            <div class="setting-option-button" onclick="UpdateNameOpen()" id="change-name-btn">Change</div>
                                         </div>
                                     </div>
                                     <div class="settings-option">
@@ -278,7 +341,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                             <p class="settings-option-description">Change Description Of Bug.</p>
                                         </div>
                                         <div class="settings-option-buttons">
-                                            <div class="setting-option-button" id="change-desc-btn">Change</div>
+                                            <div class="setting-option-button" onclick="UpdateDescriptionOpen()" id="change-desc-btn">Change</div>
                                         </div>
                                     </div>
                                     <div class="settings-option">
@@ -287,7 +350,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                             <p class="settings-option-description">Delete Bug From Project.</p>
                                         </div>
                                         <div class="settings-option-buttons">
-                                            <div class="setting-option-button" id="delete-bug-btn">Delete</div>
+                                            <div class="setting-option-button" onclick="OpenDeleteBug()" id="delete-bug-btn">Delete</div>
                                         </div>
                                     </div>
                                     <?php
@@ -306,7 +369,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
             </div>
         </pop-up>
 
-        <pop-up id="pop-up" >
+        <pop-up id="update-bug-priorty-popup" style="display: none;">
             <div class="innerModal" id="modal" >
             <div class="fixedHolder">
                 
@@ -315,7 +378,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                         <td>
                             <div class="innerModalHolder" id="" style="max-width: 400px;">
                                 <div class="innerHeader">
-                                <div class="close-button">x</div>
+                                <div class="close-button" onclick="CloseUpdatePriorityPopUp()">x</div>
                                     <div class="innerTitle">
                                         Update Bug Priority
                                     </div>
@@ -323,10 +386,11 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                 <div class="innerContent">
                                     <form method="POST" action="../../backend/editprocess/bugsettings/bugpriorityedit.php">
                                         <div class="input-row">
-                                            <input type="text" placeholder="<?=$bugPriority?>" maxlength="10" minlength="3" name="bugPriority" required>
+                                            <input type="text" placeholder="Bug Prioirty..." maxlength="10" minlength="3" name="bugPriority" required>
                                         </div>
+
                                         <div class="input-row">
-                                            <input type="hidden" value="<?=$bugID?>" hidden>
+                                            <input type="hidden" name="bugID" value="<?=$bugID?>" hidden>
                                         </div>
                                         
                                         <div class="input-row">
@@ -341,6 +405,179 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
             </div>
         </div>
         </pop-up>
+
+        <?php 
+
+            if ($orgRole == "owner" || $orgRole == "editor") {
+                ?>
+                <pop-up id="update-bug-name-popup" style="display: none;">
+                    <div class="innerModal" id="modal" >
+                    <div class="fixedHolder">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                        <div class="innerHeader">
+                                        <div class="close-button" onclick="UpdateNameClose()">x</div>
+                                            <div class="innerTitle">
+                                                Update Bug Name
+                                            </div>
+                                        </div>
+                                        <div class="innerContent">
+                                            <form method="POST" action="../../backend/editprocess/bugsettings/bugnameedit.php">
+                                                <div class="input-row">
+                                                    <input type="text" placeholder="<?=$bugName?>" maxlength="20" minlength="3" name="bugName" required>
+                                                </div>
+                                                <div class="input-row">
+                                                    <input type="hidden" name="bugID" value="<?=$bugID?>" hidden>
+                                                </div>
+                                                
+                                                <div class="input-row">
+                                                    <input type="submit" value="Update Name" name="update-bug-name-btn">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </pop-up>
+
+                <pop-up id="update-bug-desc-popup" style="display: none;">
+                    <div class="innerModal" id="modal" >
+                    <div class="fixedHolder">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                        <div class="innerHeader">
+                                        <div class="close-button" onclick="UpdateDescriptionClose()">x</div>
+                                            <div class="innerTitle">
+                                                Update Bug Description
+                                            </div>
+                                        </div>
+                                        <div class="innerContent">
+                                            <form method="POST" action="../../backend/editprocess/bugsettings/bugdescedit.php">
+                                                <div class="input-row">
+                                                    <input type="text" placeholder="<?=$bugDesc?>" maxlength="20" minlength="3" name="bugDesc" required>
+                                                </div>
+                                                <div class="input-row">
+                                                    <input type="hidden" name="bugID" value="<?=$bugID?>" hidden>
+                                                </div>
+                                                
+                                                <div class="input-row">
+                                                    <input type="submit" value="Update Description" name="update-bug-desc-btn">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </pop-up>
+                 <pop-up id="delete-bug-popup" style="display: none;">
+                    <div class="innerModal" id="modal" >
+                    <div class="fixedHolder">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                        <div class="innerHeader">
+                                        <div class="close-button"  onclick="CancelDeleteBug()" id="close-delete-org-button">x</div>
+                                            <div class="innerTitle">
+                                                Delete Bug
+                                            </div>
+                                        </div>
+                                        <div class="innerContent">
+                                            <div class="modal-content-text">
+                                                <p> Are you sure you want to delete this bug? </p>
+                                            </div>
+                                            <div class="modal-content-buttons">
+                                                <div class="modal-content-button" onclick="DeleteBug(<?=$bugID?>, <?=$userID?>)" id="confirm-delete-org-btn">Delete</div>
+
+                                                <div class="modal-content-button"  onclick="CancelDeleteBug()" id="cancel-delete-org-btn">Cancel</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </pop-up>
+                <?php
+            }
+
+            if ($orgRole == 'member' || $orgRole == 'editor' || $orgRole == 'owner') {
+                ?>
+
+                <div class="fixedButton" onclick="CreateBugOpen()" title="Create Bug" id="create-bug">
+                    <div  class="roundedFixedBtn"><i class="fa fa-plus"></i></div>
+                </div>
+
+                <pop-up id="create-bug-popup" style="display: none;">
+                    <div class="innerModal" id="modal" >
+                    <div class="fixedHolder">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                        <div class="innerHeader">
+                                        <div class="close-button" onclick="CreateBugClose()">x</div>
+                                            <div class="innerTitle">
+                                                Add Bug
+                                            </div>
+                                        </div>
+                                        <div class="innerContent">
+                                            <form method="POST" action="../../backend/createprocesses/createbugprocess.php">
+                                                <div class="input-row">
+                                                    <input type="text" placeholder="Bug Name..." maxlength="20" minlength="3" name="bugName" required>
+                                                </div>
+                                                <div class="input-row">
+                                                    <input type="text" placeholder="Bug Description..." maxlength="20" minlength="3" name="bugDesc" required>
+                                                </div>
+
+                                                <div class="input-row">
+                                                    <input type="text" placeholder="Bug Prioirty..." maxlength="10" minlength="3" name="bugPriority" required>
+                                                </div>
+
+                                                <div class="input-row">
+                                                    <input type="hidden" value="<?=$projectID?>" name="projectID" hidden class="extra-input" onkeydown="return false">
+                                                </div>
+
+                                                <div class="input-row">
+                                                    <input type="hidden" value="<?=$projectName?>" name="projectName" hidden class="extra-input"  onkeydown="return false">
+                                                </div>
+
+                                                <div class="input-row">
+                                                    <input type="hidden" value="<?=$username?>" name="username" hidden class="extra-input"  onkeydown="return false">
+                                                </div>
+                                                
+                                                
+                                                <div class="input-row">
+                                                    <input type="submit" value="Add Bug" name="add-bug-btn">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </pop-up>
+
+                
+
+                <?php
+            }
+        ?> 
+
+       
    </body>
 </html>
 <?php } else { ?>

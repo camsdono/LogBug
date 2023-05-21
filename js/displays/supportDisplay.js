@@ -42,5 +42,4 @@ function sendMessageToCarter(username) {
     addMessageToContainer(message, "outgoing");
 
     document.getElementById("message").value = "";
-
 }

@@ -865,3 +865,68 @@ input[type=submit]:hover {
     background-color: var(--gray-bg-color);
     color: white;
 }
+
+.modal-content-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content-button {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 25%;
+    max-width: 1200px;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+    background-color: var(--blue-crete-color);
+}
+
+.modal-content-button:hover {
+    background-color: var(--gray-bg-color);
+}
+
+.fixedButton{
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    padding: 20px;
+}
+
+.roundedFixedBtn{
+  height: 60px;
+  line-height: 65px;  
+  width: 60px;  
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: var(--blue-crete-color);
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.roundedFixedBtn:hover{
+  background-color: var(--blue-hover-color);
+}
+
+.extra-input {
+    display: none;
+    user-select: none;
+}
+
+.settings-page {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+

@@ -60,8 +60,8 @@ $getDetailsRes = $conn->query($getDetails);
                     <span class="profile-name"><?=htmlspecialchars($username)?></span>
                 </button>
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Profile</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Settings</a>
                     <a hidden style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
                     <a class="dropdown-item" href="./support.php">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
@@ -110,7 +110,7 @@ $getDetailsRes = $conn->query($getDetails);
                             }
                             while ($row = mysqli_fetch_array($getAuditLogRes)) {
                             ?>
-                            <li class="recent-bug"><a href="../displays/bugdisplay.php?bugID=<?=$row['objectID']?>"><?=htmlspecialchars($row['message'])?></a></li>
+                            <li class="recent-bug" style="text-align: center;"><?=htmlspecialchars($row['message'])?></li>
                             <?php
                             }
                             ?>                                                                                                                                                    

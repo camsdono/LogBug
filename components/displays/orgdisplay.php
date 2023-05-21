@@ -69,10 +69,10 @@ if(mysqli_num_rows($getOrgUserRes) == 0) {
                     <span class="profile-name"><?=htmlspecialchars($username)?></span>
                 </button>
                 <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Profile</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Settings</a>
                     <a hidden style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
-                    <a class="dropdown-item" href="#">Support</a>
+                    <a class="dropdown-item" href="../root/support.php">Support</a>
                     <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
                 </div>
             </div>

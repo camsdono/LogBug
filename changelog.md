@@ -2,10 +2,7 @@
 
 Features:
     - Security and bug fixes
-    - New UI  (Dark Colour Scheme Included)
-    - Page Routing 
-    - Bug Points
-    - Profile Pictures
+    - New UI  (Dark Colour Scheme)
     
 
 

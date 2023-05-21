@@ -1,9 +1,6 @@
 var closeBugBtn = document.getElementById("close-bug-btn");
 var bugPopup = document.getElementById("bug-display-popup");
 
-
-
-
 function OpenBug(bugID) {
     
     bugPopup.style.display = "flex";
@@ -82,7 +79,12 @@ function OpenBug(bugID) {
                 
                 document.addEventListener('keydown', function(event) {
                     if (event.key === "Escape") {
-                        bugPopup.style.display = "none";
+                        var updatePriorityPopUp = document.getElementById("update-bug-priorty-popup");
+                        if (updatePriorityPopUp.style.display == "block") {
+                            CloseUpdatePriorityPopUp();
+                        } else {
+                            bugPopup.style.display = "none";
+                        }
                         bugTitle.innerHTML = "Loading... <span id='close-bug-btn' class='close'>&times;</span>";
                         bugStatus.innerHTML = "";
                         bugDescription.innerHTML = "";
@@ -162,4 +164,112 @@ function CloseOpenBug(status, bugID) {
         location.reload();
     }
     , 500);
+}
+
+function OpenUpdatePriorityPopUp() {
+    var updatePriorityPopUp = document.getElementById("update-bug-priorty-popup");
+    var bugPopUp = document.getElementById("bug-display-popup");
+    bugPopUp.style.zIndex = 0;
+    updatePriorityPopUp.style.zIndex = 1;
+    updatePriorityPopUp.style.display = "block";
+}
+
+function CloseUpdatePriorityPopUp() {
+    var updatePriorityPopUp = document.getElementById("update-bug-priorty-popup");
+    updatePriorityPopUp.style.display = "none";
+}  
+
+function UpdateNameOpen() {
+    var updateNamePopUp = document.getElementById("update-bug-name-popup");
+    var bugPopUp = document.getElementById("bug-display-popup");
+    bugPopUp.style.zIndex = 0;
+    updateNamePopUp.style.zIndex = 1;
+    updateNamePopUp.style.display = "block";
+}
+
+function UpdateNameClose() {
+    var updateNamePopUp = document.getElementById("update-bug-name-popup");
+    updateNamePopUp.style.display = "none";
+}
+
+function UpdateDescriptionOpen() {
+    var updateDescriptionPopUp = document.getElementById("update-bug-desc-popup");
+    var bugPopUp = document.getElementById("bug-display-popup");
+    bugPopUp.style.zIndex = 0;
+    updateDescriptionPopUp.style.zIndex = 1;
+    updateDescriptionPopUp.style.display = "block";
+}
+
+function UpdateDescriptionClose() {
+    var updateDescriptionPopUp = document.getElementById("update-bug-desc-popup");
+    updateDescriptionPopUp.style.display = "none";
+}
+
+function OpenDeleteBug() {
+    var deleteBugPopUp = document.getElementById("delete-bug-popup");
+    var bugPopUp = document.getElementById("bug-display-popup");
+    bugPopUp.style.zIndex = 0;
+    deleteBugPopUp.style.zIndex = 1;
+    deleteBugPopUp.style.display = "block";
+}
+
+function DeleteBug(bugID, userID) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../../backend/global/deletebug.php?bugID=" + bugID + "&userID=" + userID, true);
+    xhttp.send();
+
+    setTimeout(function() {
+        location.reload();
+    }
+    , 500);
+}
+
+function CancelDeleteBug() {
+    var deleteBugPopUp = document.getElementById("delete-bug-popup");
+    deleteBugPopUp.style.display = "none";
+}
+
+function CreateBugOpen() {
+    var createBugPopUp = document.getElementById("create-bug-popup");
+    createBugPopUp.style.display = "block";
+}
+
+function CreateBugClose() {
+    var createBugPopUp = document.getElementById("create-bug-popup");
+    createBugPopUp.style.display = "none";
+}
+
+function CancelDeleteProject() {
+    var deleteProjectPopUp = document.getElementById("delete-project-popup");
+    deleteProjectPopUp.style.display = "none";
+}
+
+function OpenDeleteProject() {
+    var deleteProjectPopUp = document.getElementById("delete-project-popup");
+    deleteProjectPopUp.style.display = "block";
+}
+
+function DeleteProject(projectID, orgID) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../../backend/global/deleteproject.php?projectID=" + projectID + "&orgID=" + orgID, true);
+    xhttp.send();
+
+    setTimeout(function() {
+        location.href = "../../components/displays/orgdisplay.php?id=" + orgID;
+    }
+    , 500);
+}
+
+function OpenProjectSettings() {
+    var projectSettingsPopUp = document.getElementById("project-settings-page");
+    var projectBugsPopUp = document.getElementById("project-bugs-popup");
+    projectSettingsPopUp.style.display = "flex";
+    projectBugsPopUp.style.display = "none";
+}
+
+function OpenProjectBugs() {
+    var projectBugsPopUp = document.getElementById("project-bugs-popup");
+    var projectSettingsPopUp = document.getElementById("project-settings-page");
+    projectBugsPopUp.style.display = "flex";
+    projectSettingsPopUp.style.display = "none";
 }

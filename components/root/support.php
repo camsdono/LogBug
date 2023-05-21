@@ -9,6 +9,12 @@ if(!$_SESSION['username'] == null) {
     header("Location: ../auth/login.php");
 }
 
+require('../../backend/global/pfpmanager.php');
+
+
+$pfp = $_SESSION['pfp'];
+$pfp = CheckPFP($pfp, $username); 
+
 
 
 ?>
@@ -33,6 +39,28 @@ if(!$_SESSION['username'] == null) {
         <link rel="stylesheet" href="../../styles/Global/Support.css">
     </head>
     <body>
+    <nav class="profile-nav">
+            <div class="links">
+                <a href="../root/home.php">Home</a>
+                <a href="../root/organization.php">Orgs</a>
+            </div>
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="profile-image" width="35" height="35" src="<?=$pfp?>" alt="Profile Image">
+                    <span class="profile-name"><?=htmlspecialchars($username)?></span>
+                </button>
+                <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="../global/comingsoon.html">Profile</a>
+                    <a class="dropdown-item" href="../global/comingsoon.html">Settings</a>
+                    <a hidden style="cursor: pointer;" id="color" class="dropdown-item color-select"></a>
+                    <a class="dropdown-item" href="../root/support.php">Support</a>
+                    <a class="dropdown-item" href="../../backend/auth/logout.php">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <a href="javascript:void(0);" class="icon" onclick="OpenCloseNav()">
+            <i class="fa fa-bars"></i>
+        </a>
     <div class="container">
     <div class="chat-container">
         <div class="messages-container">
@@ -62,3 +90,5 @@ if(!$_SESSION['username'] == null) {
     }
     });
 </script>
+
+<script src="../../js/changeTheme.js"></script>
