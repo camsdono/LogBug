@@ -11,7 +11,7 @@ if (isset($_POST["add-bug-btn"])) {
     $projectID = $_POST['projectID'];
     $projectName = $_POST['projectName'];
     $priority = $_POST['bugPriority'];
-    $createdUser = $_SESSION['username'];
+    $createdUser = $_POST['username'];
     
     $stmt = $conn->prepare("INSERT INTO bugs (bugName, bugDesc, projectID, projectName, priority, createdUser) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssss", $bugName, $bugDesc, $projectID, $projectName, $priority, $createdUser);

@@ -1,12 +1,13 @@
 <?php
 
 require('../config.php');
-require('../global/addauditlog.php');
-require('../global/checkrequests.php');
-require('../global/pfpmanager.php');
+
 
 if (isset($_POST["login-btn"])) {
     session_start();
+    require('../global/addauditlog.php');
+    require('../global/checkrequests.php');
+    require('../global/pfpmanager.php');
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -57,9 +58,12 @@ if (isset($_POST["login-btn"])) {
 }
 
 if (isset($_POST["register-btn"])) {
+    
     session_start();
-    $stmt = $conn->prepare("INSERT INTO users (name, email, username, password, pfp) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $name, $email, $username, $encryptedpass, $pfp);
+    require('../global/addauditlog.php');
+    require('../global/checkrequests.php');
+    require('../global/pfpmanager.php');
+   
 
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -83,6 +87,8 @@ if (isset($_POST["register-btn"])) {
         $confirmPass = $_POST['confirm-password'];
         $getToken = $_POST['token'];
         $start_time = $_POST['start-time'];
+
+     
 
         if ($password != $confirmPass) {
             echo "Passwords do not match";
@@ -128,6 +134,8 @@ if (isset($_POST["register-btn"])) {
                 exit();
                 header("Location: ../../components/auth/signup.php?a=RequestMany");
             } else {
+                $stmt = $conn->prepare("INSERT INTO users (name, email, username, password, pfp) VALUES (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssss", $name, $email, $username, $encryptedpass, $pfp);
                 $stmt->execute();
 
                 $message = "User registered";
@@ -138,9 +146,6 @@ if (isset($_POST["register-btn"])) {
                 addAuditLog($message, $process, $userID, $userName, $ip, True);
         
                 $stmt->close();
-
-                
-
         
                 header("Location: ../../components/auth/signup.php?");
             }
