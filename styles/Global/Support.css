@@ -25,6 +25,7 @@ body {
     color: white;
     background-color: var(--main-bg-color);
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 p {
@@ -134,8 +135,8 @@ p {
   /* Style for incoming messages */
   .message.incoming {
     margin-left: 5px;
-    background-color: #f1f0f0;
-    color: #333;
+    background-color: #5f8036;
+    color: #000000;
     border-radius: 20px;
     padding: 8px 16px;
     align-self: flex-start;
