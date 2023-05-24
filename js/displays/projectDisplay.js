@@ -55,7 +55,7 @@ function OpenBug(bugID) {
                 var memberspage = document.getElementById("members-page");
 
                 var settingsbtn = document.getElementById("bug-settings");
-                var settingspage = document.getElementById("settings-page");
+                var settingspage = document.getElementById("bug-settings-page");
 
                 membersbtn.addEventListener("click", function() {
                     generalpage.style.display = "none";

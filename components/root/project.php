@@ -284,7 +284,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                         </div>
                     </div>
 
-                    <div class="settings-page" id="settings-page" style="display: none;">
+                    <div class="settings-page" id="bug-settings-page" style="display: none;">
                         <div class="settings">
                             <div class="settings-list">
                                 <div class="settings-header">

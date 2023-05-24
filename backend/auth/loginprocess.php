@@ -8,6 +8,7 @@ if (isset($_POST["login-btn"])) {
     require('../global/addauditlog.php');
     require('../global/checkrequests.php');
     require('../global/pfpmanager.php');
+    
     $username = $_POST['username'];
     $password = $_POST['password'];
 

@@ -18,7 +18,7 @@ function CreatePFP($character) {
 
     // check if the file exists 
     if (file_exists($path . $character . ".png")) {
-        return $path . $character . ".png";
+        return $path . $character . ".png"; 
     } else {
         imagepng($image, $path . $character . ".png");
         return $path . $character . ".png";
