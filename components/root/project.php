@@ -84,6 +84,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                 <a href="../root/home.php">Home</a>
                 <a href="../root/organization.php">Orgs</a>
             </div>
+
             <div class="dropdown">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="profile-image" width="35" height="35" src="<?=$pfp?>" alt="Profile Image">

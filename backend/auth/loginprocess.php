@@ -73,7 +73,7 @@ if (isset($_POST["register-btn"])) {
     $firstChar = substr($username, 0, 1);
 
     // Create the PFP
-    $pfp = CreatePFP($firstChar);
+    $pfp = CreatePFP($username);
 
     $sql1 = "SELECT * FROM users WHERE username='$username' OR email='$email'"; 
     $result1 = $conn->query($sql1); 

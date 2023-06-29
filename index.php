@@ -57,7 +57,7 @@
   
   <div>
     <a class="button" href="./components/auth/signup.php">Sign Up</a>
-    <a class="button" href="./components/auth/signup.php">Login</a>
+    <a class="button" href="./components/auth/login.php">Login</a>
   </div>
 </body>
 </html>
