@@ -15,9 +15,10 @@ if (isset($_POST["create-project-btn"])) {
             $projectName = $_POST['projectName'];
             $projectDesc = $_POST['projectDesc'];
             $orgName = $row['orgName'];
+            $key = implode('-', str_split(substr(strtolower(md5(microtime().rand(1000, 9999))), 0, 30), 6));
 
-            $stmt = $conn->prepare("INSERT INTO projects (projectName, projectDesc, orgID, orgName) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $projectName, $projectDesc, $orgid, $orgName);
+            $stmt = $conn->prepare("INSERT INTO projects (projectName, projectDesc, orgID, orgName, apiKey) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $projectName, $projectDesc, $orgid, $orgName, $key);
             $stmt->execute();
             
             $res = mysqli_stmt_get_result($stmt);

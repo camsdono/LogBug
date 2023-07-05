@@ -15,13 +15,13 @@ $pfp = $_SESSION['pfp'];
 $pfp = CheckPFP($pfp, $username); 
 $projectID = $_GET['projectID'];
 
+
 // get project information from database
 $getProjects = "SELECT * FROM projects WHERE id='$projectID'";
 $getProjectsRes = $conn->query($getProjects);
 
 $getBugs = "SELECT * FROM bugs WHERE projectID='$projectID'";
 $getBugsRes = $conn->query($getBugs);
-
 
 // get userID 
 $getUserID = "SELECT * FROM users WHERE username='$username'";
@@ -46,16 +46,20 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
     }
 }
 
-
 ?>
 <?php 
+//  - Generate API KEY
+
         if (mysqli_num_rows($getProjectsRes) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($getProjectsRes)) {
                 $projectName = $row['projectName'];
                 $projectDescription = $row['projectDesc'];
+                $projectAPIKey = $row['apiKey'];
             }
         ?>
+
+        
 <!DOCTYPE html>
 <html>
     <head>
@@ -178,6 +182,16 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                 ?>
                                 <div class="settings-option">
                                     <div class="settings-option-info">
+                                        <h1 class="settings-option-name" style="width: 15vw;">Get Project API Key</h1>
+                                        <p class="settings-option-description">Get The Projects API Key.</p>
+                                    </div> 
+                                    <div class="settings-option-buttons">
+                                        <div class="setting-option-button" onclick="OpenGetAPIKey()" id="get-api-btn">Get</div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-option">
+                                    <div class="settings-option-info">
                                         <h1 class="settings-option-name" style="color: red; width: 10vw;">Delete Project</h1>
                                         <p class="settings-option-description">Delete Project.</p>
                                     </div>
@@ -185,6 +199,34 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                         <div class="setting-option-button" onclick="OpenDeleteProject()" id="delete-bug-btn">Delete</div>
                                     </div>
                                 </div>
+
+                                <pop-up id="get-api-key-popup" style="display: none;">
+                                    <div class="innerModal" id="modal" >
+                                    <div class="fixedHolder">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="innerModalHolder" id="" style="max-width: 400px;">
+                                                        <div class="innerHeader">
+                                                        <div class="close-button"  onclick="CancelgetAPI()" id="close-delete-org-button">x</div>
+                                                            <div class="innerTitle">
+                                                            This Is Your API Key:
+                                                            </div>
+                                                        </div>
+                                                        <div class="innerContent">
+                                                            <div class="modal-content-text" >
+                                                                <p style="user-select: all;"><?=$projectAPIKey?></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                </pop-up>
+
+                                
 
                                 <pop-up id="delete-project-popup" style="display: none;">
                                     <div class="innerModal" id="modal" >
@@ -216,6 +258,7 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                     </div>
                                 </div>
                                 </pop-up>
+                                
                                 <?php
                             } ?>
                         </div>
@@ -312,6 +355,8 @@ if (mysqli_num_rows($getOrgRoleRes) > 0) {
                                             </div>
                                         <?php
                                     } ?>
+
+
                                     
                                 </div>
 

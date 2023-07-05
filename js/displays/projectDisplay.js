@@ -273,3 +273,13 @@ function OpenProjectBugs() {
     projectBugsPopUp.style.display = "flex";
     projectSettingsPopUp.style.display = "none";
 }
+
+function OpenGetAPIKey() {
+    var getAPIKeyPopUp = document.getElementById("get-api-key-popup");
+    getAPIKeyPopUp.style.display = "block";
+}
+
+function CancelgetAPI() {   
+    var getAPIKeyPopUp = document.getElementById("get-api-key-popup");
+    getAPIKeyPopUp.style.display = "none";
+}

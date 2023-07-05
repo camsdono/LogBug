@@ -24,8 +24,8 @@ function sendMessageToCarter(username) {
     }
     const data = {
       text: message,
-      key: "7eb6b757-5a9a-48e9-b4fd-6152abbc0938",
-      playerId: username
+      key: "bda54381-0698-4919-a9d4-4c5f1e46b50e", 
+      user_id: username
     };
   
     const options = {
@@ -34,7 +34,7 @@ function sendMessageToCarter(username) {
       body: JSON.stringify(data)
     };
   
-    fetch("https://api.carterlabs.ai/chat", options)
+    fetch("https://api.carterlabs.ai/api/chat", options)
       .then(response => response.json())
       .then(data => addMessageToContainer(data.output.text, "incoming"))
       .catch(error => console.error(error));
